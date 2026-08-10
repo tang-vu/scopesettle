@@ -7,11 +7,11 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
 
 - GitHub: `https://github.com/tang-vu/scopesettle`
 - Branch: `main`; remote and local were synchronized and the worktree was clean.
-- Verified base before this handoff note: `5d7b81585fd71beb0fd1a0941501ba8307f579f8`.
+- Verified implementation commits through `6416859084f3f4187d4af31d34bb72fa5305e752`.
 - No open pull request, Dependabot alert, or CodeQL alert remained.
-- Latest CI passed: `https://github.com/tang-vu/scopesettle/actions/runs/31363633961`.
+- Latest CI passed: `https://github.com/tang-vu/scopesettle/actions/runs/31400453787`.
 - Latest CodeQL passed for Actions and JavaScript/TypeScript:
-  `https://github.com/tang-vu/scopesettle/actions/runs/31363633850`.
+  `https://github.com/tang-vu/scopesettle/actions/runs/31400453238`.
 - `main` requires strict `database`, `web`, `contracts`, `Analyze (actions)`, and
   `Analyze (javascript-typescript)` checks. Force pushes and deletion are disabled; linear history
   and conversation resolution are required. Admin enforcement is intentionally off so the owner
@@ -27,6 +27,9 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
 - The product includes the public landing page, wallet dashboard, create/fund flow, exact job view,
   role actions, evidence report, responsive design, accessibility/error/loading states, and a
   clearly labeled illustrative example.
+- Every completed report now exposes a deterministic decision proof: weighted score arithmetic,
+  immutable thresholds, gate outcomes, and fail-closed manual-review precedence are visible without
+  requiring a judge to reconstruct evaluator code.
 - `AgenticCommerce` implements the minimal zero-fee, non-upgradeable ERC-8183 lifecycle with an
   immutable ERC-20, SafeERC20, reentrancy protection, escrow accounting, and permissionless expiry.
 - `ScopeSettleEvaluator` verifies chain/contract-bound EIP-712 verdicts, prevents nonce/digest
@@ -39,6 +42,9 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
   leases, and atomic wallet quota buckets. Onchain state remains authoritative.
 - Protected local, Testnet mock, and production-shaped deployment scripts exist. Testnet source
   verification is automated through OKLink after the required delay.
+- Protected workflows now reject invalid token/role/chain inputs, reconcile deployed runtime and
+  immutable bindings from RPC, verify sources, and preserve normalized deployment plus raw
+  broadcast records for review before they enter the canonical ledger.
 - Submission documentation, demo script, X thread, threat model, methodology, architecture,
   deployment ledger, security policy, and contribution guide are present.
 
@@ -65,6 +71,7 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
   - `xlayer-testnet-broadcast`, protected by reviewer `tang-vu`
 - Both environments contain only `XLAYER_TESTNET_RPC_URL`, set to the official primary Testnet RPC.
 - Both official Testnet RPCs returned chain ID `1952`; the observed gas price was `20,000,001` wei.
+- Both configured Mainnet RPCs returned chain ID `196`; they reported the same current gas price.
 - A local Anvil deployment using chain ID `1952` succeeded. The mock stack estimated `6,589,351`
   gas; local addresses and transactions are deliberately not recorded as external proof.
 - Official Testnet verifier URL used by the protected workflow:
@@ -82,6 +89,10 @@ putting values in chat or Git:
 - `EVALUATOR_SIGNER_ADDRESS`
 - `REVIEWER_ADDRESS`
 - `OKLINK_API_KEY`
+
+The generic production-shaped environments additionally require
+`PAYMENT_TOKEN_ADDRESS`, the appropriate X Layer RPC secret, and
+`OKLINK_CHAIN_SHORT_NAME` copied from OKLink's current supported-chain list.
 
 The deployer must be funded with valueless Testnet OKB from the official faucet. The deployer,
 evaluator signer, and reviewer should be deliberately selected and securely recoverable. Do not

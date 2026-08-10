@@ -93,6 +93,10 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
       and migration idempotency fail the release gate.
 - [x] Enable GitHub dependency alerts and automated fixes, consolidate patched build tooling, add
       weekly dependency updates, and protect `main` with strict database/web/contract checks.
+- [x] Expose a deterministic decision proof with visible weighted math, locked thresholds, and the
+      exact pass/fail/manual-review precedence on every completed report.
+- [x] Reconcile deployed bytecode and immutable bindings from RPC, verify sources, and preserve
+      normalized deployment records plus raw Foundry receipts as protected workflow artifacts.
 
 ## Architecture decisions
 

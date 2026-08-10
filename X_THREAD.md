@@ -23,3 +23,28 @@ Demo: `[DEMO_VIDEO_URL]`
 
 Replace placeholders only with real public artifacts; attach product/report/explorer visuals and do
 not claim audit, usage, or Mainnet status without evidence.
+
+## Dedicated-account publishing sequence
+
+The official project account must remain active. Publish these as separate updates rather than
+dropping an inactive account into the final form. Every post must reflect the state that exists at
+posting time.
+
+1. **Problem / build start:** “AI agents can produce code and move funds, but payment rails cannot
+   decide whether a PR met scope. ScopeSettle is building an evidence-linked settlement layer on
+   X Layer. Follow the build toward a public beta. @XLayerOfficial”
+2. **Technical mechanism:** show the architecture diagram and explain immutable rubric hashes,
+   exact PR head binding, deterministic gates, AI evidence, and EIP-712 verdicts.
+3. **Explainability proof:** attach the current report screenshot and show the visible weighted
+   formula, locked thresholds, confidence route, and manual-review behavior. Label the fixture
+   illustrative until a real job replaces it.
+4. **Security posture:** explain zero fees, escrow conservation, permissionless expiry, trusted
+   evaluator/reviewer roles, and the unaudited low-value beta limitation.
+5. **Testnet proof:** publish only after verified deployment. Include contract, transaction, source
+   verification, and completed-job links from the checked-in deployment record.
+6. **Mainnet launch / submission:** publish only after the live low-value flow passes. Use the
+   five-post launch thread above, attach the final demo, and mention `@XLayerOfficial`.
+
+Suggested existing assets: `docs/assets/product-preview.png` for the problem/product post and
+`docs/assets/job-mobile.png` for the explainability post. Replace them with real hosted-job
+captures after launch.
