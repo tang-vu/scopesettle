@@ -23,6 +23,28 @@ PostgreSQL advisory lock and rejects changed checksums for migrations that were 
 
 ## X Layer Testnet then Mainnet
 
+The official network/faucet pages currently do not publish a verified USDG Testnet contract
+address. For the first public beta, use the explicitly Testnet-only `DeployTestnetMock` script. It
+deploys a valueless six-decimal `MockUSDG` with a public faucet and has an immutable chain-ID guard
+that reverts anywhere except chain `1952`:
+
+```powershell
+$env:TESTNET_TOKEN_HOLDER='<deployer address>'
+Push-Location contracts
+node ../scripts/run-forge.mjs script script/DeployTestnetMock.s.sol --target-contract DeployTestnetMock --rpc-url $env:XLAYER_TESTNET_RPC_URL --private-key $env:DEPLOYER_PRIVATE_KEY
+# Add --broadcast only after reviewing the simulation and explicitly confirming the exact deployment.
+Pop-Location
+```
+
+The protected `deploy-testnet-mock.yml` workflow runs tests, verifies chain ID, displays deployer,
+OKB balance, gas price, immutable roles, and Foundry's gas estimate, then waits for the separately
+protected `xlayer-testnet-broadcast` environment approval. `MockUSDG` must always be labelled
+valueless and must never be reused on Mainnet. Configure the four required secrets independently in
+both GitHub environments: `XLAYER_TESTNET_RPC_URL`, `DEPLOYER_PRIVATE_KEY`,
+`EVALUATOR_SIGNER_ADDRESS`, and `REVIEWER_ADDRESS`.
+
+For an existing, independently verified payment token, the production-shaped broadcast remains:
+
 After preflight and explicit confirmation, the broadcast shape is:
 
 ```powershell

@@ -124,7 +124,9 @@ local audit evidence, not claims about an as-yet-unpublished hosting environment
 Official configuration is recorded in [verified research](docs/research.md). X Layer Testnet is
 chain `1952`; Mainnet is `196`; both use OKB gas. No external contract address or explorer link is
 published until a real confirmed, source-verified transaction exists. See the live
-[deployment ledger](docs/deployments.md).
+[deployment ledger](docs/deployments.md). Because no official faucet USDG address is published, the
+beta has a separately protected, chain-guarded Testnet workflow that deploys an explicitly
+valueless `MockUSDG`; the production/Mainnet path cannot use that script.
 
 ## Security model and limitations
 

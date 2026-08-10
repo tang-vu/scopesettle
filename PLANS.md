@@ -108,3 +108,11 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
 - No Testnet/Mainnet signer, funded account, deployment confirmation, hosted database,
   public web host, GitHub token, OpenAI key, dedicated X account, or public-post approval
   has been provided. Local implementation and validation continue without them.
+
+## Testnet deployment readiness
+
+- [x] Reverify both official Testnet RPCs return chain ID 1952.
+- [x] Add a chain-guarded, valueless `MockUSDG` Testnet deployment path.
+- [x] Add separate protected simulation and broadcast environments for the mock beta stack.
+- [!] Derive deployer, check balance, simulate exact gas, and broadcast (signer secrets and explicit
+  transaction confirmation required).

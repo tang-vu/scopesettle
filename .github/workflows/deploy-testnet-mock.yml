@@ -1,0 +1,96 @@
+name: Protected X Layer Testnet mock deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type DEPLOY VALUELESS TESTNET BETA; a protected approval follows simulation
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: scopesettle-xlayer-testnet-mock-deployment
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: inputs.confirmation == 'DEPLOY VALUELESS TESTNET BETA'
+    environment: xlayer-testnet-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.20.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm contracts:test
+      - name: Verify Testnet and simulate immutable deployment
+        env:
+          DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          EVALUATOR_SIGNER_ADDRESS: ${{ secrets.EVALUATOR_SIGNER_ADDRESS }}
+          REVIEWER_ADDRESS: ${{ secrets.REVIEWER_ADDRESS }}
+          RPC_URL: ${{ secrets.XLAYER_TESTNET_RPC_URL }}
+        run: |
+          ACTUAL=$(cast chain-id --rpc-url "$RPC_URL")
+          test "$ACTUAL" = "1952"
+          DEPLOYER=$(cast wallet address --private-key "$DEPLOYER_PRIVATE_KEY")
+          BALANCE=$(cast balance "$DEPLOYER" --ether --rpc-url "$RPC_URL")
+          GAS_PRICE=$(cast gas-price --rpc-url "$RPC_URL")
+          echo "Network: X Layer Testnet; verified chain ID: $ACTUAL"
+          echo "Deployer: $DEPLOYER"
+          echo "Deployer balance: $BALANCE OKB"
+          echo "RPC gas price: $GAS_PRICE wei"
+          echo "Payment token: new valueless MockUSDG with a public Testnet faucet"
+          echo "Evaluator signer: $EVALUATOR_SIGNER_ADDRESS"
+          echo "Reviewer: $REVIEWER_ADDRESS"
+          echo "Command: forge script script/DeployTestnetMock.s.sol --target-contract DeployTestnetMock --rpc-url [redacted] --private-key [secret]"
+          export TESTNET_TOKEN_HOLDER="$DEPLOYER"
+          cd contracts
+          forge script script/DeployTestnetMock.s.sol --target-contract DeployTestnetMock --rpc-url "$RPC_URL" --private-key "$DEPLOYER_PRIVATE_KEY"
+
+  deploy:
+    needs: preflight
+    if: inputs.confirmation == 'DEPLOY VALUELESS TESTNET BETA'
+    environment: xlayer-testnet-broadcast
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.20.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --dir contracts deps
+      - name: Reverify chain and broadcast after protected approval
+        env:
+          DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          EVALUATOR_SIGNER_ADDRESS: ${{ secrets.EVALUATOR_SIGNER_ADDRESS }}
+          REVIEWER_ADDRESS: ${{ secrets.REVIEWER_ADDRESS }}
+          RPC_URL: ${{ secrets.XLAYER_TESTNET_RPC_URL }}
+        run: |
+          ACTUAL=$(cast chain-id --rpc-url "$RPC_URL")
+          test "$ACTUAL" = "1952"
+          DEPLOYER=$(cast wallet address --private-key "$DEPLOYER_PRIVATE_KEY")
+          echo "Approved deployer: $DEPLOYER"
+          echo "Broadcasting valueless beta contracts on verified chain ID $ACTUAL"
+          export TESTNET_TOKEN_HOLDER="$DEPLOYER"
+          cd contracts
+          forge script script/DeployTestnetMock.s.sol --target-contract DeployTestnetMock --rpc-url "$RPC_URL" --private-key "$DEPLOYER_PRIVATE_KEY" --broadcast

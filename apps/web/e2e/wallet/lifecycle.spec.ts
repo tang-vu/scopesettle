@@ -150,7 +150,9 @@ test("handles provider submission, evaluation, verdict proposal, and finalizatio
 
   await page.goto("/e2e-actions?stage=finalizable");
   await page.getByRole("button", { name: "Finalize permissionlessly" }).click();
-  await expect(page.getByText("Finalizing settlement")).toBeHidden();
+  await expect(
+    page.getByRole("button", { name: "Finalizing settlement" }),
+  ).toBeHidden();
 });
 
 test("reviewer resolves challenged evidence with an explicit reason", async ({

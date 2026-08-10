@@ -3,11 +3,11 @@
 No external ScopeSettle deployment has been made. Addresses and transaction links remain absent
 because the repository never fabricates deployment evidence.
 
-| Network         | Chain ID | RPC source            | Payment token    | Commerce          | Evaluator         | Status                                 |
-| --------------- | -------: | --------------------- | ---------------- | ----------------- | ----------------- | -------------------------------------- |
-| Local Anvil     |    31337 | local process         | `MockUSDG`       | generated per run | generated per run | supported                              |
-| X Layer Testnet |     1952 | official X Layer docs | not yet selected | —                 | —                 | awaiting approval/configuration        |
-| X Layer Mainnet |      196 | official X Layer docs | not yet selected | —                 | —                 | blocked until Testnet proof + approval |
+| Network         | Chain ID | RPC source            | Payment token      | Commerce          | Evaluator         | Status                                 |
+| --------------- | -------: | --------------------- | ------------------ | ----------------- | ----------------- | -------------------------------------- |
+| Local Anvil     |    31337 | local process         | `MockUSDG`         | generated per run | generated per run | supported                              |
+| X Layer Testnet |     1952 | official X Layer docs | `MockUSDG` planned | —                 | —                 | RPC verified; awaiting signer/approval |
+| X Layer Mainnet |      196 | official X Layer docs | not yet selected   | —                 | —                 | blocked until Testnet proof + approval |
 
 Every external record must add deployment date, source commit SHA, deployer, payment token,
 contract addresses, deployment block, explorer links, transaction hashes, compiler settings, and
@@ -25,3 +25,11 @@ official asset or deployed to Mainnet.
 7. Verify sources and complete one low-value end-to-end job before changing web configuration.
 
 See [deployment runbook](deployment-runbook.md) for commands.
+
+## Latest Testnet readiness evidence
+
+On 2026-08-10, both official X Layer Testnet RPCs returned chain ID `1952`. A local Anvil run using
+that chain ID deployed the mock beta stack successfully and estimated `6,589,351` gas. The official
+RPC gas price observed during the same preflight was `20,000,001` wei, implying an indicative
+`0.000131787` OKB before buffer. These are not external deployment records; gas, balance, roles,
+nonce, and addresses must be freshly simulated from the real deployer before approval.
