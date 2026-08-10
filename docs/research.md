@@ -1,6 +1,6 @@
 # Verified research
 
-Verified on 2026-08-09 from primary sources. Links are retained so facts can be rechecked
+Verified on 2026-08-10 from primary sources. Links are retained so facts can be rechecked
 immediately before deployment and submission.
 
 ## Hackathon
@@ -57,12 +57,14 @@ defines six states: Open, Funded, Submitted, Completed, Rejected, and Expired. I
 client/provider/evaluator roles, a single ERC-20 payment path, front-running protection on
 funding through `expectedBudget`, a `bytes32` deliverable commitment, evaluator-only terminal
 decisions after submission, and permissionless expiry refunds as the recommended behavior.
+At the exact expiry boundary, both evaluator settlement and `claimRefund` remain permitted from
+`Submitted`; normal EVM transaction ordering makes the first terminal transition win.
 
 The EIP explicitly identifies the evaluator as trusted, provides no dispute court, recommends
 SafeERC20 and reentrancy protection, and supports reason hashes as audit commitments. Its
 reference implementation is broader and upgradeable; ScopeSettle intentionally implements
 the smaller allowed non-hooked, zero-fee, non-upgradeable form and pins compatibility to the
-draft reviewed on 2026-08-09.
+draft reviewed on 2026-08-10.
 
 Sources: [official EIP-8183](https://eips.ethereum.org/EIPS/eip-8183),
 [OKX ERC-8183 article](https://web3.okx.com/learn/erc-8183).

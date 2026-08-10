@@ -328,6 +328,37 @@ contract ScopeSettleEvaluatorTest is Test {
         assertEq(token.balanceOf(client), 1_000_000e6);
     }
 
+    function testExpiryBoundaryMakesFinalizeAndRefundMutuallyExclusive() public {
+        uint256 finalizedJob = _createSubmittedFor(address(evaluator), 1 days, 1 days);
+        _propose(finalizedJob, ScopeSettleEvaluator.Outcome.Pass, 1);
+        uint64 finalizedExpiry = commerce.getJob(finalizedJob).expiredAt;
+
+        vm.warp(finalizedExpiry);
+        evaluator.finalize(finalizedJob);
+        vm.expectPartialRevert(AgenticCommerce.WrongStatus.selector);
+        commerce.claimRefund(finalizedJob);
+
+        uint256 refundedJob = _createSubmittedFor(address(evaluator), 1 days, 1 days);
+        _propose(refundedJob, ScopeSettleEvaluator.Outcome.Pass, 2);
+        uint64 refundedExpiry = commerce.getJob(refundedJob).expiredAt;
+
+        vm.warp(refundedExpiry);
+        commerce.claimRefund(refundedJob);
+        vm.expectPartialRevert(AgenticCommerce.WrongStatus.selector);
+        evaluator.finalize(refundedJob);
+
+        assertFalse(evaluator.getProposal(refundedJob).finalized);
+        assertEq(commerce.escrowedTotal(), 0);
+        assertEq(
+            uint256(commerce.getJob(finalizedJob).status),
+            uint256(IAgenticCommerce.JobStatus.Completed)
+        );
+        assertEq(
+            uint256(commerce.getJob(refundedJob).status),
+            uint256(IAgenticCommerce.JobStatus.Expired)
+        );
+    }
+
     function testManualResolutionValidationAndFinality() public {
         uint256 automaticJob = _createSubmittedFor(address(evaluator), 1 days, 7 days);
         _propose(automaticJob, ScopeSettleEvaluator.Outcome.Pass, 1);
