@@ -69,7 +69,12 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
 - GitHub environments exist:
   - `xlayer-testnet-preflight`
   - `xlayer-testnet-broadcast`, protected by reviewer `tang-vu`
-- Both environments contain only `XLAYER_TESTNET_RPC_URL`, set to the official primary Testnet RPC.
+  - `xlayer-mainnet-preflight`
+  - `xlayer-mainnet-broadcast`, protected by reviewer `tang-vu`
+- Both Testnet environments contain only `XLAYER_TESTNET_RPC_URL`, set to the official primary
+  Testnet RPC.
+- Both Mainnet environments contain only `XLAYER_MAINNET_RPC_URL`, set to the official primary
+  Mainnet RPC. No deployment credential or role has been generated.
 - Both official Testnet RPCs returned chain ID `1952`; the observed gas price was `20,000,001` wei.
 - Both configured Mainnet RPCs returned chain ID `196`; they reported the same current gas price.
 - A local Anvil deployment using chain ID `1952` succeeded. The mock stack estimated `6,589,351`
@@ -90,9 +95,10 @@ putting values in chat or Git:
 - `REVIEWER_ADDRESS`
 - `OKLINK_API_KEY`
 
-The generic production-shaped environments additionally require
-`PAYMENT_TOKEN_ADDRESS`, the appropriate X Layer RPC secret, and
-`OKLINK_CHAIN_SHORT_NAME` copied from OKLink's current supported-chain list.
+The generic production-shaped environments additionally require `PAYMENT_TOKEN_ADDRESS`,
+`OKLINK_API_KEY`, `DEPLOYER_PRIVATE_KEY`, `EVALUATOR_SIGNER_ADDRESS`, `REVIEWER_ADDRESS`, and
+`OKLINK_CHAIN_SHORT_NAME` copied from OKLink's current supported-chain list. Their appropriate
+X Layer RPC secrets are already configured.
 
 The deployer must be funded with valueless Testnet OKB from the official faucet. The deployer,
 evaluator signer, and reviewer should be deliberately selected and securely recoverable. Do not
