@@ -124,6 +124,8 @@ export const exampleJob = {
     "Implement a public POST /settlements endpoint that safely retries identical requests, rejects key reuse with a different payload, validates all external input, and includes regression tests. The implementation must use the existing service boundary and must not log bearer tokens or wallet signatures.",
   status: "Completed",
   budget: "500.00 mUSDG",
+  minimumPassingScore: 80,
+  minimumConfidence: 75,
   client: "0x1111111111111111111111111111111111111111",
   provider: "0x2222222222222222222222222222222222222222",
   evaluator: "0x3333333333333333333333333333333333333333",

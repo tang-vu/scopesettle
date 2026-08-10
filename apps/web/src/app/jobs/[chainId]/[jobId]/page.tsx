@@ -15,6 +15,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { DecisionProof } from "@/components/decision-proof";
 import { Status } from "@/components/status";
 import { LiveJobDetail } from "@/components/live-job-detail";
 import { exampleJob, exampleReport } from "@/lib/example-data";
@@ -210,6 +211,12 @@ export default async function JobDetailPage({ params }: PageProperties) {
             <h2>Scope</h2>
             <p>{exampleJob.scope}</p>
           </section>
+
+          <DecisionProof
+            minimumConfidence={exampleJob.minimumConfidence}
+            minimumPassingScore={exampleJob.minimumPassingScore}
+            report={exampleReport}
+          />
 
           <section className="panel content-block">
             <h2>Acceptance rubric</h2>

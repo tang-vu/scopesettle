@@ -17,6 +17,7 @@ import {
 import { formatDate, shortAddress } from "@/lib/format";
 import type { SignedVerdictRecord } from "@/server/db/schema";
 
+import { DecisionProof } from "./decision-proof";
 import { JobActions } from "./job-actions";
 import { Providers } from "./providers";
 import { Status } from "./status";
@@ -172,6 +173,13 @@ export function LiveJobDetail(properties: Properties) {
           </section>
           {report ? (
             <>
+              <DecisionProof
+                minimumConfidence={properties.specification.minimumConfidence}
+                minimumPassingScore={
+                  properties.specification.minimumPassingScore
+                }
+                report={report}
+              />
               <section className="panel content-block">
                 <div
                   style={{

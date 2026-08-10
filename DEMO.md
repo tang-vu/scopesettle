@@ -5,8 +5,9 @@ whether an offchain pull request met scope. ScopeSettle adds evidence, explanati
 Click **Explore a verified job**.
 
 **0:12–0:32 — auditability.** Show the live completed Testnet job (replace the illustrative fixture
-only after deployment). Point to the exact head SHA, separate deterministic checks, criterion-level
-AI citations, weighted score, confidence, limitations, and report hash.
+only after deployment). Start with the decision proof: its visible weighted formula, locked score
+and confidence thresholds, deterministic gates, and fail-closed manual-review route. Then point to
+the exact head SHA, criterion-level AI citations, limitations, and report hash.
 
 **0:32–0:48 — immutable agreement.** Open `/jobs/new`. Show weighted criteria summing to 100,
 provider/budget/expiry, pass/confidence thresholds, challenge window, and the specification/rubric

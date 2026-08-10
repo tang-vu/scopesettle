@@ -16,6 +16,16 @@ test("public visitor understands the product and opens a completed example", asy
   await expect(
     page.getByRole("heading", { name: "AI evidence by criterion" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Why this verdict was reached" }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Weighted score formula")).toContainText(
+    "94 × 40% + 88 × 30% + 91 × 30% = 91.3",
+  );
+  await expect(
+    page.getByText("meets the locked 80-point threshold"),
+  ).toBeVisible();
+  await expect(page.getByText("meets the locked 75% threshold")).toBeVisible();
   await expect(page.getByText("Weighted score / 100")).toBeVisible();
 });
 
