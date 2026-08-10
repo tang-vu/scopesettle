@@ -2,6 +2,8 @@
 
 Last updated: 2026-08-10
 
+Current cross-chat continuation state: [`docs/handoff.md`](docs/handoff.md).
+
 Status markers: `[ ]` pending, `[~]` active, `[x]` complete, `[!]` externally blocked.
 
 ## Milestone 1 — Foundation
