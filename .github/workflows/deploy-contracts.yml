@@ -1,0 +1,88 @@
+name: Protected contract deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      network:
+        description: Exact target network
+        required: true
+        type: choice
+        options: [xlayer-testnet, xlayer-mainnet]
+      confirmation:
+        description: Type DEPLOY IMMUTABLE CONTRACTS; a second protected-environment approval follows simulation
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    if: inputs.confirmation == 'DEPLOY IMMUTABLE CONTRACTS'
+    environment: ${{ inputs.network }}-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.20.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm contracts:test
+      - name: Verify chain and show immutable inputs
+        env:
+          DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          EVALUATOR_SIGNER_ADDRESS: ${{ secrets.EVALUATOR_SIGNER_ADDRESS }}
+          MAINNET_RPC: ${{ secrets.XLAYER_MAINNET_RPC_URL }}
+          NETWORK: ${{ inputs.network }}
+          PAYMENT_TOKEN_ADDRESS: ${{ secrets.PAYMENT_TOKEN_ADDRESS }}
+          REVIEWER_ADDRESS: ${{ secrets.REVIEWER_ADDRESS }}
+          TESTNET_RPC: ${{ secrets.XLAYER_TESTNET_RPC_URL }}
+        run: |
+          if [ "$NETWORK" = "xlayer-testnet" ]; then RPC="$TESTNET_RPC"; EXPECTED=1952; else RPC="$MAINNET_RPC"; EXPECTED=196; fi
+          ACTUAL=$(cast chain-id --rpc-url "$RPC")
+          test "$ACTUAL" = "$EXPECTED"
+          echo "Network: $NETWORK; verified chain ID: $ACTUAL"
+          echo "Deployer: $(cast wallet address --private-key "$DEPLOYER_PRIVATE_KEY")"
+          echo "Payment token: $PAYMENT_TOKEN_ADDRESS"
+          echo "Evaluator signer: $EVALUATOR_SIGNER_ADDRESS"
+          echo "Reviewer: $REVIEWER_ADDRESS"
+          echo "Broadcast command: forge script script/DeployScopeSettle.s.sol --target-contract DeployScopeSettle --rpc-url [redacted] --private-key [secret] --broadcast"
+          cd contracts
+          forge script script/DeployScopeSettle.s.sol --target-contract DeployScopeSettle --rpc-url "$RPC" --private-key "$DEPLOYER_PRIVATE_KEY"
+
+  deploy:
+    needs: preflight
+    if: inputs.confirmation == 'DEPLOY IMMUTABLE CONTRACTS'
+    environment: ${{ inputs.network }}-broadcast
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - name: Reverify chain and broadcast after protected approval
+        env:
+          DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          EVALUATOR_SIGNER_ADDRESS: ${{ secrets.EVALUATOR_SIGNER_ADDRESS }}
+          MAINNET_RPC: ${{ secrets.XLAYER_MAINNET_RPC_URL }}
+          NETWORK: ${{ inputs.network }}
+          PAYMENT_TOKEN_ADDRESS: ${{ secrets.PAYMENT_TOKEN_ADDRESS }}
+          REVIEWER_ADDRESS: ${{ secrets.REVIEWER_ADDRESS }}
+          TESTNET_RPC: ${{ secrets.XLAYER_TESTNET_RPC_URL }}
+        run: |
+          if [ "$NETWORK" = "xlayer-testnet" ]; then RPC="$TESTNET_RPC"; EXPECTED=1952; else RPC="$MAINNET_RPC"; EXPECTED=196; fi
+          ACTUAL=$(cast chain-id --rpc-url "$RPC")
+          test "$ACTUAL" = "$EXPECTED"
+          echo "Approved deployer: $(cast wallet address --private-key "$DEPLOYER_PRIVATE_KEY")"
+          echo "Broadcasting on verified chain ID $ACTUAL with payment token $PAYMENT_TOKEN_ADDRESS"
+          cd contracts
+          forge script script/DeployScopeSettle.s.sol --target-contract DeployScopeSettle --rpc-url "$RPC" --private-key "$DEPLOYER_PRIVATE_KEY" --broadcast

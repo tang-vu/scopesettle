@@ -1,0 +1,21 @@
+{
+  "name": "@scopesettle/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "deps": "node ../scripts/ensure-forge-deps.mjs",
+    "prebuild": "pnpm deps",
+    "precoverage": "pnpm deps",
+    "prelint": "pnpm deps",
+    "pretest": "pnpm deps",
+    "build": "node ../scripts/run-forge.mjs build --sizes",
+    "coverage": "node ../scripts/run-forge.mjs coverage --report summary --report lcov",
+    "fmt": "node ../scripts/run-forge.mjs fmt",
+    "lint": "node ../scripts/run-forge.mjs fmt --check",
+    "test": "node ../scripts/run-forge.mjs test -vv"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.6.1"
+  }
+}

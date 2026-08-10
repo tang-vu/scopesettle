@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+coverage
+contracts/lib
+contracts/out
+contracts/cache
+contracts/**/*.sol
+broadcast
+pnpm-lock.yaml
+public/example-report.json

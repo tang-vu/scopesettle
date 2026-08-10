@@ -1,0 +1,31 @@
+{
+  "name": "scopesettle",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Explainable AI settlement for ERC-8183 agent jobs on X Layer.",
+  "license": "MIT",
+  "packageManager": "pnpm@11.20.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @scopesettle/web dev",
+    "build": "pnpm --filter @scopesettle/shared build && pnpm --filter @scopesettle/web build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @scopesettle/web test:e2e",
+    "contracts:build": "pnpm --dir contracts build",
+    "contracts:test": "pnpm --dir contracts test",
+    "contracts:coverage": "pnpm --dir contracts coverage",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm contracts:build && pnpm contracts:test && pnpm build && pnpm test:e2e"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.7",
+    "prettier": "^3.6.2",
+    "prettier-plugin-solidity": "^2.1.0",
+    "typescript": "6.0.3"
+  }
+}
