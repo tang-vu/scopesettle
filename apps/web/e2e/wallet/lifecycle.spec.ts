@@ -146,7 +146,9 @@ test("handles provider submission, evaluation, verdict proposal, and finalizatio
 
   await page.goto("/e2e-actions?stage=signed");
   await page.getByRole("button", { name: "Propose signed verdict" }).click();
-  await expect(page.getByText("Proposing signed verdict")).toBeHidden();
+  await expect(
+    page.getByRole("button", { name: "Propose signed verdict" }),
+  ).toBeEnabled();
 
   await page.goto("/e2e-actions?stage=finalizable");
   await page.getByRole("button", { name: "Finalize permissionlessly" }).click();
