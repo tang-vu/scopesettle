@@ -89,6 +89,8 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
       landing page at mobile and desktop Lighthouse profiles with zero layout shift.
 - [x] Exercise the checksummed migration runner twice against PostgreSQL 17 in CI so schema drift
       and migration idempotency fail the release gate.
+- [x] Enable GitHub dependency alerts and automated fixes, consolidate patched build tooling, add
+      weekly dependency updates, and protect `main` with strict database/web/contract checks.
 
 ## Architecture decisions
 
