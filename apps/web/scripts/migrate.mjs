@@ -3,9 +3,10 @@ import { readdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { loadEnvConfig } from "@next/env";
+import nextEnv from "@next/env";
 import postgres from "postgres";
 
+const { loadEnvConfig } = nextEnv;
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 loadEnvConfig(root);
 
