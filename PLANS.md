@@ -87,6 +87,8 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
 - [x] Add production metadata, crawl/install/social assets, global recovery UI, and hardened headers.
 - [x] Route-scope wallet providers, disable unnecessary route prefetch, and audit the production
       landing page at mobile and desktop Lighthouse profiles with zero layout shift.
+- [x] Exercise the checksummed migration runner twice against PostgreSQL 17 in CI so schema drift
+      and migration idempotency fail the release gate.
 
 ## Architecture decisions
 

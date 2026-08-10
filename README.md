@@ -111,6 +111,9 @@ For a local chain and Testnet/Mainnet runbooks, see [deployment instructions](do
 | `pnpm test:e2e`                             | Playwright public/mobile/a11y and isolated wallet lifecycle paths  |
 | `pnpm --filter @scopesettle/web db:migrate` | apply checksummed, lock-protected PostgreSQL migrations            |
 
+CI runs the migration set twice against an ephemeral PostgreSQL 17 service to verify both schema
+application and idempotency. Applied migration files must never be edited in place.
+
 Automated tests never make paid model calls. The mock provider throws if constructed in production.
 
 Latest local production audit (Lighthouse 13.4.1, 2026-08-10): desktop scored 99 performance,
