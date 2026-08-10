@@ -39,9 +39,15 @@ jobs:
         env:
           DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
           EVALUATOR_SIGNER_ADDRESS: ${{ secrets.EVALUATOR_SIGNER_ADDRESS }}
+          OKLINK_API_KEY: ${{ secrets.OKLINK_API_KEY }}
           REVIEWER_ADDRESS: ${{ secrets.REVIEWER_ADDRESS }}
           RPC_URL: ${{ secrets.XLAYER_TESTNET_RPC_URL }}
         run: |
+          test -n "$DEPLOYER_PRIVATE_KEY"
+          test -n "$EVALUATOR_SIGNER_ADDRESS"
+          test -n "$OKLINK_API_KEY"
+          test -n "$REVIEWER_ADDRESS"
+          test -n "$RPC_URL"
           ACTUAL=$(cast chain-id --rpc-url "$RPC_URL")
           test "$ACTUAL" = "1952"
           DEPLOYER=$(cast wallet address --private-key "$DEPLOYER_PRIVATE_KEY")
@@ -82,6 +88,7 @@ jobs:
       - name: Reverify chain and broadcast after protected approval
         env:
           DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          ETHERSCAN_API_KEY: ${{ secrets.OKLINK_API_KEY }}
           EVALUATOR_SIGNER_ADDRESS: ${{ secrets.EVALUATOR_SIGNER_ADDRESS }}
           REVIEWER_ADDRESS: ${{ secrets.REVIEWER_ADDRESS }}
           RPC_URL: ${{ secrets.XLAYER_TESTNET_RPC_URL }}
@@ -94,3 +101,29 @@ jobs:
           export TESTNET_TOKEN_HOLDER="$DEPLOYER"
           cd contracts
           forge script script/DeployTestnetMock.s.sol --target-contract DeployTestnetMock --rpc-url "$RPC_URL" --private-key "$DEPLOYER_PRIVATE_KEY" --broadcast
+          RUN_FILE="broadcast/DeployTestnetMock.s.sol/1952/run-latest.json"
+          TOKEN=$(jq -r '.transactions[] | select(.contractName == "MockUSDG") | .contractAddress' "$RUN_FILE")
+          COMMERCE=$(jq -r '.transactions[] | select(.contractName == "AgenticCommerce") | .contractAddress' "$RUN_FILE")
+          EVALUATOR=$(jq -r '.transactions[] | select(.contractName == "ScopeSettleEvaluator") | .contractAddress' "$RUN_FILE")
+          TOKEN_TX=$(jq -r '.transactions[] | select(.contractName == "MockUSDG") | .hash' "$RUN_FILE")
+          COMMERCE_TX=$(jq -r '.transactions[] | select(.contractName == "AgenticCommerce") | .hash' "$RUN_FILE")
+          EVALUATOR_TX=$(jq -r '.transactions[] | select(.contractName == "ScopeSettleEvaluator") | .hash' "$RUN_FILE")
+          for ADDRESS in "$TOKEN" "$COMMERCE" "$EVALUATOR"; do
+            [[ "$ADDRESS" =~ ^0x[0-9a-fA-F]{40}$ ]]
+          done
+          EXPLORER="https://www.okx.com/web3/explorer/xlayer-test"
+          {
+            echo "## X Layer Testnet deployment"
+            echo "- MockUSDG: [$TOKEN]($EXPLORER/address/$TOKEN) · [transaction]($EXPLORER/tx/$TOKEN_TX)"
+            echo "- AgenticCommerce: [$COMMERCE]($EXPLORER/address/$COMMERCE) · [transaction]($EXPLORER/tx/$COMMERCE_TX)"
+            echo "- ScopeSettleEvaluator: [$EVALUATOR]($EXPLORER/address/$EVALUATOR) · [transaction]($EXPLORER/tx/$EVALUATOR_TX)"
+          } >> "$GITHUB_STEP_SUMMARY"
+          sleep 60
+          VERIFY_URL="https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET"
+          TOKEN_ARGS=$(cast abi-encode "constructor(address,uint256)" "$DEPLOYER" "1000000000000")
+          COMMERCE_ARGS=$(cast abi-encode "constructor(address)" "$TOKEN")
+          EVALUATOR_ARGS=$(cast abi-encode "constructor(address,address,address)" "$COMMERCE" "$EVALUATOR_SIGNER_ADDRESS" "$REVIEWER_ADDRESS")
+          forge verify-contract "$TOKEN" src/MockUSDG.sol:MockUSDG --chain 1952 --constructor-args "$TOKEN_ARGS" --verifier oklink --verifier-url "$VERIFY_URL" --watch
+          forge verify-contract "$COMMERCE" src/AgenticCommerce.sol:AgenticCommerce --chain 1952 --constructor-args "$COMMERCE_ARGS" --verifier oklink --verifier-url "$VERIFY_URL" --watch
+          forge verify-contract "$EVALUATOR" src/ScopeSettleEvaluator.sol:ScopeSettleEvaluator --chain 1952 --constructor-args "$EVALUATOR_ARGS" --verifier oklink --verifier-url "$VERIFY_URL" --watch
+          echo "Source verification completed for all three contracts." >> "$GITHUB_STEP_SUMMARY"

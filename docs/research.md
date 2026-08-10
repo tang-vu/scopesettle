@@ -40,6 +40,16 @@ Sources: [network information](https://web3.okx.com/onchainos/dev-docs/xlayer/de
 [X Layer developer overview](https://web3.okx.com/onchainos/dev-docs/xlayer/developer/build-on-xlayer/about-xlayer),
 [official faucet](https://web3.okx.com/xlayer/faucet).
 
+Official X Layer documentation confirms Foundry verification through OKLink and requires waiting at
+least one minute after deployment. OKLink's current supported-chain list includes
+`XLAYER_TESTNET`, making the verifier endpoint
+`https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET`.
+The deployment workflow derives constructor arguments from the immutable deployment inputs and
+uses `--watch` for all three contracts.
+
+Sources: [X Layer Foundry verification](https://web3.okx.com/onchainos/dev-docs/xlayer/developer/verify-a-smart-contract/verify-with-foundry),
+[OKLink verification plugin documentation](https://www.oklink.com/docs/en/).
+
 ## ERC-8183
 
 ERC-8183 is currently a **Draft** ERC titled “Agentic Commerce.” The inspected specification
@@ -79,7 +89,7 @@ Sources: [OpenAI API quickstart](https://platform.openai.com/docs/quickstart),
 
 - Official supported Mainnet payment token and address suitable for this beta.
 - Whether faucet USDG is a standard ERC-20 usable by the escrow and its exact Testnet address.
-- Current contract verification endpoint/API behavior and explorer source-verification status.
+- Explorer source-verification status for the actual deployed addresses.
 - Final RPC health, fee estimates, deployer balance, and chain ID immediately before broadcasting.
 - Hosted web URL, deployed contracts, real transactions, and dedicated X account/post.
 - The EIP’s draft text may change; compatibility must be re-diffed before public deployment.

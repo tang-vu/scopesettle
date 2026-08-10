@@ -38,10 +38,12 @@ Pop-Location
 
 The protected `deploy-testnet-mock.yml` workflow runs tests, verifies chain ID, displays deployer,
 OKB balance, gas price, immutable roles, and Foundry's gas estimate, then waits for the separately
-protected `xlayer-testnet-broadcast` environment approval. `MockUSDG` must always be labelled
-valueless and must never be reused on Mainnet. Configure the four required secrets independently in
+protected `xlayer-testnet-broadcast` environment approval. After broadcast it waits the officially
+recommended minute, derives the exact constructor arguments, and verifies all three contracts with
+the OKLink `XLAYER_TESTNET` Foundry endpoint. `MockUSDG` must always be labelled valueless and must
+never be reused on Mainnet. Configure the five required secrets independently in
 both GitHub environments: `XLAYER_TESTNET_RPC_URL`, `DEPLOYER_PRIVATE_KEY`,
-`EVALUATOR_SIGNER_ADDRESS`, and `REVIEWER_ADDRESS`.
+`EVALUATOR_SIGNER_ADDRESS`, `REVIEWER_ADDRESS`, and `OKLINK_API_KEY`.
 
 For an existing, independently verified payment token, the production-shaped broadcast remains:
 
@@ -55,8 +57,8 @@ Pop-Location
 
 For Mainnet, substitute `XLAYER_MAINNET_RPC_URL` only after a verified Testnet workflow and fresh
 explicit approval. The evaluator private key is separate from the deployer, stays server-side, and
-must correspond to `EVALUATOR_SIGNER_ADDRESS`. Verification flags are intentionally not guessed;
-confirm the current official explorer verifier API immediately before deployment.
+must correspond to `EVALUATOR_SIGNER_ADDRESS`. Reconfirm the official verifier documentation and
+the `XLAYER_TESTNET` chain short name immediately before an external deployment.
 
 The manual GitHub workflow separates simulation from broadcast. Configure the same scoped secrets
 in `<network>-preflight` and `<network>-broadcast`, and require a human reviewer on every broadcast

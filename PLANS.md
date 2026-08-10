@@ -114,5 +114,7 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
 - [x] Reverify both official Testnet RPCs return chain ID 1952.
 - [x] Add a chain-guarded, valueless `MockUSDG` Testnet deployment path.
 - [x] Add separate protected simulation and broadcast environments for the mock beta stack.
+- [x] Automate post-broadcast explorer links and Foundry source verification through the official
+      OKLink `XLAYER_TESTNET` endpoint.
 - [!] Derive deployer, check balance, simulate exact gas, and broadcast (signer secrets and explicit
   transaction confirmation required).
