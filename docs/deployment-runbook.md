@@ -40,8 +40,11 @@ The protected `deploy-testnet-mock.yml` workflow runs tests, verifies chain ID, 
 OKB balance, gas price, immutable roles, and Foundry's gas estimate, then waits for the separately
 protected `xlayer-testnet-broadcast` environment approval. After broadcast it waits the officially
 recommended minute, derives the exact constructor arguments, and verifies all three contracts with
-the OKLink `XLAYER_TESTNET` Foundry endpoint. `MockUSDG` must always be labelled valueless and must
-never be reused on Mainnet. Configure the five required secrets independently in
+the OKLink `XLAYER_TESTNET` Foundry endpoint. It then reads every deployed runtime and immutable
+role/token back from RPC, emits a normalized machine-readable deployment record, and preserves that
+record plus Foundry's broadcast receipt as a 90-day workflow artifact. Review and commit the record
+under `deployments/`; the artifact alone is not the canonical ledger. `MockUSDG` must always be
+labelled valueless and must never be reused on Mainnet. Configure the five required secrets independently in
 both GitHub environments: `XLAYER_TESTNET_RPC_URL`, `DEPLOYER_PRIVATE_KEY`,
 `EVALUATOR_SIGNER_ADDRESS`, `REVIEWER_ADDRESS`, and `OKLINK_API_KEY`.
 
@@ -65,3 +68,10 @@ in `<network>-preflight` and `<network>-broadcast`, and require a human reviewer
 environment. Review the preflight chain ID, deployer, immutable roles/token, exact command, and gas
 estimate before approving the second job. Mainnet approval additionally requires the recorded,
 source-verified Testnet workflow.
+
+The production-shaped workflow also requires `OKLINK_API_KEY` and
+`OKLINK_CHAIN_SHORT_NAME` in each protected environment. Set the chain short name only from
+OKLink's current supported-chain list; it is deliberately configuration rather than a guessed
+Mainnet constant. Preflight rejects a missing token runtime, malformed roles, or an invalid chain
+short name. After broadcast, the workflow reads all immutable bindings back from RPC, verifies both
+ScopeSettle contracts, and exports normalized deployment and broadcast records for review.

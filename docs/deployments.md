@@ -22,7 +22,9 @@ official asset or deployed to Mainnet.
 4. Derive and show the deployer address without printing its private key.
 5. simulate/estimate the deployment and show expected OKB gas plus the immutable token/signer/reviewer.
 6. Obtain explicit confirmation for that exact network and command, then broadcast.
-7. Verify sources and complete one low-value end-to-end job before changing web configuration.
+7. Verify deployed bytecode, immutable token/role bindings, and sources; compare the exported
+   deployment record with Foundry's broadcast receipt before committing it to `deployments/`.
+8. Complete one low-value end-to-end job before changing web configuration.
 
 See [deployment runbook](deployment-runbook.md) for commands.
 
