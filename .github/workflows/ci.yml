@@ -33,7 +33,7 @@ jobs:
       - run: pnpm --filter @scopesettle/shared test
       - run: pnpm --filter @scopesettle/web test
       - run: pnpm build
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm --filter @scopesettle/web exec playwright install --with-deps chromium
       - run: pnpm test:e2e
 
   contracts:
