@@ -18,7 +18,9 @@ import { formatDate, shortAddress } from "@/lib/format";
 import type { SignedVerdictRecord } from "@/server/db/schema";
 
 import { JobActions } from "./job-actions";
+import { Providers } from "./providers";
 import { Status } from "./status";
+import { WalletButton } from "./wallet-button";
 
 type Properties = {
   readonly chainId: number;
@@ -63,6 +65,7 @@ type Properties = {
     outcome: number;
   } | null;
   readonly token: { symbol: string; decimals: number };
+  readonly reviewer: `0x${string}`;
 };
 
 function formatBudget(baseUnits: string, decimals: number): string {
@@ -290,18 +293,27 @@ export function LiveJobDetail(properties: Properties) {
           )}
         </div>
         <aside className="job-side-stack">
-          <JobActions
-            chainId={properties.chainId}
-            client={properties.job.client}
-            expiredAt={properties.job.expiredAt}
-            jobId={properties.jobId}
-            {...(properties.proposal ? { proposal: properties.proposal } : {})}
-            provider={properties.job.provider}
-            {...(properties.signedVerdict
-              ? { signedVerdict: properties.signedVerdict }
-              : {})}
-            status={properties.job.status}
-          />
+          <Providers>
+            <section className="panel wallet-context">
+              <span className="meta-label">Transaction wallet</span>
+              <WalletButton />
+            </section>
+            <JobActions
+              chainId={properties.chainId}
+              client={properties.job.client}
+              expiredAt={properties.job.expiredAt}
+              jobId={properties.jobId}
+              {...(properties.proposal
+                ? { proposal: properties.proposal }
+                : {})}
+              provider={properties.job.provider}
+              reviewer={properties.reviewer}
+              {...(properties.signedVerdict
+                ? { signedVerdict: properties.signedVerdict }
+                : {})}
+              status={properties.job.status}
+            />
+          </Providers>
           <section className="panel content-block">
             <h2>Repository</h2>
             <a
@@ -339,6 +351,7 @@ export function LiveJobDetail(properties: Properties) {
                 ["Client", properties.job.client],
                 ["Provider", properties.job.provider],
                 ["Evaluator", properties.job.evaluator],
+                ["Reviewer", properties.reviewer],
               ] as const
             ).map(([label, address]) => (
               <div key={label} style={{ marginTop: 12 }}>
@@ -373,6 +386,30 @@ export function LiveJobDetail(properties: Properties) {
                   <a href={submissionUrl} rel="noreferrer" target="_blank">
                     View transaction
                   </a>
+                </li>
+              ) : null}
+              {report ? (
+                <li>
+                  <strong>Evidence report signed</strong>
+                  <span>{report.verdict.replace("_", " ")}</span>
+                </li>
+              ) : null}
+              {properties.proposal ? (
+                <li>
+                  <strong>
+                    {properties.proposal.finalized
+                      ? "Verdict finalized"
+                      : properties.proposal.challenged
+                        ? "Verdict challenged"
+                        : "Verdict proposed"}
+                  </strong>
+                  <span>
+                    {properties.proposal.outcome === 0
+                      ? "pass"
+                      : properties.proposal.outcome === 1
+                        ? "fail"
+                        : "manual review"}
+                  </span>
                 </li>
               ) : null}
               <li>

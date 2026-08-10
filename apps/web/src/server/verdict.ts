@@ -1,6 +1,8 @@
 import { randomBytes } from "node:crypto";
 
 import type { EvaluationReport } from "@scopesettle/shared";
+import "server-only";
+
 import { privateKeyToAccount } from "viem/accounts";
 
 import { getDeployment, readEvaluatorSigner } from "./chain";

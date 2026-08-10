@@ -11,7 +11,10 @@ import {
 
 import { shortAddress } from "@/lib/format";
 
-const TARGET_CHAIN = 1952;
+const TARGET_CHAIN = Number(
+  process.env.NEXT_PUBLIC_DEFAULT_CHAIN_ID || 1952,
+) as 1952 | 196;
+const TARGET_LABEL = TARGET_CHAIN === 196 ? "Mainnet" : "Testnet";
 
 export function WalletButton() {
   const connection = useConnection();
@@ -53,7 +56,7 @@ export function WalletButton() {
         type="button"
       >
         <CircleAlert aria-hidden="true" size={15} />
-        {isSwitching ? "Switching…" : "Switch to Testnet"}
+        {isSwitching ? "Switching…" : `Switch to ${TARGET_LABEL}`}
       </button>
     );
   }
@@ -72,7 +75,7 @@ export function WalletButton() {
       </button>
       {open ? (
         <div className="wallet-menu">
-          <p>X Layer Testnet</p>
+          <p>X Layer {TARGET_LABEL}</p>
           <button onClick={() => disconnect()} type="button">
             <LogOut aria-hidden="true" size={14} /> Disconnect
           </button>

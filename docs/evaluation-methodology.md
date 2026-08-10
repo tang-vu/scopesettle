@@ -25,6 +25,11 @@ the percentage of criteria with verified citations. Failed deterministic require
 verdict; missing evidence and provider/schema failures fail closed to manual review. A pass requires
 both the immutable score and confidence thresholds. Reports always state limitations.
 
+Before a paid model request, the database atomically acquires a ten-minute lease for the chain/job
+and one of three wallet quota slots in the current UTC-aligned hour. Concurrent requests receive
+409, exhausted wallets receive 429 with `Retry-After`, and a persisted report is returned without a
+second model call. If only its verdict deadline expired, ScopeSettle signs the same report hash again.
+
 ## Commitment and settlement
 
 Canonical JSON recursively sorts object keys, preserves array order, encodes UTF-8, and is hashed

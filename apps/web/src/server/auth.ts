@@ -1,3 +1,5 @@
+import "server-only";
+
 import { createHash, createHmac, randomBytes } from "node:crypto";
 
 import { and, eq, gt, isNull } from "drizzle-orm";

@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { Logo } from "./logo";
-import { WalletButton } from "./wallet-button";
 
 export function SiteHeader() {
   return (
@@ -9,13 +8,21 @@ export function SiteHeader() {
       <div className="shell header-inner">
         <Logo />
         <nav aria-label="Primary navigation">
-          <Link href="/app">Jobs</Link>
+          <Link href="/app" prefetch={false}>
+            Jobs
+          </Link>
           <Link href="/#methodology">Methodology</Link>
-          <Link className="desktop-only" href="/jobs/new">
+          <Link className="desktop-only" href="/jobs/new" prefetch={false}>
             Create job
           </Link>
         </nav>
-        <WalletButton />
+        <Link
+          className="button button-primary button-small"
+          href="/app"
+          prefetch={false}
+        >
+          Launch app
+        </Link>
       </div>
     </header>
   );

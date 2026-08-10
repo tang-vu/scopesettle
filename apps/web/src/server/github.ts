@@ -1,3 +1,5 @@
+import "server-only";
+
 import { z } from "zod";
 
 const API_ORIGIN = "https://api.github.com";

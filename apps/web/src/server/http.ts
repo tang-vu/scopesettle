@@ -3,6 +3,16 @@ import { ZodError } from "zod";
 
 import { DatabaseUnavailableError } from "./db";
 
+export class RateLimitError extends Error {
+  constructor(
+    message: string,
+    readonly retryAfterSeconds: number,
+  ) {
+    super(message);
+    this.name = "RateLimitError";
+  }
+}
+
 export function apiError(error: unknown): NextResponse {
   if (error instanceof ZodError) {
     return NextResponse.json(
@@ -21,6 +31,15 @@ export function apiError(error: unknown): NextResponse {
   }
   if (error instanceof Error && error.name === "ConflictError") {
     return NextResponse.json({ error: error.message }, { status: 409 });
+  }
+  if (error instanceof RateLimitError) {
+    return NextResponse.json(
+      { error: error.message },
+      {
+        headers: { "Retry-After": error.retryAfterSeconds.toString() },
+        status: 429,
+      },
+    );
   }
   // Do not leak provider, database, signature, or RPC internals to clients.
   console.error("ScopeSettle request failed", {

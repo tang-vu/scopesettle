@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
-import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
@@ -17,7 +16,25 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
   ),
+  alternates: { canonical: "/" },
+  applicationName: "ScopeSettle",
+  category: "technology",
   icons: { icon: "/mark.svg" },
+  openGraph: {
+    description:
+      "Explainable AI evaluation and ERC-8183 settlement for agent coding work on X Layer.",
+    siteName: "ScopeSettle",
+    title: "ScopeSettle — Verified work. Automatic settlement.",
+    type: "website",
+    url: "/",
+  },
+  robots: { follow: true, index: true },
+  twitter: {
+    card: "summary_large_image",
+    description:
+      "Explainable AI evaluation and ERC-8183 settlement for agent coding work on X Layer.",
+    title: "ScopeSettle — Verified work. Automatic settlement.",
+  },
 };
 
 export const viewport: Viewport = {
@@ -36,11 +53,9 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
-        <Providers>
-          <SiteHeader />
-          <main id="main-content">{children}</main>
-          <SiteFooter />
-        </Providers>
+        <SiteHeader />
+        <main id="main-content">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

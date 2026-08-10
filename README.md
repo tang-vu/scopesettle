@@ -24,7 +24,8 @@ generic chatbot.
 1. Client defines public repository, provider, budget, expiry, weighted rubric, score/confidence
    thresholds, and challenge window.
 2. The browser displays canonical specification/rubric hashes, then creates and funds the six-state
-   ERC-8183 escrow without taking custody.
+   ERC-8183 escrow without taking custody. Confirmed steps are checkpointed by wallet, deployment,
+   and specification hash, so a rejected later transaction resumes instead of creating a duplicate.
 3. Provider pins and submits owner/repository/PR/base/head SHA as a deliverable hash.
 4. Server verifies onchain state and bounded GitHub data for that exact head, then runs deterministic
    gates and structured AI criterion review.
@@ -65,7 +66,8 @@ flowchart LR
 - Next.js App Router: accessible product UI, injected/EIP-1193 wallet interactions, nonce/SIWE-style
   authentication, RPC reconciliation, GitHub ingestion, evaluation, and report APIs.
 - PostgreSQL/Drizzle: expiring single-use nonces, immutable job documents, pinned deliverables, and
-  reports. The database cannot fabricate settlement; contract reads remain authoritative.
+  reports, plus atomic per-job evaluation leases and per-wallet hourly AI quotas. The database
+  cannot fabricate settlement; contract reads remain authoritative.
 
 See [architecture](docs/architecture.md), [methodology](docs/evaluation-methodology.md), and
 [threat model](docs/threat-model.md).
@@ -106,10 +108,16 @@ For a local chain and Testnet/Mainnet runbooks, see [deployment instructions](do
 | `pnpm check`                                | formatting, lint, types, unit/contract/E2E tests, production build |
 | `pnpm test`                                 | shared/web unit tests plus Foundry tests                           |
 | `pnpm contracts:coverage`                   | Solidity coverage summary and LCOV                                 |
-| `pnpm test:e2e`                             | Playwright public critical paths on desktop/mobile                 |
-| `pnpm --filter @scopesettle/web db:migrate` | apply PostgreSQL migration                                         |
+| `pnpm test:e2e`                             | Playwright public/mobile/a11y and isolated wallet lifecycle paths  |
+| `pnpm --filter @scopesettle/web db:migrate` | apply checksummed, lock-protected PostgreSQL migrations            |
 
 Automated tests never make paid model calls. The mock provider throws if constructed in production.
+
+Latest local production audit (Lighthouse 13.4.1, 2026-08-10): desktop scored 99 performance,
+100 accessibility, 100 best practices, and 100 SEO; mobile throttling scored 82/100/100/100.
+Both runs reported zero cumulative layout shift. Wallet libraries are loaded only on transaction
+routes, keeping the public landing route independent of the wagmi/viem client bundle. Scores are
+local audit evidence, not claims about an as-yet-unpublished hosting environment.
 
 ## Networks and deployments
 
@@ -124,6 +132,12 @@ The evaluator signer and reviewer are trusted. Model output, GitHub metadata, an
 malicious. Repository code is never executed. URLs are restricted to public `https://github.com`
 forms and requests go only to fixed `api.github.com`; responses/diffs are bounded. Token transfers
 use SafeERC20, reentrancy protection, expected-budget checking, and fee-on-transfer rejection.
+Authenticated evaluation is limited to three new runs per wallet per UTC-aligned hour and one
+active lease per job; completed reports are reused instead of calling the model again.
+Indexed lifecycle writes must carry a successful commerce-contract receipt containing the exact
+`JobCreated` or `JobSubmitted` event for that job ID. Resumed funding also reconciles its local
+checkpoint with the creation receipt, current job state, budget, and token allowance before it can
+request another wallet transaction.
 
 The contracts are unaudited immutable beta software. Do not use meaningful Mainnet funds. A full
 dispute court, private repositories, arbitrary uploads, milestones, cross-chain flows, custom token,

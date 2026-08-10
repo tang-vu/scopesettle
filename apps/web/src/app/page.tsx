@@ -52,11 +52,19 @@ export default function LandingPage() {
               settles ERC-8183 escrow.
             </p>
             <div className="hero-actions">
-              <Link className="button button-primary" href="/jobs/1952/42">
+              <Link
+                className="button button-primary"
+                href="/jobs/1952/42"
+                prefetch={false}
+              >
                 Explore a verified job{" "}
                 <ArrowRight aria-hidden="true" size={16} />
               </Link>
-              <Link className="button button-secondary" href="/app">
+              <Link
+                className="button button-secondary"
+                href="/app"
+                prefetch={false}
+              >
                 Launch app
               </Link>
             </div>
@@ -236,6 +244,7 @@ export default function LandingPage() {
           <Link
             className="button button-secondary button-small"
             href="/jobs/1952/42"
+            prefetch={false}
           >
             <FileCheck2 aria-hidden="true" size={15} /> Inspect the report
           </Link>

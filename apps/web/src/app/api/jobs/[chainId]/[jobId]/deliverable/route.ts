@@ -49,6 +49,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
       chainId,
       body.transactionHash as `0x${string}`,
       session.address,
+      { eventName: "JobSubmitted", jobId },
     );
     const database = getDatabase();
     const [document] = await database

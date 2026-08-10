@@ -17,8 +17,9 @@ forge script script/DeployLocal.s.sol --target-contract DeployLocal --rpc-url ht
 Pop-Location
 ```
 
-`MockUSDG` is valueless. Copy generated addresses only into `apps/web/.env.local`, run the migration with
-`pnpm --filter @scopesettle/web db:migrate`, and start `pnpm dev`.
+`MockUSDG` is valueless. Copy generated addresses only into `apps/web/.env.local`, run migrations
+with `pnpm --filter @scopesettle/web db:migrate`, and start `pnpm dev`. The migration runner takes a
+PostgreSQL advisory lock and rejects changed checksums for migrations that were already applied.
 
 ## X Layer Testnet then Mainnet
 

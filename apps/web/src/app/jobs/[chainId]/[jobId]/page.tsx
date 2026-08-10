@@ -4,6 +4,7 @@ import {
   CheckCircle2,
   ChevronRight,
   CircleCheck,
+  CircleAlert,
   Download,
   FileCode2,
   GitCommitHorizontal,
@@ -42,35 +43,48 @@ export default async function JobDetailPage({ params }: PageProperties) {
     if (!/^\d+$/u.test(chainId) || !/^\d+$/u.test(jobId)) notFound();
     const numericChainId = Number(chainId);
     const numericJobId = BigInt(jobId);
-    const database = getDatabase();
-    const [{ client, deployment, job }, documents, reports] = await Promise.all(
-      [
-        readJob(numericChainId, numericJobId),
-        database
-          .select()
-          .from(jobDocuments)
-          .where(
-            and(
-              eq(jobDocuments.chainId, numericChainId),
-              eq(jobDocuments.jobId, numericJobId),
-            ),
-          )
-          .limit(1),
-        database
-          .select()
-          .from(evaluationReports)
-          .where(
-            and(
-              eq(evaluationReports.chainId, numericChainId),
-              eq(evaluationReports.jobId, numericJobId),
-            ),
-          )
-          .limit(1),
-      ],
-    );
+    const liveRecord = await (async () => {
+      try {
+        const database = getDatabase();
+        const [chain, documents, reports] = await Promise.all([
+          readJob(numericChainId, numericJobId),
+          database
+            .select()
+            .from(jobDocuments)
+            .where(
+              and(
+                eq(jobDocuments.chainId, numericChainId),
+                eq(jobDocuments.jobId, numericJobId),
+              ),
+            )
+            .limit(1),
+          database
+            .select()
+            .from(evaluationReports)
+            .where(
+              and(
+                eq(evaluationReports.chainId, numericChainId),
+                eq(evaluationReports.jobId, numericJobId),
+              ),
+            )
+            .limit(1),
+        ]);
+        return { chain, documents, reports };
+      } catch {
+        return null;
+      }
+    })();
+    if (!liveRecord) {
+      return <LiveJobUnavailable chainId={chainId} jobId={jobId} />;
+    }
+    const {
+      chain: { client, deployment, job },
+      documents,
+      reports,
+    } = liveRecord;
     const document = documents[0];
     if (!document) notFound();
-    const [symbol, decimals, proposal] = await Promise.all([
+    const chainMetadata = await Promise.all([
       client.readContract({
         abi: erc20Abi,
         address: deployment.paymentToken,
@@ -89,7 +103,16 @@ export default async function JobDetailPage({ params }: PageProperties) {
           functionName: "getProposal",
         })
         .catch(() => null),
-    ]);
+      client.readContract({
+        abi: scopeSettleEvaluatorAbi,
+        address: deployment.evaluator,
+        functionName: "reviewer",
+      }),
+    ]).catch(() => null);
+    if (!chainMetadata) {
+      return <LiveJobUnavailable chainId={chainId} jobId={jobId} />;
+    }
+    const [symbol, decimals, proposal, reviewer] = chainMetadata;
     const evaluation = reports[0] ?? null;
     return (
       <LiveJobDetail
@@ -115,6 +138,7 @@ export default async function JobDetailPage({ params }: PageProperties) {
             : null
         }
         report={evaluation?.report ?? null}
+        reviewer={reviewer}
         signedVerdict={evaluation?.signedVerdict ?? null}
         specification={document.specification}
         submissionTransactionHash={document.submissionTransactionHash}
@@ -392,5 +416,44 @@ export default async function JobDetailPage({ params }: PageProperties) {
         </aside>
       </div>
     </>
+  );
+}
+
+function LiveJobUnavailable({
+  chainId,
+  jobId,
+}: {
+  readonly chainId: string;
+  readonly jobId: string;
+}) {
+  return (
+    <main className="shell section">
+      <section className="panel empty-state" role="alert">
+        <div>
+          <CircleAlert aria-hidden="true" size={28} />
+          <p className="eyebrow">
+            Chain {chainId} / job {jobId}
+          </p>
+          <h1>Live job temporarily unavailable</h1>
+          <p>
+            ScopeSettle could not reconcile the RPC and PostgreSQL evidence
+            index. No cached status is being presented as final, and no wallet
+            transaction was requested.
+          </p>
+          <div className="hero-actions">
+            <Link
+              className="button button-primary"
+              href={`/jobs/${chainId}/${jobId}`}
+              prefetch={false}
+            >
+              Retry reconciliation
+            </Link>
+            <Link className="button button-secondary" href="/app">
+              Return to jobs
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

@@ -43,6 +43,21 @@ test("job creator validates before any wallet request", async ({ page }) => {
   ).toBeDisabled();
 });
 
+test("live job fails closed when chain or index reconciliation is unavailable", async ({
+  page,
+}) => {
+  await page.goto("/jobs/1952/999");
+  await expect(
+    page.getByRole("heading", { name: "Live job temporarily unavailable" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("No cached status is being presented as final"),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Retry reconciliation" }),
+  ).toBeVisible();
+});
+
 test("mobile pages do not overflow horizontally", async ({ page }) => {
   await page.goto("/");
   const dimensions = await page.evaluate(() => ({

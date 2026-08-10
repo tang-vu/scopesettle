@@ -37,7 +37,11 @@ export async function POST(request: NextRequest) {
     const { deployment, job } = await readJob(body.chainId, jobId);
     const specificationHash = hashCanonicalJson(body.specification);
     const rubricHash = hashCanonicalJson(body.specification.criteria);
+    const expectedExpiry = BigInt(
+      Math.floor(new Date(body.specification.expiresAt).getTime() / 1_000),
+    );
     if (
+      job.id !== jobId ||
       getAddress(job.client) !== getAddress(session.address) ||
       getAddress(job.provider) !== getAddress(body.specification.provider) ||
       getAddress(job.evaluator) !== deployment.evaluator ||
@@ -47,7 +51,10 @@ export async function POST(request: NextRequest) {
         body.specification.minimumPassingScore * 100 ||
       job.policy.minimumConfidence !==
         body.specification.minimumConfidence * 100 ||
-      job.policy.challengeWindow !== body.specification.challengeWindowSeconds
+      job.policy.challengeWindow !==
+        body.specification.challengeWindowSeconds ||
+      job.expiredAt !== expectedExpiry ||
+      job.description !== `ScopeSettle specification ${specificationHash}`
     ) {
       throw new UnauthorizedError(
         "The saved specification does not match the onchain job.",
@@ -57,6 +64,7 @@ export async function POST(request: NextRequest) {
       body.chainId,
       body.transactionHash as `0x${string}`,
       session.address,
+      { eventName: "JobCreated", jobId },
     );
     const database = getDatabase();
     await database

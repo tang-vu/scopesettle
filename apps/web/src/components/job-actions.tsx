@@ -36,6 +36,7 @@ type Properties = {
   readonly status: number;
   readonly provider: `0x${string}`;
   readonly client: `0x${string}`;
+  readonly reviewer: `0x${string}`;
   readonly expiredAt: number;
   readonly proposal?: {
     challengeUntil: number;
@@ -55,6 +56,7 @@ export function JobActions(properties: Properties) {
   const { writeContractAsync } = useWriteContract();
   const [pullRequestUrl, setPullRequestUrl] = useState("");
   const [challengeReason, setChallengeReason] = useState("");
+  const [resolutionReason, setResolutionReason] = useState("");
   const [pending, setPending] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const commerce = process.env.NEXT_PUBLIC_AGENTIC_COMMERCE_ADDRESS as
@@ -66,6 +68,9 @@ export function JobActions(properties: Properties) {
     address?.toLowerCase() === properties.provider.toLowerCase();
   const isParty =
     isProvider || address?.toLowerCase() === properties.client.toLowerCase();
+  const isClient = address?.toLowerCase() === properties.client.toLowerCase();
+  const isReviewer =
+    address?.toLowerCase() === properties.reviewer.toLowerCase();
 
   async function prepare(): Promise<void> {
     if (!address || !commerce || !evaluator) {
@@ -242,12 +247,76 @@ export function JobActions(properties: Properties) {
     });
   }
 
+  async function rejectOpenJob() {
+    await act("Rejecting open job", async () => {
+      if (resolutionReason.trim().length < 10) {
+        throw new Error("Describe the rejection in at least ten characters.");
+      }
+      const transactionHash = await writeContractAsync({
+        abi: agenticCommerceAbi,
+        address: getAddress(commerce!),
+        args: [
+          BigInt(properties.jobId),
+          keccak256(toBytes(resolutionReason.trim())),
+          "0x",
+        ],
+        chainId: properties.chainId as 1952 | 196,
+        functionName: "reject",
+      });
+      await publicClient!.waitForTransactionReceipt({ hash: transactionHash });
+    });
+  }
+
+  async function resolveManualReview(approved: boolean) {
+    await act(
+      approved ? "Approving manual review" : "Rejecting manual review",
+      async () => {
+        if (resolutionReason.trim().length < 10) {
+          throw new Error("Record a review reason of at least ten characters.");
+        }
+        const transactionHash = await writeContractAsync({
+          abi: scopeSettleEvaluatorAbi,
+          address: getAddress(evaluator!),
+          args: [
+            BigInt(properties.jobId),
+            approved,
+            keccak256(toBytes(resolutionReason.trim())),
+          ],
+          chainId: properties.chainId as 1952 | 196,
+          functionName: "resolveManualReview",
+        });
+        await publicClient!.waitForTransactionReceipt({
+          hash: transactionHash,
+        });
+      },
+    );
+  }
+
   const [now] = useState(() => Math.floor(Date.now() / 1_000));
   return (
     <section className="panel content-block" aria-live="polite">
       <h2>Available actions</h2>
       {!address ? (
         <p>Connect the relevant wallet to reveal role-authorized actions.</p>
+      ) : null}
+      {properties.status === 0 && isClient ? (
+        <div className="field">
+          <label htmlFor="open-rejection-reason">Cancellation reason</label>
+          <textarea
+            className="textarea"
+            id="open-rejection-reason"
+            onChange={(event) => setResolutionReason(event.target.value)}
+            value={resolutionReason}
+          />
+          <button
+            className="button button-secondary button-wide"
+            disabled={Boolean(pending)}
+            onClick={rejectOpenJob}
+            type="button"
+          >
+            Reject unfunded job
+          </button>
+        </div>
       ) : null}
       {properties.status === 1 && isProvider ? (
         <div className="field">
@@ -331,6 +400,39 @@ export function JobActions(properties: Properties) {
         >
           Finalize permissionlessly
         </button>
+      ) : null}
+      {properties.proposal &&
+      !properties.proposal.finalized &&
+      (properties.proposal.challenged || properties.proposal.outcome === 2) &&
+      isReviewer ? (
+        <div className="field">
+          <label htmlFor="manual-review-reason">Manual review decision</label>
+          <textarea
+            className="textarea"
+            id="manual-review-reason"
+            onChange={(event) => setResolutionReason(event.target.value)}
+            placeholder="Cite the evidence and explain the final decision."
+            value={resolutionReason}
+          />
+          <div className="action-pair">
+            <button
+              className="button button-primary"
+              disabled={Boolean(pending)}
+              onClick={() => resolveManualReview(true)}
+              type="button"
+            >
+              Approve and release
+            </button>
+            <button
+              className="button button-secondary"
+              disabled={Boolean(pending)}
+              onClick={() => resolveManualReview(false)}
+              type="button"
+            >
+              Reject and refund
+            </button>
+          </div>
+        </div>
       ) : null}
       {[1, 2].includes(properties.status) && now >= properties.expiredAt ? (
         <button

@@ -109,3 +109,32 @@ export const evaluationReports = pgTable(
     uniqueIndex("evaluation_reports_hash_unique").on(table.reportHash),
   ],
 );
+
+export const evaluationLeases = pgTable(
+  "evaluation_leases",
+  {
+    chainId: integer("chain_id").notNull(),
+    jobId: bigint("job_id", { mode: "bigint" }).notNull(),
+    holder: text("holder").notNull(),
+    acquiredAt: timestamp("acquired_at", { withTimezone: true }).notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.chainId, table.jobId] })],
+);
+
+export const evaluationRateLimits = pgTable(
+  "evaluation_rate_limits",
+  {
+    address: text("address").notNull(),
+    chainId: integer("chain_id").notNull(),
+    windowStartedAt: timestamp("window_started_at", {
+      withTimezone: true,
+    }).notNull(),
+    requestCount: integer("request_count").notNull(),
+  },
+  (table) => [
+    primaryKey({
+      columns: [table.address, table.chainId, table.windowStartedAt],
+    }),
+  ],
+);

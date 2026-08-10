@@ -38,9 +38,15 @@ for the exact commit, runs deterministic gates, sends hostile repository content
 model prompt with explicit data delimiters, validates the output, recomputes the weighted score,
 canonicalizes and hashes the report, persists evidence, and only then prepares/signs a verdict.
 
-PostgreSQL stores expiring single-use auth nonces, evaluation runs, and reports. It may cache
-public metadata, but all job state and settlement displays are reconciled against RPC reads/events.
-The public example is clearly labeled local fixture data until a real Testnet job exists.
+PostgreSQL stores expiring single-use auth nonces, job documents, reports, atomic per-job evaluator
+leases, and UTC-hour per-wallet quota buckets. A ten-minute expiring lease prevents concurrent paid
+model calls for one job; a completed report is reused and only its expired verdict signature is
+refreshed. The database may cache public metadata, but all job state and settlement displays are
+reconciled against RPC reads/events. The public example is clearly labeled local fixture data until
+a real Testnet job exists.
+
+Database migrations run in filename order under a PostgreSQL advisory transaction lock. Applied
+SHA-256 checksums are persisted, and editing an already-applied migration fails closed.
 
 ## Canonical commitments
 
@@ -55,4 +61,5 @@ The public example is clearly labeled local fixture data until a real Testnet jo
 
 Invalid URL/input, stale head SHA, oversized/binary-only diffs, low confidence, schema-invalid
 model output, provider outage, or insufficient time before expiry fails closed to manual review;
-production never substitutes the deterministic mock evaluator.
+production never substitutes the deterministic mock evaluator. Concurrent evaluation returns 409;
+quota exhaustion returns 429 with `Retry-After`.

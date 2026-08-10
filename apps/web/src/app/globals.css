@@ -1362,9 +1362,42 @@ h1 .accent {
   padding-bottom: 100px;
 }
 
+.page-wallet-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-height: 58px;
+  color: var(--dim);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.wallet-context {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
 .form-stack {
   display: grid;
   gap: 18px;
+}
+
+.form-fields {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  gap: 18px;
+}
+
+.form-fields:disabled :is(.input, .textarea, .button, .icon-button) {
+  opacity: 0.72;
 }
 
 .form-section {
@@ -1567,6 +1600,12 @@ h1 .accent {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+
+.action-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .sticky-summary {
@@ -1803,7 +1842,8 @@ h1 .accent {
   }
 
   .field-grid,
-  .review-grid {
+  .review-grid,
+  .action-pair {
     grid-template-columns: 1fr;
   }
 

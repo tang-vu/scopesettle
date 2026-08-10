@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
 import { JobCreateForm } from "@/components/job-create-form";
+import { Providers } from "@/components/providers";
+import { WalletButton } from "@/components/wallet-button";
 
 export const metadata: Metadata = { title: "Create job" };
 
@@ -18,7 +20,13 @@ export default function CreateJobPage() {
           </p>
         </div>
       </header>
-      <JobCreateForm />
+      <Providers>
+        <div className="shell page-wallet-row">
+          <span>Client transaction wallet</span>
+          <WalletButton />
+        </div>
+        <JobCreateForm />
+      </Providers>
     </>
   );
 }

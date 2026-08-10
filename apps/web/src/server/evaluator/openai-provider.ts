@@ -1,4 +1,6 @@
 import { canonicalize } from "@scopesettle/shared";
+import "server-only";
+
 import OpenAI from "openai";
 import { zodTextFormat } from "openai/helpers/zod";
 

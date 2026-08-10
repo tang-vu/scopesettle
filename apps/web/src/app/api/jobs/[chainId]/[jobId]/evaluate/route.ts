@@ -13,6 +13,10 @@ import { requireWalletSession, UnauthorizedError } from "@/server/auth";
 import { readJob } from "@/server/chain";
 import { getDatabase } from "@/server/db";
 import { evaluationReports, jobDocuments } from "@/server/db/schema";
+import {
+  acquireEvaluationLease,
+  releaseEvaluationLease,
+} from "@/server/evaluation-guard";
 import { OpenAIEvaluationProvider } from "@/server/evaluator/openai-provider";
 import { evaluatePullRequest } from "@/server/evaluator/pipeline";
 import { GitHubClient } from "@/server/github";
@@ -116,62 +120,75 @@ export async function POST(request: NextRequest, context: RouteContext) {
         );
       return NextResponse.json({ ...existing, signedVerdict });
     }
-    const deliverable = document.deliverable;
-    const pull = await new GitHubClient().getPullRequest(
-      `https://github.com/${deliverable.owner}/${deliverable.repository}/pull/${deliverable.pullNumber}`,
-    );
-    let report = await evaluatePullRequest(
-      {
-        chainId,
-        contractAddress: deployment.commerce,
-        expectedHeadSha: deliverable.headSha,
-        jobId: jobId.toString(),
-        pull,
-        specification: document.specification,
-      },
-      new OpenAIEvaluationProvider(),
-    );
-    if (
-      report.verdict !== "manual_review" &&
-      now + Number(job.policy.challengeWindow) >= Number(job.expiredAt)
-    ) {
-      report = forceManualReview(
-        report,
-        "Automatic settlement was disabled because the remaining job lifetime cannot contain the immutable challenge window.",
-      );
-    }
-    const signedVerdict = await signEvaluationVerdict({
+    const lease = await acquireEvaluationLease({
+      address: session.address,
       chainId,
-      challengeWindow: BigInt(job.policy.challengeWindow),
-      deliverableHash: document.deliverableHash as `0x${string}`,
-      expiresAt: job.expiredAt,
       jobId,
-      report,
     });
-    await database
-      .insert(evaluationReports)
-      .values({
+    try {
+      const deliverable = document.deliverable;
+      const pull = await new GitHubClient().getPullRequest(
+        `https://github.com/${deliverable.owner}/${deliverable.repository}/pull/${deliverable.pullNumber}`,
+      );
+      let report = await evaluatePullRequest(
+        {
+          chainId,
+          contractAddress: deployment.commerce,
+          expectedHeadSha: deliverable.headSha,
+          jobId: jobId.toString(),
+          pull,
+          specification: document.specification,
+        },
+        new OpenAIEvaluationProvider(),
+      );
+      if (
+        report.verdict !== "manual_review" &&
+        now + Number(job.policy.challengeWindow) >= Number(job.expiredAt)
+      ) {
+        report = forceManualReview(
+          report,
+          "Automatic settlement was disabled because the remaining job lifetime cannot contain the immutable challenge window.",
+        );
+      }
+      const signedVerdict = await signEvaluationVerdict({
         chainId,
+        challengeWindow: BigInt(job.policy.challengeWindow),
+        deliverableHash: document.deliverableHash as `0x${string}`,
+        expiresAt: job.expiredAt,
         jobId,
-        model: report.model,
         report,
-        reportHash: report.reportHash,
-        signedVerdict,
-      })
-      .onConflictDoNothing();
-    const [saved] = await database
-      .select()
-      .from(evaluationReports)
-      .where(
-        and(
-          eq(evaluationReports.chainId, chainId),
-          eq(evaluationReports.jobId, jobId),
-        ),
-      )
-      .limit(1);
-    if (!saved)
-      throw new Error("The evaluation report could not be persisted.");
-    return NextResponse.json(saved, { status: 201 });
+      });
+      await database
+        .insert(evaluationReports)
+        .values({
+          chainId,
+          jobId,
+          model: report.model,
+          report,
+          reportHash: report.reportHash,
+          signedVerdict,
+        })
+        .onConflictDoNothing();
+      const [saved] = await database
+        .select()
+        .from(evaluationReports)
+        .where(
+          and(
+            eq(evaluationReports.chainId, chainId),
+            eq(evaluationReports.jobId, jobId),
+          ),
+        )
+        .limit(1);
+      if (!saved)
+        throw new Error("The evaluation report could not be persisted.");
+      return NextResponse.json(saved, { status: 201 });
+    } finally {
+      await releaseEvaluationLease(lease).catch((error: unknown) => {
+        console.error("ScopeSettle evaluation lease release failed", {
+          name: error instanceof Error ? error.name : "UnknownError",
+        });
+      });
+    }
   } catch (error) {
     return apiError(error);
   }

@@ -7,12 +7,12 @@
   "scripts": {
     "build": "next build",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:migrate": "node ./scripts/migrate.mjs",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
     "test": "vitest run",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test && playwright test --config playwright.wallet.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "postgres": "^3.4.7",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "server-only": "0.0.1",
     "siwe": "3.0.0",
     "viem": "2.55.11",
     "wagmi": "3.7.6",

@@ -75,6 +75,19 @@ Acceptance: no serious accessibility issue and all achievable quality gates pass
 
 Acceptance: submission assets match reality; human-only checklist is minimal and exact.
 
+## Release hardening pass
+
+- [x] Make create/fund retries resumable by client, chain, deployment, and specification hash,
+      with creation-receipt, job-state, budget, and allowance reconciliation before continuation.
+- [x] Expose client cancellation and trusted-reviewer resolution in the role action UI.
+- [x] Serialize evaluator work per job and enforce an atomic per-wallet AI quota.
+- [x] Add checksummed, advisory-lock-protected PostgreSQL migration execution.
+- [x] Exercise network switch, wallet rejection/resume, submit, evaluate, propose, finalize, and
+      manual review in isolated Chromium tests with no paid calls or public transactions.
+- [x] Add production metadata, crawl/install/social assets, global recovery UI, and hardened headers.
+- [x] Route-scope wallet providers, disable unnecessary route prefetch, and audit the production
+      landing page at mobile and desktop Lighthouse profiles with zero layout shift.
+
 ## Architecture decisions
 
 1. One immutable ERC-20 per escrow deployment; no fee, proxy, hook, or custody layer.

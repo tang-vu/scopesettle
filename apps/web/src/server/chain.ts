@@ -8,6 +8,7 @@ import {
   getAddress,
   http,
   isAddress,
+  parseEventLogs,
   type Address,
   type Hash,
 } from "viem";
@@ -80,6 +81,10 @@ export async function assertSuccessfulTransaction(
   chainId: number,
   hash: Hash,
   expectedSender: Address,
+  operation: {
+    eventName: "JobCreated" | "JobSubmitted";
+    jobId: bigint;
+  },
 ): Promise<void> {
   const { commerce } = getDeployment(chainId);
   const receipt = await getScopeSettleClient(chainId).getTransactionReceipt({
@@ -92,6 +97,17 @@ export async function assertSuccessfulTransaction(
   ) {
     throw new Error(
       "The supplied transaction does not match this job operation.",
+    );
+  }
+  const matchingEvent = parseEventLogs({
+    abi: agenticCommerceAbi,
+    eventName: operation.eventName,
+    logs: receipt.logs,
+    strict: true,
+  }).some((event) => event.args.jobId === operation.jobId);
+  if (!matchingEvent) {
+    throw new Error(
+      `The supplied transaction did not emit ${operation.eventName} for this job.`,
     );
   }
 }

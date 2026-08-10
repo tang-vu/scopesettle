@@ -12,8 +12,12 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="eyebrow">Protocol</p>
-          <Link href="/app">Explore jobs</Link>
-          <Link href="/jobs/new">Create a job</Link>
+          <Link href="/app" prefetch={false}>
+            Explore jobs
+          </Link>
+          <Link href="/jobs/new" prefetch={false}>
+            Create a job
+          </Link>
         </div>
         <div>
           <p className="eyebrow">Documentation</p>
