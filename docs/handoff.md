@@ -82,6 +82,8 @@ Last verified: 2026-08-12. Read this file together with [`PLANS.md`](../PLANS.md
   bytecode and immutable bindings, and OKLink published matching sources for all three contracts.
 - Canonical addresses, transaction hashes, compiler settings, roles, and deployment time are in
   `deployments/xlayer-testnet-1952-2026-08-12.json`.
+- The public judge dossier is live at `https://tang-vu.github.io/scopesettle/`; GitHub Pages run
+  `31616238673` deployed it successfully and the repo homepage points to it.
 - Official Testnet verifier URL used by the protected workflow:
   `https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET`.
 
@@ -125,6 +127,13 @@ X Layer RPC secrets are already configured.
 The current Testnet deployer remains funded with valueless Testnet OKB. Its key, the evaluator
 signer, and the reviewer must remain securely recoverable. Do not generate a production key without
 an owner-approved custody/backup plan.
+
+Read-only Mainnet preflight on 2026-08-12 confirmed chain `196` through both official RPCs and the
+official native USDC candidate `0x74b7f16337b8972027f6196a17a631ac6de26d22` (`USDC`, 6 decimals,
+non-empty runtime). The current deployer has `0 OKB` and `0 USDC` on Mainnet, so no broadcast was
+attempted. The two production contracts consumed `4,381,279` gas in the Testnet deployment;
+`0.001 OKB` is a conservative gas-funding floor at the observed `20,000,001` wei gas price. Recheck
+all values and obtain fresh confirmation before Mainnet deployment.
 
 A hosted web release additionally needs:
 

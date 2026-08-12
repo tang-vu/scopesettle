@@ -1,6 +1,6 @@
 # Verified research
 
-Verified on 2026-08-10 from primary sources. Links are retained so facts can be rechecked
+Verified on 2026-08-12 from primary sources. Links are retained so facts can be rechecked
 immediately before deployment and submission.
 
 ## Hackathon
@@ -39,6 +39,14 @@ to Testnet only if an official usable address cannot be verified at deployment t
 Sources: [network information](https://web3.okx.com/onchainos/dev-docs/xlayer/developer/build-on-xlayer/network-information),
 [X Layer developer overview](https://web3.okx.com/onchainos/dev-docs/xlayer/developer/build-on-xlayer/about-xlayer),
 [official faucet](https://web3.okx.com/xlayer/faucet).
+
+The official X Layer documentation repository identifies native Mainnet USDC as
+`0x74b7f16337b8972027f6196a17a631ac6de26d22`. On 2026-08-12, both official Mainnet RPCs returned
+chain ID `196`, identical non-empty runtime code for this address, symbol `USDC`, and `6` decimals.
+It is the current payment-token candidate; the exact immutable deployment inputs still require
+fresh owner confirmation before broadcast.
+
+Source: [official X Layer contract-address table](https://github.com/okx/xlayer-docs/blob/main/developer/build-on-xlayer/contracts.mdx).
 
 Official X Layer documentation confirms Foundry verification through OKLink and requires waiting at
 least one minute after deployment. OKLink's current supported-chain list includes
@@ -89,9 +97,7 @@ Sources: [OpenAI API quickstart](https://platform.openai.com/docs/quickstart),
 
 ## Facts still requiring deployment-time verification
 
-- Official supported Mainnet payment token and address suitable for this beta.
 - Whether faucet USDG is a standard ERC-20 usable by the escrow and its exact Testnet address.
-- Explorer source-verification status for the actual deployed addresses.
 - Final RPC health, fee estimates, deployer balance, and chain ID immediately before broadcasting.
-- Hosted web URL, deployed contracts, real transactions, and dedicated X account/post.
+- Hosted AI-backed app URL, Mainnet deployment, dedicated X account/post, and demo video.
 - The EIP’s draft text may change; compatibility must be re-diffed before public deployment.

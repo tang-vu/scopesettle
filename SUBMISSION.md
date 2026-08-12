@@ -73,6 +73,16 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 - [ ] Owner Email, Telegram, X handle, and self-custodial prize wallet confirmed
 - [ ] Final form submitted before the official deadline
 
+## Mainnet preflight checkpoint
+
+- Target chain: X Layer Mainnet, chain ID `196` (confirmed by both official RPCs).
+- Candidate payment token: native USDC,
+  `0x74b7f16337b8972027f6196a17a631ac6de26d22` (official docs, non-empty runtime, 6 decimals).
+- Deployer: `0x66dd076f5cbb8c8dc4825c8eb7148df55bd565a6`.
+- Current deployer balances: `0 OKB`, `0 USDC`; deployment is blocked and no transaction was sent.
+- Conservative gas funding request: `0.001 OKB`; observed two-contract deployment cost was about
+  `0.00008763 OKB` at the current RPC gas price.
+
 The Hackathon Grant—not the AI-RWA Liquidity Grant or trading-volume Launch Grant—is the honest
 target for the current product. ScopeSettle must not generate artificial DEX volume or represent
 itself as an RWA project.
