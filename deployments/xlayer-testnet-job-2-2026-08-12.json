@@ -1,0 +1,183 @@
+{
+  "budget": {
+    "amount": "1000000",
+    "decimals": 6,
+    "symbol": "mUSDG",
+    "value": "valueless-testnet-mock"
+  },
+  "chainId": 1952,
+  "commerceAddress": "0x76a0f64d59699be3330d6088a157a7941bcad3cc",
+  "deliverable": {
+    "baseSha": "5d7b81585fd71beb0fd1a0941501ba8307f579f8",
+    "hash": "0x794648c619dbab0e6dc7722a004fa72b08eb3a530ff3d6a03660eca7b7d49160",
+    "headSha": "6899e3a96ea19c09d6d0cc28958cfa8241cc9a30",
+    "owner": "tang-vu",
+    "pullNumber": 10,
+    "repository": "scopesettle",
+    "schemaVersion": "1.0.0"
+  },
+  "description": "ScopeSettle EOA Testnet lifecycle proof; deterministic wiring and settlement evidence, not AI evaluation.",
+  "evaluation": {
+    "content": {
+      "chainId": 1952,
+      "confidence": 100,
+      "contractAddress": "0x76a0f64d59699be3330d6088a157a7941bcad3cc",
+      "criteria": [
+        {
+          "evidence": [
+            {
+              "excerpt": "Confirmed X Layer Testnet provider submission transaction.",
+              "url": "https://www.oklink.com/x-layer-testnet/tx/0xea84e50aa77b47a5a8df58969de5a42af7ac2843c65b0eadd0d5fe56592f0d27"
+            }
+          ],
+          "id": "onchain-lifecycle",
+          "reason": "The dedicated EOA provider submitted the pinned public pull-request commitment through the source-verified Testnet commerce contract.",
+          "score": 100,
+          "status": "pass",
+          "title": "Onchain lifecycle completion",
+          "weight": 100
+        }
+      ],
+      "deterministicChecks": [
+        {
+          "evidence": "OKLink verification matched the deployed bytecode, source, and compiler metadata.",
+          "id": "source-verification",
+          "label": "All three contracts are source-verified on OKLink",
+          "status": "pass"
+        },
+        {
+          "evidence": "The X Layer Testnet receipt succeeded and committed the pinned deliverable hash.",
+          "id": "submission-receipt",
+          "label": "Provider submission receipt is confirmed",
+          "status": "pass"
+        }
+      ],
+      "generatedAt": "2026-08-12T15:49:38.000Z",
+      "jobId": "2",
+      "limitations": [
+        "Deterministic Testnet wiring proof only; no AI model evaluated code quality or repository behavior."
+      ],
+      "model": "deterministic-onchain-smoke-v1",
+      "promptVersion": "smoke-v1",
+      "repository": {
+        "baseSha": "5d7b81585fd71beb0fd1a0941501ba8307f579f8",
+        "headSha": "6899e3a96ea19c09d6d0cc28958cfa8241cc9a30",
+        "name": "scopesettle",
+        "owner": "tang-vu",
+        "pullNumber": 10
+      },
+      "schemaVersion": "1.0.0",
+      "verdict": "pass",
+      "weightedScore": 100
+    },
+    "mode": "deterministic-testnet-smoke",
+    "reportHash": "0x2736e657a509dc171dff589328f423d3ff084f066be6e841f3f7a78adf83f375"
+  },
+  "expiresAt": "2026-08-13T15:48:20Z",
+  "jobId": "2",
+  "policy": {
+    "challengeWindowSeconds": 1,
+    "minimumConfidenceBps": 10000,
+    "minimumScoreBps": 10000,
+    "rubricHash": "0xe146257516dc38b2857910f658ca8440245e22d63d945ce3795a6e9a2532a237",
+    "specificationHash": "0x886b00e748e32055b0b7bc17cc783e6bc71fff1c59ba9afcde560125700560f8"
+  },
+  "postSettlement": {
+    "commerceTokenBalance": "1000000",
+    "escrowedTotal": "1000000",
+    "jobStatus": "completed",
+    "providerTokenBalance": "1000000",
+    "remainingClientAllowance": "0"
+  },
+  "provider": {
+    "address": "0x31ea67bd77b05b21ba9114c17fbdfb0c71d05e2d",
+    "gasFundingAmountWei": "5000000000000000",
+    "gasFundingConfirmedByBothOfficialRpcs": true,
+    "postSettlementNativeBalanceWei": "4998877959943898",
+    "type": "dedicated-testnet-eoa"
+  },
+  "roles": {
+    "client": "0x66dd076f5cbb8c8dc4825c8eb7148df55bd565a6",
+    "evaluator": "0x02fac1ee8036b51ccc79be97006fdc9298d11bf0",
+    "provider": "0x31ea67bd77b05b21ba9114c17fbdfb0c71d05e2d"
+  },
+  "sourceCommit": "0af81b13a1ad05823fe79c014faf876e794d33a3",
+  "status": "completed-deterministic-testnet-smoke",
+  "transactions": {
+    "approve": {
+      "block": 38090886,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 46281,
+      "hash": "0xcb64d72853c62dc9ea8b28a082ada5fccb2ff8d6920ead2b66ff46b2bb36db95",
+      "minedAt": "2026-08-12T15:48:43Z",
+      "status": 1
+    },
+    "create": {
+      "block": 38090909,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 332803,
+      "hash": "0xdb4c6bdd54f4c36a509226b0b3a14976b53cc1f8da813ca329672e521d88855d",
+      "minedAt": "2026-08-12T15:49:06Z",
+      "status": 1
+    },
+    "finalize": {
+      "block": 38091137,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 95484,
+      "hash": "0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330",
+      "minedAt": "2026-08-12T15:52:54Z",
+      "status": 1
+    },
+    "fund": {
+      "block": 38090927,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 64468,
+      "hash": "0xd855f93c85b6754749c01142d2c9c8522da85ba26bd7fc15d759cf838d514188",
+      "minedAt": "2026-08-12T15:49:24Z",
+      "status": 1
+    },
+    "gasFunding": {
+      "block": 38090814,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 21000,
+      "hash": "0x18e661a02879469c2f1e35eb029cc5cc3f67242a2b5b9055445701fa054a53ee",
+      "minedAt": "2026-08-12T15:47:31Z",
+      "status": 1
+    },
+    "propose": {
+      "block": 38091126,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 191124,
+      "hash": "0xabbb08193e2971a0bcb69436d3d571f8abf50ddf871f74eacff1401bdcd14749",
+      "minedAt": "2026-08-12T15:52:43Z",
+      "status": 1
+    },
+    "setBudget": {
+      "block": 38090912,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 52385,
+      "hash": "0x6eb8d9eb2c2f8342a2bc84737594c955ddbbd3317b35e5eaff1179b1dc5c1dfc",
+      "minedAt": "2026-08-12T15:49:09Z",
+      "status": 1
+    },
+    "submit": {
+      "block": 38090941,
+      "effectiveGasPriceWei": "20000001",
+      "gasUsed": 56102,
+      "hash": "0xea84e50aa77b47a5a8df58969de5a42af7ac2843c65b0eadd0d5fe56592f0d27",
+      "minedAt": "2026-08-12T15:49:38Z",
+      "status": 1
+    }
+  },
+  "verdict": {
+    "challengeUntil": "2026-08-12T15:52:44Z",
+    "confidenceBps": 10000,
+    "deadline": "2026-08-12T16:52:40Z",
+    "digest": "0x38440c08d089ca7a2ef9faa4dabc94d472103c7231668f6cb49a9c554a92c890",
+    "finalized": true,
+    "nonce": "2",
+    "outcome": "pass",
+    "proposedAt": "2026-08-12T15:52:43Z",
+    "scoreBps": 10000
+  }
+}

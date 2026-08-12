@@ -1,6 +1,6 @@
 # ScopeSettle handoff
 
-Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md),
+Last verified: 2026-08-12. Read this file together with [`PLANS.md`](../PLANS.md),
 [`README.md`](../README.md), and the [deployment runbook](deployment-runbook.md).
 
 ## Repository state
@@ -23,7 +23,8 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
 
 ## What is complete
 
-- Milestones 1–5, 7, and 8 are complete; the locally achievable part of milestone 6 is complete.
+- Milestones 1–5, 7, and 8 are complete; milestone 6 now includes a completed deterministic
+  contract lifecycle on X Layer Testnet.
 - The product includes the public landing page, wallet dashboard, create/fund flow, exact job view,
   role actions, evidence report, responsive design, accessibility/error/loading states, and a
   clearly labeled illustrative example.
@@ -86,9 +87,14 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
 
 ## External blockers and secrets still missing
 
-No external web deployment, completed Testnet job, live URL, or public X post exists. The Testnet
-contract deployment is real and source-verified; never substitute local/fixture evidence for the
-remaining end-to-end proof.
+No external web deployment, hosted OpenAI-backed Testnet evaluation, live URL, or public X post
+exists. The Testnet contract deployment and deterministic job `2` lifecycle are real and
+source-verified; never describe the smoke verdict as an AI code evaluation.
+
+Testnet job `2` completed through create, fund, EOA submit, signed verdict, challenge window, and
+finalization. It released exactly `1 mUSDG` to the dedicated Testnet EOA provider. The immutable
+report, verdict, role, receipt, and post-settlement evidence is recorded in
+`deployments/xlayer-testnet-job-2-2026-08-12.json`.
 
 Testnet job `1` is funded with `1 mUSDG` and awaits submission by the configured Agentic Wallet
 provider. Its evidence record is `deployments/xlayer-testnet-job-1-2026-08-12.json`. The OKX
@@ -145,9 +151,10 @@ PostgreSQL 17 service instead. That gate passed on the final CI run.
 ## Exact next sequence
 
 1. Configure the deployed Testnet addresses in the hosted web environment, together with the
-   PostgreSQL/OpenAI/evaluator secrets, run migrations, deploy the web app,
-   and complete a real low-value Testnet create → fund → submit → evaluate → challenge/finalize flow.
-2. Replace the illustrative judge path with a clearly labeled real completed Testnet job, rerun
+   PostgreSQL/OpenAI/evaluator secrets, run migrations, deploy the web app, and complete an
+   OpenAI-backed Testnet create → fund → submit → evaluate → challenge/finalize flow.
+2. Link the judge path to the hosted completed job while retaining the deterministic job `2`
+   evidence as the contract-wiring proof, then rerun
    `pnpm check`, CodeQL, dependency/secret review, Lighthouse, responsive QA, and documentation audit.
 3. Optionally add the Testnet signer/role secrets to the protected GitHub environments before any
    future redeployment; never paste a private key into chat or Git.

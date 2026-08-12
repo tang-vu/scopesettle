@@ -149,8 +149,10 @@ and platform fees are intentionally out of scope. Read [SECURITY.md](SECURITY.md
 
 ## Submission and roadmap
 
-The remaining release gate is a real low-value completed Testnet job, public hosted app,
-browser/security QA, and judge demo. Mainnet follows only after explicit approval.
+The source-verified contracts now have a completed valueless Testnet lifecycle with a dedicated EOA
+provider. It is explicitly a deterministic contract-wiring proof, not an AI evaluation. The
+remaining release gate is the public hosted OpenAI-backed workflow and judge demo. Mainnet follows
+only after explicit approval.
 Submission copy, demo script, and launch thread are in [SUBMISSION.md](SUBMISSION.md),
 [DEMO.md](DEMO.md), and [X_THREAD.md](X_THREAD.md).
 

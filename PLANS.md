@@ -1,6 +1,6 @@
 # ScopeSettle execution plan
 
-Last updated: 2026-08-10
+Last updated: 2026-08-12
 
 Current cross-chat continuation state: [`docs/handoff.md`](docs/handoff.md).
 
@@ -56,7 +56,8 @@ Acceptance: exact commit binding, hostile-content handling, outages, and manual 
 
 - [x] Complete deterministic local workflow and public completed-job fixture.
 - [x] Deploy and source-verify the mock stack on X Layer Testnet.
-- [!] Run real Testnet workflow and record explorer links (requires deployment).
+- [x] Run a deterministic, valueless Testnet contract lifecycle and record explorer evidence.
+- [!] Run the hosted OpenAI-backed product workflow (requires hosting and external secrets).
 
 Acceptance: judges can inspect a real completed Testnet job without a wallet.
 

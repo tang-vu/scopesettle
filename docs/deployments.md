@@ -51,3 +51,16 @@ estimated `56,908` gas, but the Agentic Wallet backend rejected the submit UserO
 broadcast with `may_be_out_of_gas` using automatic, `100,000`, and `500,000` gas limits. Wallet
 history remained empty and the provider nonce did not advance. The job therefore remains safely
 funded and unchanged; do not present any transaction hash for the failed submission attempts.
+
+Job `2` completed the same contract lifecycle with a dedicated ordinary Testnet EOA provider. The
+client approved and funded exactly `1 mUSDG`; the provider submitted the pinned PR commitment; the
+trusted evaluator signer proposed a deterministic pass verdict; and permissionless finalization
+released the full escrow to the provider. All eight receipts succeeded on chain `1952`, and the
+final RPC state reports job status `Completed`, provider balance `1 mUSDG`, and zero remaining job
+`2` escrow. The commerce contract still holds `1 mUSDG` solely for unfinished job `1`.
+
+The canonical evidence is
+`deployments/xlayer-testnet-job-2-2026-08-12.json`. This proves source-verified contract wiring and
+settlement, not AI evaluation quality: no model reviewed or executed repository code in this smoke
+run. The completed transaction is
+[`0x7016…a330`](https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330).
