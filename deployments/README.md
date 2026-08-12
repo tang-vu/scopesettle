@@ -1,6 +1,6 @@
 # Deployment records
 
-This directory is intentionally empty until a real transaction is confirmed. The protected
-deployment workflow exports a normalized `deployment-record.json` together with Foundry's broadcast
-receipt. Download, compare, and review both artifacts before adding one immutable JSON record per
-network and deployment here; never prefill addresses or hashes.
+This directory contains one immutable JSON record per confirmed external deployment. Compare every
+record with its Foundry broadcast receipt and live RPC state before committing it; never prefill
+addresses or hashes. Verification status must remain pending until the explorer publishes the
+matching source.

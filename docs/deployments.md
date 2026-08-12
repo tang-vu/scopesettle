@@ -1,13 +1,13 @@
 # Deployments
 
-No external ScopeSettle deployment has been made. Addresses and transaction links remain absent
-because the repository never fabricates deployment evidence.
+ScopeSettle's mock beta stack was deployed to X Layer Testnet on 2026-08-12. The canonical
+machine-readable evidence is stored in `deployments/xlayer-testnet-1952-2026-08-12.json`.
 
-| Network         | Chain ID | RPC source            | Payment token      | Commerce          | Evaluator         | Status                                 |
-| --------------- | -------: | --------------------- | ------------------ | ----------------- | ----------------- | -------------------------------------- |
-| Local Anvil     |    31337 | local process         | `MockUSDG`         | generated per run | generated per run | supported                              |
-| X Layer Testnet |     1952 | official X Layer docs | `MockUSDG` planned | —                 | —                 | RPC verified; awaiting signer/approval |
-| X Layer Mainnet |      196 | official X Layer docs | not yet selected   | —                 | —                 | blocked until Testnet proof + approval |
+| Network         | Chain ID | RPC source            | Payment token    | Commerce          | Evaluator         | Status                                 |
+| --------------- | -------: | --------------------- | ---------------- | ----------------- | ----------------- | -------------------------------------- |
+| Local Anvil     |    31337 | local process         | `MockUSDG`       | generated per run | generated per run | supported                              |
+| X Layer Testnet |     1952 | official X Layer docs | `0xef0b…fac1`    | `0x76a0…d3cc`     | `0x02fa…1bf0`     | deployed; OKLink verification pending  |
+| X Layer Mainnet |      196 | official X Layer docs | not yet selected | —                 | —                 | blocked until Testnet proof + approval |
 
 Every external record must add deployment date, source commit SHA, deployer, payment token,
 contract addresses, deployment block, explorer links, transaction hashes, compiler settings, and
@@ -28,10 +28,10 @@ official asset or deployed to Mainnet.
 
 See [deployment runbook](deployment-runbook.md) for commands.
 
-## Latest Testnet readiness evidence
+## X Layer Testnet deployment
 
-On 2026-08-10, both official X Layer Testnet RPCs returned chain ID `1952`. A local Anvil run using
-that chain ID deployed the mock beta stack successfully and estimated `6,589,351` gas. The official
-RPC gas price observed during the same preflight was `20,000,001` wei, implying an indicative
-`0.000131787` OKB before buffer. These are not external deployment records; gas, balance, roles,
-nonce, and addresses must be freshly simulated from the real deployer before approval.
+The deployment was mined at block `38086528` from source commit
+`a21be84a2b6e6b5c86567fbb391f96f818e800ce`. RPC reads confirmed non-empty runtime bytecode and
+the expected immutable payment-token, commerce, verdict-signer, and reviewer bindings. `MockUSDG`
+is a valueless six-decimal faucet token for Testnet demonstrations only. OKLink source verification
+remains pending and must not be described as complete until the explorer publishes the sources.

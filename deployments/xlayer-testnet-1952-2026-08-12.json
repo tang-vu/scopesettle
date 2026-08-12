@@ -1,0 +1,40 @@
+{
+  "chainId": 1952,
+  "commit": "a21be84a2b6e6b5c86567fbb391f96f818e800ce",
+  "compiler": {
+    "evmVersion": "cancun",
+    "optimizer": true,
+    "optimizerRuns": 10000,
+    "solcVersion": "0.8.28"
+  },
+  "contracts": {
+    "agenticCommerce": {
+      "address": "0x76a0f64d59699be3330d6088a157a7941bcad3cc",
+      "block": 38086528,
+      "transactionHash": "0x2d54abe3e418e8bb2db36e9a8641c697a6e9b47c9c3e9c9b8f602f10f6144d6a"
+    },
+    "mockUSDG": {
+      "address": "0xef0b78c4dd4cd167fddad7edb48cf7f9e4c5fac1",
+      "block": 38086528,
+      "transactionHash": "0x3f115c86e245eb8050082ee117bf608d70b919e4b8c4860f8dac8e40472f0fc0"
+    },
+    "scopeSettleEvaluator": {
+      "address": "0x02fac1ee8036b51ccc79be97006fdc9298d11bf0",
+      "block": 38086528,
+      "transactionHash": "0x495a47afbd7c4a18564d98664d703fd5252e18b730de74ecc3842aba1d759b10"
+    }
+  },
+  "deployedAt": "2026-08-12T14:36:05Z",
+  "deployer": "0x66dd076f5cbb8c8dc4825c8eb7148df55bd565a6",
+  "network": "xlayer-testnet",
+  "roles": {
+    "evaluatorSigner": "0x964b52ade4d1a7c58dec1c7cf6384c2c82e107f7",
+    "reviewer": "0x9114a8c33c77f6d3d50c6ef598202fa5c5b8f6df"
+  },
+  "token": {
+    "decimals": 6,
+    "kind": "valueless-testnet-mock",
+    "symbol": "mUSDG"
+  },
+  "verification": "pending-manual-oklink"
+}
