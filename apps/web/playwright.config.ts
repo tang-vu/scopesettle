@@ -13,6 +13,11 @@ export default defineConfig({
   },
   webServer: {
     command: "pnpm exec next dev --port 3417",
+    env: {
+      NEXT_PUBLIC_AGENTIC_COMMERCE_ADDRESS: "",
+      NEXT_PUBLIC_PAYMENT_TOKEN_ADDRESS: "",
+      NEXT_PUBLIC_SCOPESETTLE_EVALUATOR_ADDRESS: "",
+    },
     url: "http://localhost:3417",
     reuseExistingServer: false,
     timeout: 120_000,

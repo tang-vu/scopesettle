@@ -36,5 +36,5 @@
     "kind": "valueless-testnet-mock",
     "symbol": "mUSDG"
   },
-  "verification": "pending-manual-oklink"
+  "verification": "source-verified"
 }

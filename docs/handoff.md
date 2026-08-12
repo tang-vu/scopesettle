@@ -77,18 +77,21 @@ Last verified: 2026-08-10. Read this file together with [`PLANS.md`](../PLANS.md
   Mainnet RPC. No deployment credential or role has been generated.
 - Both official Testnet RPCs returned chain ID `1952`; the observed gas price was `20,000,001` wei.
 - Both configured Mainnet RPCs returned chain ID `196`; they reported the same current gas price.
-- A local Anvil deployment using chain ID `1952` succeeded. The mock stack estimated `6,589,351`
-  gas; local addresses and transactions are deliberately not recorded as external proof.
+- The mock stack was deployed at X Layer Testnet block `38086528`; RPC reads reconciled all runtime
+  bytecode and immutable bindings, and OKLink published matching sources for all three contracts.
+- Canonical addresses, transaction hashes, compiler settings, roles, and deployment time are in
+  `deployments/xlayer-testnet-1952-2026-08-12.json`.
 - Official Testnet verifier URL used by the protected workflow:
   `https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET`.
 
 ## External blockers and secrets still missing
 
-No external web or contract deployment exists. There are no real contract addresses, transaction
-links, live URL, completed Testnet job, or public X post. Never substitute local/fixture evidence.
+No external web deployment, completed Testnet job, live URL, or public X post exists. The Testnet
+contract deployment is real and source-verified; never substitute local/fixture evidence for the
+remaining end-to-end proof.
 
-The two Testnet GitHub environments still need these names, configured independently without
-putting values in chat or Git:
+The two Testnet GitHub environments still need these names if future deployments must use the
+protected workflow, configured independently without putting values in chat or Git:
 
 - `DEPLOYER_PRIVATE_KEY`
 - `EVALUATOR_SIGNER_ADDRESS`
@@ -100,9 +103,9 @@ The generic production-shaped environments additionally require `PAYMENT_TOKEN_A
 `OKLINK_CHAIN_SHORT_NAME` copied from OKLink's current supported-chain list. Their appropriate
 X Layer RPC secrets are already configured.
 
-The deployer must be funded with valueless Testnet OKB from the official faucet. The deployer,
-evaluator signer, and reviewer should be deliberately selected and securely recoverable. Do not
-generate a production key without an owner-approved custody/backup plan.
+The current Testnet deployer remains funded with valueless Testnet OKB. Its key, the evaluator
+signer, and the reviewer must remain securely recoverable. Do not generate a production key without
+an owner-approved custody/backup plan.
 
 A hosted web release additionally needs:
 
@@ -129,26 +132,14 @@ PostgreSQL 17 service instead. That gate passed on the final CI run.
 
 ## Exact next sequence
 
-1. Add the four missing Testnet secrets to both protected GitHub environments and fund the derived
-   deployer with Testnet OKB. Never paste a private key into chat.
-2. Recheck the ERC-8183 draft, chain ID, RPC health, deployer address/balance, immutable signer and
-   reviewer, current gas price, and exact simulation output.
-3. Trigger only the protected Testnet workflow:
-
-   ```powershell
-   gh workflow run deploy-testnet-mock.yml `
-     --repo tang-vu/scopesettle `
-     -f confirmation="DEPLOY VALUELESS TESTNET BETA"
-   ```
-
-4. Inspect preflight evidence, then explicitly approve the separate broadcast environment. Record
-   the resulting addresses, transactions, deployment commit/block/date, constructor roles, explorer
-   links, and verification status in `deployments/`, `docs/deployments.md`, and the web environment.
-5. Configure the hosted PostgreSQL/OpenAI/evaluator/web secrets, run migrations, deploy the web app,
+1. Configure the deployed Testnet addresses in the hosted web environment, together with the
+   PostgreSQL/OpenAI/evaluator secrets, run migrations, deploy the web app,
    and complete a real low-value Testnet create → fund → submit → evaluate → challenge/finalize flow.
-6. Replace the illustrative judge path with a clearly labeled real completed Testnet job, rerun
+2. Replace the illustrative judge path with a clearly labeled real completed Testnet job, rerun
    `pnpm check`, CodeQL, dependency/secret review, Lighthouse, responsive QA, and documentation audit.
-7. Only then request fresh Mainnet approval, deploy/verify with a real supported payment token, and
+3. Optionally add the Testnet signer/role secrets to the protected GitHub environments before any
+   future redeployment; never paste a private key into chat or Git.
+4. Only then request fresh Mainnet approval, deploy/verify with a real supported payment token, and
    perform the public X launch/submission actions.
 
 ## Rules for the next chat

@@ -125,11 +125,10 @@ local audit evidence, not claims about an as-yet-unpublished hosting environment
 ## Networks and deployments
 
 Official configuration is recorded in [verified research](docs/research.md). X Layer Testnet is
-chain `1952`; Mainnet is `196`; both use OKB gas. No external contract address or explorer link is
-published until a real confirmed, source-verified transaction exists. See the live
-[deployment ledger](docs/deployments.md). Because no official faucet USDG address is published, the
-beta has a separately protected, chain-guarded Testnet workflow that deploys an explicitly
-valueless `MockUSDG`; the production/Mainnet path cannot use that script.
+chain `1952`; Mainnet is `196`; both use OKB gas. The source-verified Testnet mock stack and its
+transaction evidence are recorded in the live [deployment ledger](docs/deployments.md). Because no
+official faucet USDG address is published, the beta uses an explicitly valueless, chain-guarded
+`MockUSDG`; the production/Mainnet path cannot use that script.
 
 ## Security model and limitations
 
@@ -150,8 +149,8 @@ and platform fees are intentionally out of scope. Read [SECURITY.md](SECURITY.md
 
 ## Submission and roadmap
 
-The immediate release gate is a source-verified Testnet deployment, real low-value completed job,
-public hosted app, browser/security QA, and judge demo. Mainnet follows only after explicit approval.
+The remaining release gate is a real low-value completed Testnet job, public hosted app,
+browser/security QA, and judge demo. Mainnet follows only after explicit approval.
 Submission copy, demo script, and launch thread are in [SUBMISSION.md](SUBMISSION.md),
 [DEMO.md](DEMO.md), and [X_THREAD.md](X_THREAD.md).
 

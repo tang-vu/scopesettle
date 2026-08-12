@@ -55,7 +55,7 @@ Acceptance: exact commit binding, hostile-content handling, outages, and manual 
 ## Milestone 6 — End-to-end beta
 
 - [x] Complete deterministic local workflow and public completed-job fixture.
-- [!] Deploy and verify on X Layer Testnet (requires funded deployer and confirmation).
+- [x] Deploy and source-verify the mock stack on X Layer Testnet.
 - [!] Run real Testnet workflow and record explorer links (requires deployment).
 
 Acceptance: judges can inspect a real completed Testnet job without a wallet.
@@ -115,9 +115,9 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
 
 ## External blockers log
 
-- No Testnet/Mainnet signer, funded account, deployment confirmation, hosted database,
-  public web host, GitHub token, OpenAI key, dedicated X account, or public-post approval
-  has been provided. Local implementation and validation continue without them.
+- No Mainnet signer or approval, hosted database, public web host, GitHub token, OpenAI key,
+  dedicated X account, or public-post approval has been provided. The funded Testnet deployer and
+  role signers produced the source-verified mock deployment recorded in `deployments/`.
 
 ## Testnet deployment readiness
 
@@ -126,5 +126,5 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
 - [x] Add separate protected simulation and broadcast environments for the mock beta stack.
 - [x] Automate post-broadcast explorer links and Foundry source verification through the official
       OKLink `XLAYER_TESTNET` endpoint.
-- [!] Derive deployer, check balance, simulate exact gas, and broadcast (signer secrets and explicit
-  transaction confirmation required).
+- [x] Derive deployer, check balance, simulate exact gas, broadcast, reconcile immutable bindings,
+      and source-verify all three contracts.

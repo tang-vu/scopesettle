@@ -6,7 +6,7 @@ machine-readable evidence is stored in `deployments/xlayer-testnet-1952-2026-08-
 | Network         | Chain ID | RPC source            | Payment token    | Commerce          | Evaluator         | Status                                 |
 | --------------- | -------: | --------------------- | ---------------- | ----------------- | ----------------- | -------------------------------------- |
 | Local Anvil     |    31337 | local process         | `MockUSDG`       | generated per run | generated per run | supported                              |
-| X Layer Testnet |     1952 | official X Layer docs | `0xef0b…fac1`    | `0x76a0…d3cc`     | `0x02fa…1bf0`     | deployed; OKLink verification pending  |
+| X Layer Testnet |     1952 | official X Layer docs | `0xef0b…fac1`    | `0x76a0…d3cc`     | `0x02fa…1bf0`     | deployed and source-verified on OKLink |
 | X Layer Mainnet |      196 | official X Layer docs | not yet selected | —                 | —                 | blocked until Testnet proof + approval |
 
 Every external record must add deployment date, source commit SHA, deployer, payment token,
@@ -33,5 +33,5 @@ See [deployment runbook](deployment-runbook.md) for commands.
 The deployment was mined at block `38086528` from source commit
 `a21be84a2b6e6b5c86567fbb391f96f818e800ce`. RPC reads confirmed non-empty runtime bytecode and
 the expected immutable payment-token, commerce, verdict-signer, and reviewer bindings. `MockUSDG`
-is a valueless six-decimal faucet token for Testnet demonstrations only. OKLink source verification
-remains pending and must not be described as complete until the explorer publishes the sources.
+is a valueless six-decimal faucet token for Testnet demonstrations only. OKLink published matching
+sources for all three contracts using Solidity `0.8.28`, optimizer runs `10000`, and Cancun EVM.
