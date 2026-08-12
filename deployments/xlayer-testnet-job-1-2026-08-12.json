@@ -37,6 +37,18 @@
   },
   "sourceCommit": "16694fda6118ae072bd2465c96ac4414ebcae658",
   "status": "funded-awaiting-provider-submit",
+  "submissionAttempt": {
+    "attemptedAt": "2026-08-12T15:35:45Z",
+    "calldataSimulation": {
+      "estimatedGas": 56908,
+      "status": "success"
+    },
+    "ownerConfirmedSecurityScanBypass": true,
+    "result": "wallet-backend-rejected-before-broadcast",
+    "walletBackendError": "may_be_out_of_gas",
+    "walletGasLimitsAttempted": ["automatic", 100000, 500000],
+    "walletHistoryAfterAttempt": "empty"
+  },
   "transactions": {
     "approve": {
       "block": 38089496,

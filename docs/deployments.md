@@ -41,8 +41,13 @@ sources for all three contracts using Solidity `0.8.28`, optimizer runs `10000`,
 Job `1` was created and funded on 2026-08-12 with exactly `1 mUSDG`, the explicitly valueless
 Testnet mock. The client, Agentic Wallet provider, evaluator, immutable policy hashes, pinned public
 pull-request commitment, and confirmed transaction receipts are recorded in
-`deployments/xlayer-testnet-job-1-2026-08-12.json`. The job remains `Funded`: the provider submit
-was not broadcast because the OKX transaction scanner returned `Unsupported EVM chainId: 1952`.
-This is a scanner-coverage limitation, not a low-risk verdict. Finishing without a scan requires a
-fresh explicit confirmation; until then this record must not be described as a completed or
-AI-evaluated job.
+`deployments/xlayer-testnet-job-1-2026-08-12.json`. The initial provider submit was paused because
+the OKX transaction scanner returned `Unsupported EVM chainId: 1952`. This is a scanner-coverage
+limitation, not a low-risk verdict. This record must not be described as a completed or AI-evaluated
+job.
+
+The owner subsequently confirmed continuing without the unavailable scan. Direct RPC simulation
+estimated `56,908` gas, but the Agentic Wallet backend rejected the submit UserOperation before
+broadcast with `may_be_out_of_gas` using automatic, `100,000`, and `500,000` gas limits. Wallet
+history remained empty and the provider nonce did not advance. The job therefore remains safely
+funded and unchanged; do not present any transaction hash for the failed submission attempts.

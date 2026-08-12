@@ -92,9 +92,15 @@ remaining end-to-end proof.
 
 Testnet job `1` is funded with `1 mUSDG` and awaits submission by the configured Agentic Wallet
 provider. Its evidence record is `deployments/xlayer-testnet-job-1-2026-08-12.json`. The OKX
-transaction scanner does not support chain `1952`; do not bypass that failed scan without fresh
-owner confirmation. If no submission is authorized, the funded job becomes permissionlessly
-refundable after `2026-08-13T15:24:32Z`.
+transaction scanner does not support chain `1952`, which is a coverage limitation rather than a
+risk verdict. The funded job becomes permissionlessly refundable after
+`2026-08-13T15:24:32Z`.
+
+The owner later authorized bypassing the unavailable scan. RPC simulation of `submit` succeeded at
+an estimated `56,908` gas, but Agentic Wallet rejected the UserOperation before broadcast with
+`may_be_out_of_gas` even at explicit `100,000` and `500,000` gas limits. No submit transaction was
+created. Retry only after the Agentic Wallet Testnet backend changes or support resolves the issue;
+otherwise claim the permissionless refund after expiry.
 
 The two Testnet GitHub environments still need these names if future deployments must use the
 protected workflow, configured independently without putting values in chat or Git:
