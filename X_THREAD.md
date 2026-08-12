@@ -48,3 +48,17 @@ posting time.
 Suggested existing assets: `docs/assets/product-preview.png` for the problem/product post and
 `docs/assets/job-mobile.png` for the explainability post. Replace them with real hosted-job
 captures after launch.
+
+## Copy-ready Testnet proof post
+
+ScopeSettle is now live on X Layer Testnet: three source-verified contracts and a completed
+create → fund → submit → signed verdict → challenge window → finalize lifecycle.
+
+The proof used a dedicated EOA provider and valueless Testnet mUSDG. It validates contract wiring
+and settlement—not a live AI code review. The evaluator remains an explicitly trusted role.
+
+Proof: https://tang-vu.github.io/scopesettle/
+Finalization: https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330
+Code: https://github.com/tang-vu/scopesettle
+
+Built for Build X AI Season. @XLayerOfficial

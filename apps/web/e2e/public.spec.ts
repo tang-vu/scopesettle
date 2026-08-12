@@ -10,7 +10,18 @@ test("public visitor understands the product and opens a completed example", asy
   await expect(
     page.getByText("Verified work. Automatic settlement."),
   ).toBeVisible();
-  await page.getByRole("link", { name: "Explore a verified job" }).click();
+  await expect(
+    page.getByRole("link", { name: "Inspect Testnet proof" }),
+  ).toHaveAttribute(
+    "href",
+    "https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330",
+  );
+  await expect(
+    page.getByText(
+      "X Layer Testnet · chain 1952 · contracts source-verified · job 2 completed",
+    ),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Explore example report" }).click();
   await expect(page).toHaveURL(/\/jobs\/1952\/42$/u);
   await expect(page.getByText("Illustrative fixture.")).toBeVisible();
   await expect(

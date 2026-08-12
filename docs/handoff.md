@@ -87,9 +87,10 @@ Last verified: 2026-08-12. Read this file together with [`PLANS.md`](../PLANS.md
 
 ## External blockers and secrets still missing
 
-No external web deployment, hosted OpenAI-backed Testnet evaluation, live URL, or public X post
-exists. The Testnet contract deployment and deterministic job `2` lifecycle are real and
-source-verified; never describe the smoke verdict as an AI code evaluation.
+No hosted OpenAI-backed Testnet evaluation, full app deployment, Mainnet deployment, or public X
+post exists. A static public judge dossier is published through GitHub Pages. The Testnet contract
+deployment and deterministic job `2` lifecycle are real and source-verified; never describe the
+smoke verdict as an AI code evaluation.
 
 Testnet job `2` completed through create, fund, EOA submit, signed verdict, challenge window, and
 finalization. It released exactly `1 mUSDG` to the dedicated Testnet EOA provider. The immutable

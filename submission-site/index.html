@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ScopeSettle is an evidence-linked AI evaluator and ERC-8183 settlement layer built on X Layer."
+    />
+    <meta
+      property="og:title"
+      content="ScopeSettle — Verified work. Automatic settlement."
+    />
+    <meta
+      property="og:description"
+      content="Evidence-linked AI evaluation and ERC-8183 settlement on X Layer."
+    />
+    <meta
+      property="og:image"
+      content="https://tang-vu.github.io/scopesettle/assets/product-preview.png"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tang-vu.github.io/scopesettle/" />
+    <meta name="theme-color" content="#0a0c0b" />
+    <title>ScopeSettle — X Layer AI settlement</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to evidence</a>
+    <header class="nav shell">
+      <a class="brand" href="#top" aria-label="ScopeSettle home">
+        <span aria-hidden="true">S/</span> ScopeSettle
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#proof">Onchain proof</a>
+        <a href="#architecture">Architecture</a>
+        <a href="https://github.com/tang-vu/scopesettle">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" id="top">
+        <div>
+          <p class="eyebrow">Build X · AI Season · X Layer</p>
+          <h1>Verified work.<br /><em>Automatic</em> settlement.</h1>
+          <p class="lede">
+            ScopeSettle turns an immutable scope, a pinned GitHub pull request,
+            and an evidence-linked AI verdict into an auditable ERC-8183 escrow
+            decision.
+          </p>
+          <div class="actions">
+            <a
+              class="button primary"
+              href="https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330"
+              >Inspect completed job <span aria-hidden="true">↗</span></a
+            >
+            <a class="button" href="https://github.com/tang-vu/scopesettle"
+              >Review source</a
+            >
+          </div>
+        </div>
+        <aside class="proof-card" aria-label="Verified deployment summary">
+          <div class="status"><i></i> X Layer Testnet · chain 1952</div>
+          <dl>
+            <div>
+              <dt>Contracts</dt>
+              <dd>3 source-verified</dd>
+            </div>
+            <div>
+              <dt>Lifecycle proof</dt>
+              <dd>Job 2 · Completed</dd>
+            </div>
+            <div>
+              <dt>Settlement</dt>
+              <dd>1 mUSDG released</dd>
+            </div>
+            <div>
+              <dt>Protocol fee</dt>
+              <dd>0</dd>
+            </div>
+          </dl>
+          <p>
+            Valueless Testnet mock funds. The evaluator is a trusted role, not a
+            trustless oracle.
+          </p>
+        </aside>
+      </section>
+
+      <section class="strip" aria-label="Workflow">
+        <div class="shell steps">
+          <article>
+            <b>01 / SCOPE</b>
+            <h2>Lock acceptance</h2>
+            <p>
+              Hash rubric, policy, budget, provider, and expiry before funding.
+            </p>
+          </article>
+          <article>
+            <b>02 / EVIDENCE</b>
+            <h2>Judge one commit</h2>
+            <p>
+              Bounded GitHub evidence and structured AI findings target an exact
+              PR head.
+            </p>
+          </article>
+          <article>
+            <b>03 / SETTLE</b>
+            <h2>Challenge or pay</h2>
+            <p>
+              An EIP-712 verdict starts the challenge window before release or
+              refund.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="proof">
+        <div class="heading">
+          <div>
+            <p class="eyebrow">PUBLIC EVIDENCE</p>
+            <h2>A complete Testnet lifecycle.</h2>
+          </div>
+          <p>
+            Every address and transaction below is independently inspectable.
+            The proof run validates contract wiring and settlement; it does not
+            pretend that a model reviewed the code.
+          </p>
+        </div>
+        <div class="evidence-grid">
+          <a
+            href="https://www.oklink.com/x-layer-testnet/address/0xef0b78c4dd4cd167fddad7edb48cf7f9e4c5fac1"
+            ><span>Payment token</span><strong>MockUSDG</strong
+            ><code>0xef0b…fac1</code></a
+          >
+          <a
+            href="https://www.oklink.com/x-layer-testnet/address/0x76a0f64d59699be3330d6088a157a7941bcad3cc"
+            ><span>ERC-8183 escrow</span><strong>AgenticCommerce</strong
+            ><code>0x76a0…d3cc</code></a
+          >
+          <a
+            href="https://www.oklink.com/x-layer-testnet/address/0x02fac1ee8036b51ccc79be97006fdc9298d11bf0"
+            ><span>Verdict contract</span><strong>ScopeSettleEvaluator</strong
+            ><code>0x02fa…1bf0</code></a
+          >
+          <a href="evidence/xlayer-testnet-job-2-2026-08-12.json"
+            ><span>Canonical ledger</span><strong>Job 2 evidence</strong
+            ><code>8 successful receipts</code></a
+          >
+        </div>
+        <ol class="timeline">
+          <li><span>Create</span><code>0xdb4c…855d</code></li>
+          <li><span>Fund</span><code>0xd855…4188</code></li>
+          <li><span>Submit</span><code>0xea84…0d27</code></li>
+          <li><span>Propose</span><code>0xabbb…4749</code></li>
+          <li><span>Finalize</span><code>0x7016…a330</code></li>
+        </ol>
+      </section>
+
+      <section class="section shell" id="architecture">
+        <div class="heading">
+          <div>
+            <p class="eyebrow">WHY AI + ONCHAIN</p>
+            <h2>Judgment with hard boundaries.</h2>
+          </div>
+          <p>
+            Models handle semantic acceptance. Deterministic application code
+            controls identity, bounds, schema, citations, score math,
+            thresholds, and failure policy.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <h3>Exact-commit binding</h3>
+            <p>
+              The deliverable commits owner, repository, PR, base SHA, and
+              immutable head SHA.
+            </p>
+          </article>
+          <article>
+            <h3>Evidence before opinion</h3>
+            <p>
+              Every scored criterion needs a changed-file citation; missing
+              evidence fails closed.
+            </p>
+          </article>
+          <article>
+            <h3>Canonical verdict</h3>
+            <p>
+              Validated JSON is deterministically hashed and bound to chain,
+              contract, job, and nonce.
+            </p>
+          </article>
+          <article>
+            <h3>Economic finality</h3>
+            <p>
+              Eligible verdicts settle after challenge; ambiguous cases route to
+              a named trusted reviewer.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell visual">
+        <img
+          src="assets/product-preview.png"
+          alt="ScopeSettle product landing page"
+        />
+        <div>
+          <p class="eyebrow">IMPLEMENTATION</p>
+          <h2>Built beyond the pitch.</h2>
+          <ul>
+            <li>45 Solidity unit, fuzz, and invariant tests</li>
+            <li>23 TypeScript unit and component tests</li>
+            <li>24 browser, accessibility, and wallet lifecycle tests</li>
+            <li>Source-verified immutable Testnet deployment</li>
+          </ul>
+          <a
+            class="text-link"
+            href="https://github.com/tang-vu/scopesettle/actions"
+            >Inspect CI evidence <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell">
+      <div>
+        <strong>ScopeSettle</strong>
+        <p>Explainable AI settlement for agent work.</p>
+      </div>
+      <p>
+        Unaudited beta · no meaningful funds · source and evidence are public
+      </p>
+    </footer>
+  </body>
+</html>

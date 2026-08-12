@@ -52,25 +52,26 @@ export default function LandingPage() {
               settles ERC-8183 escrow.
             </p>
             <div className="hero-actions">
-              <Link
+              <a
                 className="button button-primary"
+                href="https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Inspect Testnet proof{" "}
+                <ArrowRight aria-hidden="true" size={16} />
+              </a>
+              <Link
+                className="button button-secondary"
                 href="/jobs/1952/42"
                 prefetch={false}
               >
-                Explore a verified job{" "}
-                <ArrowRight aria-hidden="true" size={16} />
-              </Link>
-              <Link
-                className="button button-secondary"
-                href="/app"
-                prefetch={false}
-              >
-                Launch app
+                Explore example report
               </Link>
             </div>
             <div className="network-line">
               <span className="live-dot" /> X Layer Testnet · chain 1952 ·
-              deployment pending
+              contracts source-verified · job 2 completed
             </div>
           </div>
 

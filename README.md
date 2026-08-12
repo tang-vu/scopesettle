@@ -6,8 +6,10 @@ ScopeSettle is an explainable AI evaluator and settlement layer for agent-to-age
 funds an ERC-8183 coding job on X Layer, a provider commits an exact public GitHub pull request,
 and ScopeSettle produces an evidence-linked verdict that can settle escrow after a challenge window.
 
-**Launch status:** local beta is implemented and tested. External Testnet/Mainnet contracts, live
-app, demo video, and explorer transactions do not exist yet and are never represented by placeholders.
+**Launch status:** the beta is implemented and tested, its X Layer Testnet contracts are
+source-verified, and deterministic job `2` completed onchain. The public
+[submission proof](https://tang-vu.github.io/scopesettle/) links the canonical receipts. Mainnet,
+hosted AI evaluation, and the demo video remain pending and are never represented by placeholders.
 
 ![ScopeSettle landing page](docs/assets/product-preview.png)
 

@@ -5,18 +5,22 @@ Official deadline: **August 21, 2026 at 23:59 UTC**. The
 an X Layer Testnet deployment followed by Mainnet launch, a dedicated active X account, and a
 submission post mentioning `@XLayerOfficial`.
 
-**Current eligibility:** not ready to submit. The software and local proof are complete, but the
-required external Testnet/Mainnet deployments, public app, dedicated X account, and post do not yet
-exist. Do not submit fixture URLs or local transactions in their place.
+**Current eligibility:** Testnet deployment and a completed deterministic contract lifecycle are
+public. Mainnet launch, the hosted AI-backed workflow, dedicated X account/post, and owner contact
+fields remain required before final submission. Do not describe job `2` as an AI code review.
+
+The live form currently contains eight fields: Project Name, Project Description, Project URL,
+Github, Email, Telegram, X handle, and X post URL. Google marks Github and X post URL optional in
+the form UI, but the official event rules still require the project-account post.
 
 ## Copy-ready form fields
 
 - **Project Name:** ScopeSettle
-- **Project Description:** ScopeSettle is an explainable AI evaluator and settlement layer for
-  agent-to-agent coding work. A client funds an ERC-8183 job on X Layer, a provider commits an exact
-  public GitHub PR head, and ScopeSettle produces an evidence-linked verdict that can release or
-  refund escrow after a challenge window.
-- **Project URL:** `[required: live public app]`
+- **Project Description:** ScopeSettle is an explainable AI evaluation and ERC-8183 settlement
+  layer for agent-to-agent coding work on X Layer. It binds immutable scope and a pinned GitHub PR
+  to validated evidence, a replay-protected verdict, a challenge window, and automatic escrow
+  release or refund.
+- **Project URL:** `https://tang-vu.github.io/scopesettle/`
 - **GitHub:** `https://github.com/tang-vu/scopesettle`
 - **Email:** `[required: owner contact]`
 - **Telegram:** `[required: owner handle]`
@@ -45,23 +49,25 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 
 ## Judge-facing evidence map
 
-| Official criterion             | ScopeSettle evidence                                                                   | Current status                    |
-| ------------------------------ | -------------------------------------------------------------------------------------- | --------------------------------- |
-| Application of AI              | Criterion-level semantic review with validated diff citations and deterministic math   | Implemented and tested locally    |
-| Innovation                     | Evidence-bound AI verdicts settle an ERC-8183 escrow after a challenge window          | Implemented in contracts and app  |
-| Product completeness           | Create, fund, submit, evaluate, challenge, resolve, finalize, and refund flows         | Local end-to-end beta complete    |
-| User value                     | Replaces subjective acceptance and payment coordination with an auditable workflow     | Demonstrable with honest fixture  |
-| X Layer integration            | Chain-bound contracts, wallet flow, explorer links, and protected deployment pipeline  | External deployment still missing |
-| Growth potential               | Reusable settlement primitive for coding agents before expansion to other deliverables | Thesis documented; no fake usage  |
-| X Layer ecosystem contribution | Real work-linked transactions and evidence commitments, with no fee or wash volume     | Requires real launch proof        |
+| Official criterion             | ScopeSettle evidence                                                                   | Current status                               |
+| ------------------------------ | -------------------------------------------------------------------------------------- | -------------------------------------------- |
+| Application of AI              | Criterion-level semantic review with validated diff citations and deterministic math   | Implemented and tested; hosting pending      |
+| Innovation                     | Evidence-bound AI verdicts settle an ERC-8183 escrow after a challenge window          | Implemented in contracts and app             |
+| Product completeness           | Create, fund, submit, evaluate, challenge, resolve, finalize, and refund flows         | Local full flow + public Testnet smoke proof |
+| User value                     | Replaces subjective acceptance and payment coordination with an auditable workflow     | Demonstrable with labeled example and proof  |
+| X Layer integration            | Chain-bound contracts, wallet flow, explorer links, and protected deployment pipeline  | Testnet source-verified; Mainnet pending     |
+| Growth potential               | Reusable settlement primitive for coding agents before expansion to other deliverables | Thesis documented; no fake usage             |
+| X Layer ecosystem contribution | Real work-linked transactions and evidence commitments, with no fee or wash volume     | Testnet lifecycle completed                  |
 
 ## Release and submission gate
 
-- [ ] X Layer Testnet contract source verification and deployment record
-- [ ] Real completed Testnet job/report/transactions linked
+- [x] X Layer Testnet contract source verification and deployment record
+- [x] Completed deterministic Testnet lifecycle and transactions linked
+- [ ] Hosted OpenAI-backed Testnet evaluation linked
 - [ ] Mainnet deployment/source verification after fresh explicit approval
 - [ ] Mainnet web configuration and low-value launch validation
-- [ ] Live public URL backed by the production database/evaluator configuration
+- [x] Public judge-proof URL with immutable Testnet evidence
+- [ ] Live app URL backed by the production database/evaluator configuration
 - [ ] 90-second demo video using only real public links
 - [ ] Dedicated X account and post mentioning `@XLayerOfficial`
 - [ ] Owner Email, Telegram, X handle, and self-custodial prize wallet confirmed
