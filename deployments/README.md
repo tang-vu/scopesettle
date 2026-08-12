@@ -1,6 +1,7 @@
 # Deployment records
 
-This directory contains one immutable JSON record per confirmed external deployment. Compare every
-record with its Foundry broadcast receipt and live RPC state before committing it; never prefill
-addresses or hashes. Verification status must remain pending until the explorer publishes the
-matching source.
+This directory contains immutable JSON evidence for confirmed external deployments and public
+Testnet lifecycle runs. Compare every record with its transaction receipts and live RPC state before
+committing it; never prefill addresses, hashes, or lifecycle status. Source verification must remain
+pending until the explorer publishes matching source, and incomplete jobs must not be described as
+completed.

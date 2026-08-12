@@ -35,3 +35,14 @@ The deployment was mined at block `38086528` from source commit
 the expected immutable payment-token, commerce, verdict-signer, and reviewer bindings. `MockUSDG`
 is a valueless six-decimal faucet token for Testnet demonstrations only. OKLink published matching
 sources for all three contracts using Solidity `0.8.28`, optimizer runs `10000`, and Cancun EVM.
+
+## Testnet lifecycle evidence
+
+Job `1` was created and funded on 2026-08-12 with exactly `1 mUSDG`, the explicitly valueless
+Testnet mock. The client, Agentic Wallet provider, evaluator, immutable policy hashes, pinned public
+pull-request commitment, and confirmed transaction receipts are recorded in
+`deployments/xlayer-testnet-job-1-2026-08-12.json`. The job remains `Funded`: the provider submit
+was not broadcast because the OKX transaction scanner returned `Unsupported EVM chainId: 1952`.
+This is a scanner-coverage limitation, not a low-risk verdict. Finishing without a scan requires a
+fresh explicit confirmation; until then this record must not be described as a completed or
+AI-evaluated job.

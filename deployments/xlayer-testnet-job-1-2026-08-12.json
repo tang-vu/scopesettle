@@ -1,0 +1,62 @@
+{
+  "budget": {
+    "amount": "1000000",
+    "decimals": 6,
+    "symbol": "mUSDG",
+    "value": "valueless-testnet-mock"
+  },
+  "chainId": 1952,
+  "commerceAddress": "0x76a0f64d59699be3330d6088a157a7941bcad3cc",
+  "deliverable": {
+    "baseSha": "5d7b81585fd71beb0fd1a0941501ba8307f579f8",
+    "hash": "0x794648c619dbab0e6dc7722a004fa72b08eb3a530ff3d6a03660eca7b7d49160",
+    "headSha": "6899e3a96ea19c09d6d0cc28958cfa8241cc9a30",
+    "owner": "tang-vu",
+    "pullNumber": 10,
+    "repository": "scopesettle",
+    "schemaVersion": "1.0.0"
+  },
+  "description": "ScopeSettle Agentic Wallet Testnet lifecycle smoke test; deterministic wiring proof, not AI evaluation.",
+  "expiresAt": "2026-08-13T15:24:32Z",
+  "jobId": "1",
+  "policy": {
+    "challengeWindowSeconds": 1,
+    "minimumConfidenceBps": 10000,
+    "minimumScoreBps": 10000,
+    "rubricHash": "0xcff5b82e5ec66fc8181dcb73e5c7d619ef510536d65d85ca3aedc20e3ec82346",
+    "specificationHash": "0x912039c7fb45b286811a43a8e0128defa70c246edbcc8d8b6255af0ed63e9582"
+  },
+  "roles": {
+    "client": "0x66dd076f5cbb8c8dc4825c8eb7148df55bd565a6",
+    "evaluator": "0x02fac1ee8036b51ccc79be97006fdc9298d11bf0",
+    "provider": "0xd34b2d2558637e9c034153be3b526330a620bc1a"
+  },
+  "securityScan": {
+    "error": "Unsupported EVM chainId: 1952",
+    "status": "unsupported-chain"
+  },
+  "sourceCommit": "16694fda6118ae072bd2465c96ac4414ebcae658",
+  "status": "funded-awaiting-provider-submit",
+  "transactions": {
+    "approve": {
+      "block": 38089496,
+      "hash": "0x344e0933e15274aee162fa2d13fcc06911a805bd6cf7886c30e8957269c5cc48",
+      "minedAt": "2026-08-12T15:25:33Z"
+    },
+    "create": {
+      "block": 38089497,
+      "hash": "0xfc49cb1695919c14611faf3385b7d1d99ca221e57595deeb4b47f7184d1c058a",
+      "minedAt": "2026-08-12T15:25:34Z"
+    },
+    "fund": {
+      "block": 38089519,
+      "hash": "0x50728d510ac3685a8d22739ce24268ee53d7bde67654e7473df5eff58b193c1b",
+      "minedAt": "2026-08-12T15:25:56Z"
+    },
+    "setBudget": {
+      "block": 38089499,
+      "hash": "0x5e921867299dd1c2a0e944b7661d66df68a8f81e4854d0526c7f6f89398687c9",
+      "minedAt": "2026-08-12T15:25:36Z"
+    }
+  }
+}

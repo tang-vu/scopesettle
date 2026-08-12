@@ -90,6 +90,12 @@ No external web deployment, completed Testnet job, live URL, or public X post ex
 contract deployment is real and source-verified; never substitute local/fixture evidence for the
 remaining end-to-end proof.
 
+Testnet job `1` is funded with `1 mUSDG` and awaits submission by the configured Agentic Wallet
+provider. Its evidence record is `deployments/xlayer-testnet-job-1-2026-08-12.json`. The OKX
+transaction scanner does not support chain `1952`; do not bypass that failed scan without fresh
+owner confirmation. If no submission is authorized, the funded job becomes permissionlessly
+refundable after `2026-08-13T15:24:32Z`.
+
 The two Testnet GitHub environments still need these names if future deployments must use the
 protected workflow, configured independently without putting values in chat or Git:
 
