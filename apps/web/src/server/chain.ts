@@ -121,12 +121,20 @@ export async function readEvaluatorSigner(chainId: number): Promise<Address> {
   });
 }
 
-export async function readVerdictProposal(chainId: number, jobId: bigint) {
+export async function verdictProposalExists(
+  chainId: number,
+  jobId: bigint,
+): Promise<boolean> {
   const deployment = getDeployment(chainId);
-  return getScopeSettleClient(chainId).readContract({
+  const deploymentBlock = BigInt(
+    process.env.NEXT_PUBLIC_DEPLOYMENT_BLOCK ?? "0",
+  );
+  const events = await getScopeSettleClient(chainId).getContractEvents({
     abi: scopeSettleEvaluatorAbi,
     address: deployment.evaluator,
-    args: [jobId],
-    functionName: "getProposal",
+    args: { jobId },
+    eventName: "VerdictProposed",
+    fromBlock: deploymentBlock,
   });
+  return events.length > 0;
 }

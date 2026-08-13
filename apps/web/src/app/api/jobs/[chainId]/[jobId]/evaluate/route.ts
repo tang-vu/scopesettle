@@ -10,7 +10,7 @@ import { getAddress } from "viem";
 import { z } from "zod";
 
 import { requireWalletSession, UnauthorizedError } from "@/server/auth";
-import { readJob, readVerdictProposal } from "@/server/chain";
+import { readJob, verdictProposalExists } from "@/server/chain";
 import { getDatabase } from "@/server/db";
 import { serializeJobRecord } from "@/server/db/json-record";
 import { evaluationReports, jobDocuments } from "@/server/db/schema";
@@ -131,8 +131,8 @@ export async function POST(request: NextRequest, context: RouteContext) {
         (check) =>
           check.id === "model_provider" && check.status === "unavailable",
       );
-      const proposal = await readVerdictProposal(chainId, jobId);
-      if (!providerWasUnavailable || proposal.exists) {
+      const hasProposal = await verdictProposalExists(chainId, jobId);
+      if (!providerWasUnavailable || hasProposal) {
         const conflict = new Error(
           "Only an unproposed fail-closed provider report can be retried.",
         );
