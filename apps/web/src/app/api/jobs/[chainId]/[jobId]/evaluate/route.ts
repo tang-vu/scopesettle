@@ -12,6 +12,7 @@ import { z } from "zod";
 import { requireWalletSession, UnauthorizedError } from "@/server/auth";
 import { readJob } from "@/server/chain";
 import { getDatabase } from "@/server/db";
+import { serializeJobRecord } from "@/server/db/json-record";
 import { evaluationReports, jobDocuments } from "@/server/db/schema";
 import {
   acquireEvaluationLease,
@@ -100,7 +101,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
     }
     if (existing) {
       if (Number(existing.signedVerdict.deadline) > now) {
-        return NextResponse.json(existing);
+        return NextResponse.json(serializeJobRecord(existing));
       }
       const signedVerdict = await signEvaluationVerdict({
         chainId,
@@ -119,7 +120,9 @@ export async function POST(request: NextRequest, context: RouteContext) {
             eq(evaluationReports.jobId, jobId),
           ),
         );
-      return NextResponse.json({ ...existing, signedVerdict });
+      return NextResponse.json(
+        serializeJobRecord({ ...existing, signedVerdict }),
+      );
     }
     const lease = await acquireEvaluationLease({
       address: session.address,
@@ -184,7 +187,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
         .limit(1);
       if (!saved)
         throw new Error("The evaluation report could not be persisted.");
-      return NextResponse.json(saved, { status: 201 });
+      return NextResponse.json(serializeJobRecord(saved), { status: 201 });
     } finally {
       await releaseEvaluationLease(lease).catch((error: unknown) => {
         console.error("ScopeSettle evaluation lease release failed", {

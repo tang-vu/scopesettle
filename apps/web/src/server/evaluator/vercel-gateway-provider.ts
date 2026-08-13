@@ -37,6 +37,11 @@ export class VercelGatewayEvaluationProvider implements EvaluationProvider {
       });
       return providerOutputSchema.parse(response.output);
     } catch (error) {
+      console.error("ScopeSettle AI Gateway request failed", {
+        name: error instanceof Error ? error.name : "UnknownError",
+        message:
+          error instanceof Error ? error.message : "Unknown provider failure",
+      });
       throw new EvaluationProviderError(
         "Vercel AI Gateway evaluation failed closed",
         error,

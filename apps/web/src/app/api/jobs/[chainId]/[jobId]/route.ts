@@ -5,6 +5,7 @@ import { z } from "zod";
 
 import { readJob } from "@/server/chain";
 import { getDatabase } from "@/server/db";
+import { serializeJobRecord } from "@/server/db/json-record";
 import { evaluationReports, jobDocuments } from "@/server/db/schema";
 import { apiError } from "@/server/http";
 
@@ -45,14 +46,14 @@ export async function GET(_request: NextRequest, context: RouteContext) {
         { status: 404 },
       );
     return NextResponse.json({
-      document: rows[0],
+      document: serializeJobRecord(rows[0]),
       onchain: {
         ...job,
         budget: job.budget.toString(),
         expiredAt: job.expiredAt.toString(),
         id: job.id.toString(),
       },
-      evaluation: reports[0] ?? null,
+      evaluation: reports[0] ? serializeJobRecord(reports[0]) : null,
     });
   } catch (error) {
     return apiError(error);
