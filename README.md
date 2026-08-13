@@ -96,9 +96,12 @@ pnpm dev
 ```
 
 Configure only the variables needed for your mode. `SESSION_SECRET` must be at least 32 random
-characters. `OPENAI_API_KEY`, `OPENAI_MODEL`, `EVALUATOR_PRIVATE_KEY`, and `DATABASE_URL` are
-server-only. Never use `NEXT_PUBLIC_*` for a secret. `GITHUB_TOKEN` is optional and only raises
-public API limits. No production mock model fallback exists.
+characters. `OPENAI_API_KEY`, `OPENAI_MODEL`, `AI_GATEWAY_MODEL`, `EVALUATOR_PRIVATE_KEY`, and
+`DATABASE_URL` are server-only. A direct OpenAI deployment uses `OPENAI_API_KEY` + `OPENAI_MODEL`;
+a Vercel deployment may instead use `AI_GATEWAY_MODEL` with Vercel's deployment identity. Never
+use `NEXT_PUBLIC_*` for a secret. `GITHUB_TOKEN` is optional and only raises public API limits. Both
+providers enforce the same structured evidence schema and fail closed; no production mock model
+fallback exists.
 
 For a local chain and Testnet/Mainnet runbooks, see [deployment instructions](docs/deployment-runbook.md).
 

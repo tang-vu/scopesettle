@@ -27,6 +27,45 @@ EVALUATION POLICY:
 - Return concise findings and limitations only. Never output chain-of-thought, hidden reasoning, or a settlement verdict.
 - Scores and confidence are 0 through 100. Application code computes weights and the final verdict.`;
 
+export function evaluationTaskPrompt(context: EvaluationContext): string {
+  const untrustedGitHubData = {
+    pull: {
+      title: context.pull.title,
+      body: context.pull.body.slice(0, 10_000),
+      state: context.pull.state,
+      draft: context.pull.draft,
+      merged: context.pull.merged,
+      baseSha: context.pull.baseSha,
+      headSha: context.pull.headSha,
+    },
+    files: context.pull.files.map((file) => ({
+      filename: file.filename,
+      status: file.status,
+      additions: file.additions,
+      deletions: file.deletions,
+      patch: file.patch ?? null,
+    })),
+    checks: context.pull.checks.map((check) => ({
+      name: check.name,
+      status: check.status,
+      conclusion: check.conclusion,
+      headSha: check.head_sha,
+    })),
+  };
+  const task = {
+    scope: context.specification.scope,
+    criteria: context.specification.criteria.map((criterion) => ({
+      id: criterion.id,
+      title: criterion.title,
+      description: criterion.description,
+      requiredFiles: criterion.requiredFiles,
+      requiresPassingCi: criterion.requiresPassingCi,
+    })),
+  };
+
+  return `Evaluate the immutable task against the exact pull-request evidence.\n\n<TASK_POLICY>\n${canonicalize(task)}\n</TASK_POLICY>\n\n<UNTRUSTED_GITHUB_DATA>\n${canonicalize(untrustedGitHubData)}\n</UNTRUSTED_GITHUB_DATA>`;
+}
+
 export class OpenAIEvaluationProvider implements EvaluationProvider {
   readonly name: string;
   private readonly client: OpenAI;
@@ -50,41 +89,6 @@ export class OpenAIEvaluationProvider implements EvaluationProvider {
   }
 
   async evaluate(context: EvaluationContext): Promise<ProviderOutput> {
-    const untrustedGitHubData = {
-      pull: {
-        title: context.pull.title,
-        body: context.pull.body.slice(0, 10_000),
-        state: context.pull.state,
-        draft: context.pull.draft,
-        merged: context.pull.merged,
-        baseSha: context.pull.baseSha,
-        headSha: context.pull.headSha,
-      },
-      files: context.pull.files.map((file) => ({
-        filename: file.filename,
-        status: file.status,
-        additions: file.additions,
-        deletions: file.deletions,
-        patch: file.patch ?? null,
-      })),
-      checks: context.pull.checks.map((check) => ({
-        name: check.name,
-        status: check.status,
-        conclusion: check.conclusion,
-        headSha: check.head_sha,
-      })),
-    };
-    const task = {
-      scope: context.specification.scope,
-      criteria: context.specification.criteria.map((criterion) => ({
-        id: criterion.id,
-        title: criterion.title,
-        description: criterion.description,
-        requiredFiles: criterion.requiredFiles,
-        requiresPassingCi: criterion.requiresPassingCi,
-      })),
-    };
-
     try {
       const response = await this.client.responses.parse({
         model: this.name,
@@ -93,7 +97,7 @@ export class OpenAIEvaluationProvider implements EvaluationProvider {
         input: [
           {
             role: "user",
-            content: `Evaluate the immutable task against the exact pull-request evidence.\n\n<TASK_POLICY>\n${canonicalize(task)}\n</TASK_POLICY>\n\n<UNTRUSTED_GITHUB_DATA>\n${canonicalize(untrustedGitHubData)}\n</UNTRUSTED_GITHUB_DATA>`,
+            content: evaluationTaskPrompt(context),
           },
         ],
         max_output_tokens: 6_000,

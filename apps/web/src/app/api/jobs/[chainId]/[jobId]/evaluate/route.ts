@@ -18,6 +18,7 @@ import {
   releaseEvaluationLease,
 } from "@/server/evaluation-guard";
 import { OpenAIEvaluationProvider } from "@/server/evaluator/openai-provider";
+import { VercelGatewayEvaluationProvider } from "@/server/evaluator/vercel-gateway-provider";
 import { evaluatePullRequest } from "@/server/evaluator/pipeline";
 import { GitHubClient } from "@/server/github";
 import { apiError } from "@/server/http";
@@ -139,7 +140,9 @@ export async function POST(request: NextRequest, context: RouteContext) {
           pull,
           specification: document.specification,
         },
-        new OpenAIEvaluationProvider(),
+        process.env.OPENAI_API_KEY
+          ? new OpenAIEvaluationProvider()
+          : new VercelGatewayEvaluationProvider(),
       );
       if (
         report.verdict !== "manual_review" &&

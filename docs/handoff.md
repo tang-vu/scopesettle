@@ -90,6 +90,10 @@ Last verified: 2026-08-13. Read this file together with [`PLANS.md`](../PLANS.md
   `deployments/xlayer-mainnet-196-2026-08-13.json`.
 - The public judge dossier is live at `https://tang-vu.github.io/scopesettle/`; GitHub Pages run
   `31616238673` deployed it successfully and the repo homepage points to it.
+- A production Vercel project is linked locally and the public web shell is live at
+  `https://scopesettle.vercel.app`. Public Testnet contract configuration, an evaluator secret, a
+  generated session secret, and `AI_GATEWAY_MODEL=openai/gpt-5-mini` are configured as protected
+  Vercel environment variables. The database and live AI workflow are not yet operational.
 - Official Testnet verifier URL used by the protected workflow:
   `https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET`.
 - Official Mainnet verifier URL used for this deployment:
@@ -97,8 +101,8 @@ Last verified: 2026-08-13. Read this file together with [`PLANS.md`](../PLANS.md
 
 ## External blockers and secrets still missing
 
-No hosted OpenAI-backed Testnet evaluation, full app deployment, Mainnet job, or public X post
-exists. A static public judge dossier is published through GitHub Pages. The Testnet contract
+No hosted AI-backed Testnet evaluation, Mainnet job, or public X post exists. A static public judge
+dossier and a Vercel web shell are published. The Testnet contract
 deployment and deterministic job `2` lifecycle are real and source-verified; the Mainnet contracts
 are real and source-verified. Never describe the smoke verdict as an AI code evaluation or the
 Mainnet deployment as usage.
@@ -143,14 +147,15 @@ consumed `4,381,279` gas and `0.000087625584381279 OKB`. No Mainnet USDC was tra
 was created. Recheck chain, balances, method, and parameters and obtain fresh confirmation before
 any future Mainnet write.
 
-A hosted web release additionally needs:
+A hosted web release now has `SESSION_SECRET`, the matching `EVALUATOR_PRIVATE_KEY`, the deployed
+public Testnet addresses/block, and `AI_GATEWAY_MODEL`. It still needs `DATABASE_URL`; an optional
+`GITHUB_TOKEN` can raise public GitHub API limits. A direct OpenAI configuration remains supported
+through `OPENAI_API_KEY` + `OPENAI_MODEL`, but is not required for the Vercel Gateway path.
 
-- `DATABASE_URL`
-- `SESSION_SECRET` of at least 32 random characters
-- `OPENAI_API_KEY` and `OPENAI_MODEL`
-- `EVALUATOR_PRIVATE_KEY` matching `EVALUATOR_SIGNER_ADDRESS`
-- optional `GITHUB_TOKEN`
-- deployed public addresses/block in the documented `NEXT_PUBLIC_*` variables
+The Vercel/Neon integration is currently stopped at Neon Marketplace terms acceptance. The owner
+must review and accept those terms in their Vercel account; after that, create the free `sin1`
+resource, apply both checksummed migrations, redeploy, and run a real hosted evaluation. Vercel
+Marketplace terms must never be accepted automatically on the owner's behalf.
 
 The dedicated ScopeSettle X account, public launch post, and hosting/database accounts are still
 human/external actions. Any further Mainnet write requires its own fresh explicit approval.
