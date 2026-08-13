@@ -120,3 +120,13 @@ export async function readEvaluatorSigner(chainId: number): Promise<Address> {
     functionName: "verdictSigner",
   });
 }
+
+export async function readVerdictProposal(chainId: number, jobId: bigint) {
+  const deployment = getDeployment(chainId);
+  return getScopeSettleClient(chainId).readContract({
+    abi: scopeSettleEvaluatorAbi,
+    address: deployment.evaluator,
+    args: [jobId],
+    functionName: "getProposal",
+  });
+}

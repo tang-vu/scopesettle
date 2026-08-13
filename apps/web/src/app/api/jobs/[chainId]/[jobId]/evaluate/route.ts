@@ -10,7 +10,7 @@ import { getAddress } from "viem";
 import { z } from "zod";
 
 import { requireWalletSession, UnauthorizedError } from "@/server/auth";
-import { readJob } from "@/server/chain";
+import { readJob, readVerdictProposal } from "@/server/chain";
 import { getDatabase } from "@/server/db";
 import { serializeJobRecord } from "@/server/db/json-record";
 import { evaluationReports, jobDocuments } from "@/server/db/schema";
@@ -54,6 +54,8 @@ export async function POST(request: NextRequest, context: RouteContext) {
       .positive()
       .parse(parameters.chainId);
     const jobId = BigInt(z.string().regex(/^\d+$/u).parse(parameters.jobId));
+    const retryProvider =
+      request.nextUrl.searchParams.get("retryProvider") === "true";
     if (session.chainId !== chainId)
       throw new UnauthorizedError("Session chain mismatch.");
     const database = getDatabase();
@@ -99,7 +101,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
       expired.name = "ConflictError";
       throw expired;
     }
-    if (existing) {
+    if (existing && !retryProvider) {
       if (Number(existing.signedVerdict.deadline) > now) {
         return NextResponse.json(serializeJobRecord(existing));
       }
@@ -123,6 +125,20 @@ export async function POST(request: NextRequest, context: RouteContext) {
       return NextResponse.json(
         serializeJobRecord({ ...existing, signedVerdict }),
       );
+    }
+    if (existing) {
+      const providerWasUnavailable = existing.report.deterministicChecks.some(
+        (check) =>
+          check.id === "model_provider" && check.status === "unavailable",
+      );
+      const proposal = await readVerdictProposal(chainId, jobId);
+      if (!providerWasUnavailable || proposal.exists) {
+        const conflict = new Error(
+          "Only an unproposed fail-closed provider report can be retried.",
+        );
+        conflict.name = "ConflictError";
+        throw conflict;
+      }
     }
     const lease = await acquireEvaluationLease({
       address: session.address,
@@ -164,17 +180,30 @@ export async function POST(request: NextRequest, context: RouteContext) {
         jobId,
         report,
       });
-      await database
-        .insert(evaluationReports)
-        .values({
-          chainId,
-          jobId,
-          model: report.model,
-          report,
-          reportHash: report.reportHash,
-          signedVerdict,
-        })
-        .onConflictDoNothing();
+      const reportRecord = {
+        chainId,
+        jobId,
+        model: report.model,
+        report,
+        reportHash: report.reportHash,
+        signedVerdict,
+      };
+      if (existing) {
+        await database
+          .update(evaluationReports)
+          .set(reportRecord)
+          .where(
+            and(
+              eq(evaluationReports.chainId, chainId),
+              eq(evaluationReports.jobId, jobId),
+            ),
+          );
+      } else {
+        await database
+          .insert(evaluationReports)
+          .values(reportRecord)
+          .onConflictDoNothing();
+      }
       const [saved] = await database
         .select()
         .from(evaluationReports)
