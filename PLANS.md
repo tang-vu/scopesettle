@@ -57,7 +57,7 @@ Acceptance: exact commit binding, hostile-content handling, outages, and manual 
 - [x] Complete deterministic local workflow and public completed-job fixture.
 - [x] Deploy and source-verify the mock stack on X Layer Testnet.
 - [x] Run a deterministic, valueless Testnet contract lifecycle and record explorer evidence.
-- [!] Run the hosted OpenAI-backed product workflow (requires hosting and external secrets).
+- [x] Run the hosted OpenAI-backed product workflow and publish its report and receipts.
 
 Acceptance: judges can inspect a real completed Testnet job without a wallet.
 
@@ -75,7 +75,8 @@ Acceptance: no serious accessibility issue and all achievable quality gates pass
 - [x] Prepare portable web and local/Testnet/Mainnet deployment instructions.
 - [x] Run the final aggregate check and evidence-backed release review.
 - [x] Deploy and source-verify the production-shaped pair on X Layer Mainnet after explicit approval.
-- [!] Public hosted app, dedicated X launch, demo video, and final submission accounts.
+- [x] Publish the database-backed application and completed hosted-AI Testnet job.
+- [!] Dedicated X launch, demo video, owner contacts, and final submission.
 
 Acceptance: submission assets match reality; human-only checklist is minimal and exact.
 
@@ -117,9 +118,9 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
 
 ## External blockers log
 
-- Mainnet deployment approval and gas funding were provided; the source-verified deployment is
-  recorded in `deployments/`. A hosted database, public full-app host, GitHub token, OpenAI key,
-  dedicated X account, and public-post approval have not been provided.
+- Mainnet and Testnet deployment evidence, a Neon-backed public app, and a Vercel AI Gateway-backed
+  job are live. The remaining external inputs are the dedicated X account/post, demo video, owner
+  contact fields, and final form submission.
 
 ## Testnet deployment readiness
 

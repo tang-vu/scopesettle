@@ -7,9 +7,10 @@ funds an ERC-8183 coding job on X Layer, a provider commits an exact public GitH
 and ScopeSettle produces an evidence-linked verdict that can settle escrow after a challenge window.
 
 **Launch status:** the beta is implemented and tested. Its X Layer Testnet lifecycle and X Layer
-Mainnet contracts are source-verified, and deterministic Testnet job `2` completed onchain. The
-public [submission proof](https://tang-vu.github.io/scopesettle/) links the canonical receipts.
-Hosted AI evaluation and the demo video remain pending and are never represented by placeholders.
+Mainnet contracts are source-verified, deterministic Testnet job `2` completed onchain, and hosted
+AI-backed job [`3`](https://scopesettle.vercel.app/jobs/1952/3) produced a public evidence report
+before trusted-reviewer refund. The public [submission proof](https://tang-vu.github.io/scopesettle/)
+links the canonical receipts. The demo video remains pending and is never represented by a placeholder.
 
 ![ScopeSettle landing page](docs/assets/product-preview.png)
 
@@ -158,7 +159,8 @@ and platform fees are intentionally out of scope. Read [SECURITY.md](SECURITY.md
 The source-verified contracts now have a completed valueless Testnet lifecycle with a dedicated EOA
 provider. It is explicitly a deterministic contract-wiring proof, not an AI evaluation. The
 Mainnet contracts are deployed and source-verified; no Mainnet job or user activity is claimed.
-The remaining release gate is the public hosted OpenAI-backed workflow and judge demo.
+The hosted OpenAI-backed workflow is live at `https://scopesettle.vercel.app`; the remaining release
+gates are the judge demo, dedicated X account/post, owner contacts, and final form submission.
 Submission copy, demo script, and launch thread are in [SUBMISSION.md](SUBMISSION.md),
 [DEMO.md](DEMO.md), and [X_THREAD.md](X_THREAD.md).
 

@@ -16,8 +16,8 @@ no server custody, no fake AI fallback.
 escrow. Ambiguous work goes to an explicitly trusted reviewer. The evaluator is not presented as a
 trustless oracle, and the beta contracts are unaudited.
 
-5/ Try the public completed job: `[LIVE_JOB_URL]`
-App: `[LIVE_APP_URL]`
+5/ Try the public hosted AI job: https://scopesettle.vercel.app/jobs/1952/3
+App: https://scopesettle.vercel.app
 Code: https://github.com/tang-vu/scopesettle
 Demo: `[DEMO_VIDEO_URL]`
 

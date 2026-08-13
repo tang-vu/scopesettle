@@ -53,7 +53,7 @@ Last verified: 2026-08-13. Read this file together with [`PLANS.md`](../PLANS.md
 
 - Local `pnpm check`: passed.
 - Solidity: 45/45 tests passed, including fuzz and invariant suites.
-- TypeScript unit/component: 23/23 tests passed.
+- TypeScript unit/component: 26/26 tests passed.
 - Playwright: 24/24 public, mobile, accessibility, metadata, visual, and wallet lifecycle tests.
 - Production Next.js build: passed.
 - PostgreSQL 17 migration set applied twice in CI, proving application and idempotency.
@@ -93,7 +93,8 @@ Last verified: 2026-08-13. Read this file together with [`PLANS.md`](../PLANS.md
 - A production Vercel project is linked locally and the public web shell is live at
   `https://scopesettle.vercel.app`. Public Testnet contract configuration, an evaluator secret, a
   generated session secret, and `AI_GATEWAY_MODEL=openai/gpt-5-mini` are configured as protected
-  Vercel environment variables. The database and live AI workflow are not yet operational.
+  Vercel environment variables. Neon Postgres is connected in `sin1`, both migrations are applied,
+  and hosted AI-backed Testnet job `3` is public and finalized by the trusted reviewer.
 - Official Testnet verifier URL used by the protected workflow:
   `https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET`.
 - Official Mainnet verifier URL used for this deployment:
@@ -101,10 +102,9 @@ Last verified: 2026-08-13. Read this file together with [`PLANS.md`](../PLANS.md
 
 ## External blockers and secrets still missing
 
-No hosted AI-backed Testnet evaluation, Mainnet job, or public X post exists. A static public judge
-dossier and a Vercel web shell are published. The Testnet contract
-deployment and deterministic job `2` lifecycle are real and source-verified; the Mainnet contracts
-are real and source-verified. Never describe the smoke verdict as an AI code evaluation or the
+Hosted AI-backed Testnet job `3` is complete and public; no Mainnet job or public X post exists. The
+Testnet deployment, deterministic job `2`, hosted job `3`, and Mainnet contracts are real and
+source-verified where applicable. Never describe the smoke verdict as an AI code evaluation or the
 Mainnet deployment as usage.
 
 Testnet job `2` completed through create, fund, EOA submit, signed verdict, challenge window, and
@@ -147,15 +147,10 @@ consumed `4,381,279` gas and `0.000087625584381279 OKB`. No Mainnet USDC was tra
 was created. Recheck chain, balances, method, and parameters and obtain fresh confirmation before
 any future Mainnet write.
 
-A hosted web release now has `SESSION_SECRET`, the matching `EVALUATOR_PRIVATE_KEY`, the deployed
-public Testnet addresses/block, and `AI_GATEWAY_MODEL`. It still needs `DATABASE_URL`; an optional
-`GITHUB_TOKEN` can raise public GitHub API limits. A direct OpenAI configuration remains supported
-through `OPENAI_API_KEY` + `OPENAI_MODEL`, but is not required for the Vercel Gateway path.
-
-The Vercel/Neon integration is currently stopped at Neon Marketplace terms acceptance. The owner
-must review and accept those terms in their Vercel account; after that, create the free `sin1`
-resource, apply both checksummed migrations, redeploy, and run a real hosted evaluation. Vercel
-Marketplace terms must never be accepted automatically on the owner's behalf.
+A hosted web release now has the production database, `SESSION_SECRET`, the matching evaluator key,
+the deployed public Testnet addresses/block, and `AI_GATEWAY_MODEL`. The Neon `free_v3` resource in
+`sin1` passed two idempotent migration runs. A direct OpenAI configuration remains supported through
+`OPENAI_API_KEY` + `OPENAI_MODEL`, but is not required for the Vercel Gateway path.
 
 The dedicated ScopeSettle X account, public launch post, and hosting/database accounts are still
 human/external actions. Any further Mainnet write requires its own fresh explicit approval.
@@ -172,16 +167,12 @@ PostgreSQL 17 service instead. That gate passed on the final CI run.
 
 ## Exact next sequence
 
-1. Configure the deployed Testnet addresses in the hosted web environment, together with the
-   PostgreSQL/OpenAI/evaluator secrets, run migrations, deploy the web app, and complete an
-   OpenAI-backed Testnet create → fund → submit → evaluate → challenge/finalize flow.
-2. Link the judge path to the hosted completed job while retaining the deterministic job `2`
-   evidence as the contract-wiring proof, then rerun
-   `pnpm check`, CodeQL, dependency/secret review, Lighthouse, responsive QA, and documentation audit.
+1. Record a concise demo of the live job `3`, report, explorer receipts, and source-verified Mainnet
+   pair without implying a Mainnet job or user adoption.
+2. Publish the dedicated X account post mentioning `@XLayerOfficial` and add its URL to the form.
 3. Optionally add signer/role secrets to the protected GitHub environments before any future
    redeployment; never paste a private key into chat or Git.
-4. Publish the dedicated X account post mentioning `@XLayerOfficial`, record the owner contact
-   fields and demo URL, then perform the final submission before the deadline.
+4. Record the owner contact fields and demo URL, then perform the final submission before the deadline.
 
 ## Rules for the next chat
 

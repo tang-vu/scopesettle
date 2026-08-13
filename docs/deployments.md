@@ -88,3 +88,16 @@ The canonical evidence is
 settlement, not AI evaluation quality: no model reviewed or executed repository code in this smoke
 run. The completed transaction is
 [`0x7016…a330`](https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330).
+
+Job `3` completed the hosted product workflow on 2026-08-13. Vercel served the application, Neon
+persisted the immutable job document and report, and `openai/gpt-5-mini` evaluated the bounded diff
+for pinned PR head `6899e3a96ea19c09d6d0cc28958cfa8241cc9a30`. It scored `50/100` with
+`50%` confidence because the required lockfile criterion could not pass while pinned GitHub CI was
+failing. The result correctly routed to `manual_review`; the explicitly trusted reviewer rejected
+it, and transaction
+[`0x27e4…e7ea`](https://www.oklink.com/x-layer-testnet/tx/0x27e4f1911b5cf7a6ecdde390182e87db2ff52896360ac09ef79c05e00df0e7ea)
+refunded the full valueless `1 mUSDG` escrow. The public
+[job](https://scopesettle.vercel.app/jobs/1952/3), downloadable
+[report](https://scopesettle.vercel.app/api/jobs/1952/3/report), and
+`deployments/xlayer-testnet-job-3-ai-2026-08-13.json` are the canonical hosted-AI evidence. Client
+and provider intentionally share one Testnet EOA in this valueless proof; this is not user adoption.

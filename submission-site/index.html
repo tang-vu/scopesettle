@@ -51,8 +51,8 @@
           <div class="actions">
             <a
               class="button primary"
-              href="https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330"
-              >Inspect completed job <span aria-hidden="true">↗</span></a
+              href="https://scopesettle.vercel.app/jobs/1952/3"
+              >Inspect hosted AI job <span aria-hidden="true">↗</span></a
             >
             <a class="button" href="https://github.com/tang-vu/scopesettle"
               >Review source</a
@@ -68,11 +68,11 @@
             </div>
             <div>
               <dt>Lifecycle proof</dt>
-              <dd>Job 2 · Completed</dd>
+              <dd>Job 3 · AI evaluated</dd>
             </div>
             <div>
               <dt>Settlement</dt>
-              <dd>1 mUSDG released</dd>
+              <dd>1 mUSDG refunded</dd>
             </div>
             <div>
               <dt>Protocol fee</dt>
@@ -118,12 +118,12 @@
         <div class="heading">
           <div>
             <p class="eyebrow">PUBLIC EVIDENCE</p>
-            <h2>A complete Testnet lifecycle.</h2>
+            <h2>A hosted AI lifecycle.</h2>
           </div>
           <p>
-            Every address and transaction below is independently inspectable.
-            The proof run validates contract wiring and settlement; it does not
-            pretend that a model reviewed the code.
+            Every address, report, and transaction below is independently
+            inspectable. A hosted model evaluated the pinned public diff; a
+            failing CI criterion routed it to trusted manual review.
           </p>
         </div>
         <div class="evidence-grid">
@@ -143,16 +143,25 @@
             ><code>0x02fa…1bf0</code></a
           >
           <a href="evidence/xlayer-testnet-job-2-2026-08-12.json"
-            ><span>Canonical ledger</span><strong>Job 2 evidence</strong
+            ><span>Deterministic smoke proof</span
+            ><strong>Job 2 evidence</strong
             ><code>8 successful receipts</code></a
+          >
+          <a href="https://scopesettle.vercel.app/api/jobs/1952/3/report"
+            ><span>Hosted AI report</span><strong>Job 3 evidence</strong
+            ><code>score 50 · manual review</code></a
+          >
+          <a href="evidence/xlayer-testnet-job-3-ai-2026-08-13.json"
+            ><span>Canonical hosted ledger</span><strong>AI workflow</strong
+            ><code>7 successful receipts</code></a
           >
         </div>
         <ol class="timeline">
-          <li><span>Create</span><code>0xdb4c…855d</code></li>
-          <li><span>Fund</span><code>0xd855…4188</code></li>
-          <li><span>Submit</span><code>0xea84…0d27</code></li>
-          <li><span>Propose</span><code>0xabbb…4749</code></li>
-          <li><span>Finalize</span><code>0x7016…a330</code></li>
+          <li><span>Create</span><code>0xa615…b577</code></li>
+          <li><span>Fund</span><code>0x2ef7…0d4e</code></li>
+          <li><span>Submit</span><code>0x9032…d514</code></li>
+          <li><span>AI + propose</span><code>0xf542…b79e</code></li>
+          <li><span>Review + refund</span><code>0x27e4…e7ea</code></li>
         </ol>
       </section>
 
@@ -245,7 +254,7 @@
           <h2>Built beyond the pitch.</h2>
           <ul>
             <li>45 Solidity unit, fuzz, and invariant tests</li>
-            <li>23 TypeScript unit and component tests</li>
+            <li>26 TypeScript unit and component tests</li>
             <li>24 browser, accessibility, and wallet lifecycle tests</li>
             <li>Source-verified immutable Testnet and Mainnet deployments</li>
           </ul>
