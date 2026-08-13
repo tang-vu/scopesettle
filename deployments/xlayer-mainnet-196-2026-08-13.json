@@ -1,0 +1,49 @@
+{
+  "chainId": 196,
+  "commit": "88dbf456b644b4326c1467db36da411ea2292bd3",
+  "compiler": {
+    "evmVersion": "cancun",
+    "optimizer": true,
+    "optimizerRuns": 10000,
+    "solcVersion": "0.8.28"
+  },
+  "contracts": {
+    "agenticCommerce": {
+      "address": "0xef0b78c4dd4cd167fddad7edb48cf7f9e4c5fac1",
+      "block": 67825467,
+      "gasUsed": 2226113,
+      "transactionHash": "0xbc26c1f047af79bd1630f5fb90707f9669632bbc02a2063fe9e1df14a6b36b85"
+    },
+    "scopeSettleEvaluator": {
+      "address": "0x76a0f64d59699be3330d6088a157a7941bcad3cc",
+      "block": 67825469,
+      "gasUsed": 2155166,
+      "transactionHash": "0x01b8b2b0d965dfa538bafa60e77e903b0bae6f048b9b421cef56f7622d9b11c7"
+    }
+  },
+  "deployedAt": "2026-08-13T04:15:03Z",
+  "deployer": "0x66dd076f5cbb8c8dc4825c8eb7148df55bd565a6",
+  "gas": {
+    "effectiveGasPriceWei": "20000001",
+    "totalCostWei": "87625584381279",
+    "totalGasUsed": 4381279
+  },
+  "network": "xlayer-mainnet",
+  "paymentToken": {
+    "address": "0x74b7f16337b8972027f6196a17a631ac6de26d22",
+    "decimals": 6,
+    "kind": "official-native-usdc",
+    "source": "https://github.com/okx/xlayer-docs/blob/main/developer/build-on-xlayer/contracts.mdx",
+    "symbol": "USDC"
+  },
+  "roles": {
+    "evaluatorSigner": "0x964b52ade4d1a7c58dec1c7cf6384c2c82e107f7",
+    "reviewer": "0x9114a8c33c77f6d3d50c6ef598202fa5c5b8f6df"
+  },
+  "rpcReconciliation": {
+    "immutableBindingsMatched": true,
+    "providers": ["https://rpc.xlayer.tech", "https://xlayerrpc.okx.com"],
+    "runtimeBytecodePresent": true
+  },
+  "verification": "source-verified"
+}

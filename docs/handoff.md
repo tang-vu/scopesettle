@@ -1,6 +1,6 @@
 # ScopeSettle handoff
 
-Last verified: 2026-08-12. Read this file together with [`PLANS.md`](../PLANS.md),
+Last verified: 2026-08-13. Read this file together with [`PLANS.md`](../PLANS.md),
 [`README.md`](../README.md), and the [deployment runbook](deployment-runbook.md).
 
 ## Repository state
@@ -24,7 +24,7 @@ Last verified: 2026-08-12. Read this file together with [`PLANS.md`](../PLANS.md
 ## What is complete
 
 - Milestones 1–5, 7, and 8 are complete; milestone 6 now includes a completed deterministic
-  contract lifecycle on X Layer Testnet.
+  contract lifecycle on X Layer Testnet and source-verified Mainnet contracts.
 - The product includes the public landing page, wallet dashboard, create/fund flow, exact job view,
   role actions, evidence report, responsive design, accessibility/error/loading states, and a
   clearly labeled illustrative example.
@@ -41,8 +41,8 @@ Last verified: 2026-08-12. Read this file together with [`PLANS.md`](../PLANS.md
   weighted scores deterministically, fails closed, and has no production mock fallback.
 - PostgreSQL stores auth nonces/sessions, immutable job documents, evidence reports, evaluation
   leases, and atomic wallet quota buckets. Onchain state remains authoritative.
-- Protected local, Testnet mock, and production-shaped deployment scripts exist. Testnet source
-  verification is automated through OKLink after the required delay.
+- Protected local, Testnet mock, and production-shaped deployment scripts exist. Testnet and
+  Mainnet source verification are supported through OKLink.
 - Protected workflows now reject invalid token/role/chain inputs, reconcile deployed runtime and
   immutable bindings from RPC, verify sources, and preserve normalized deployment plus raw
   broadcast records for review before they enter the canonical ledger.
@@ -75,24 +75,33 @@ Last verified: 2026-08-12. Read this file together with [`PLANS.md`](../PLANS.md
 - Both Testnet environments contain only `XLAYER_TESTNET_RPC_URL`, set to the official primary
   Testnet RPC.
 - Both Mainnet environments contain only `XLAYER_MAINNET_RPC_URL`, set to the official primary
-  Mainnet RPC. No deployment credential or role has been generated.
+  Mainnet RPC. Deployment credentials remain local and are not stored in GitHub environments.
 - Both official Testnet RPCs returned chain ID `1952`; the observed gas price was `20,000,001` wei.
 - Both configured Mainnet RPCs returned chain ID `196`; they reported the same current gas price.
 - The mock stack was deployed at X Layer Testnet block `38086528`; RPC reads reconciled all runtime
   bytecode and immutable bindings, and OKLink published matching sources for all three contracts.
 - Canonical addresses, transaction hashes, compiler settings, roles, and deployment time are in
   `deployments/xlayer-testnet-1952-2026-08-12.json`.
+- The production-shaped pair was deployed from commit
+  `88dbf456b644b4326c1467db36da411ea2292bd3` on X Layer Mainnet: AgenticCommerce
+  `0xef0b78c4dd4cd167fddad7edb48cf7f9e4c5fac1` and ScopeSettleEvaluator
+  `0x76a0f64d59699be3330d6088a157a7941bcad3cc`. Both are source-verified, their immutable
+  bindings match through both official RPCs, and the canonical record is
+  `deployments/xlayer-mainnet-196-2026-08-13.json`.
 - The public judge dossier is live at `https://tang-vu.github.io/scopesettle/`; GitHub Pages run
   `31616238673` deployed it successfully and the repo homepage points to it.
 - Official Testnet verifier URL used by the protected workflow:
   `https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET`.
+- Official Mainnet verifier URL used for this deployment:
+  `https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER`.
 
 ## External blockers and secrets still missing
 
-No hosted OpenAI-backed Testnet evaluation, full app deployment, Mainnet deployment, or public X
-post exists. A static public judge dossier is published through GitHub Pages. The Testnet contract
-deployment and deterministic job `2` lifecycle are real and source-verified; never describe the
-smoke verdict as an AI code evaluation.
+No hosted OpenAI-backed Testnet evaluation, full app deployment, Mainnet job, or public X post
+exists. A static public judge dossier is published through GitHub Pages. The Testnet contract
+deployment and deterministic job `2` lifecycle are real and source-verified; the Mainnet contracts
+are real and source-verified. Never describe the smoke verdict as an AI code evaluation or the
+Mainnet deployment as usage.
 
 Testnet job `2` completed through create, fund, EOA submit, signed verdict, challenge window, and
 finalization. It released exactly `1 mUSDG` to the dedicated Testnet EOA provider. The immutable
@@ -128,12 +137,11 @@ The current Testnet deployer remains funded with valueless Testnet OKB. Its key,
 signer, and the reviewer must remain securely recoverable. Do not generate a production key without
 an owner-approved custody/backup plan.
 
-Read-only Mainnet preflight on 2026-08-12 confirmed chain `196` through both official RPCs and the
-official native USDC candidate `0x74b7f16337b8972027f6196a17a631ac6de26d22` (`USDC`, 6 decimals,
-non-empty runtime). The current deployer has `0 OKB` and `0 USDC` on Mainnet, so no broadcast was
-attempted. The two production contracts consumed `4,381,279` gas in the Testnet deployment;
-`0.001 OKB` is a conservative gas-funding floor at the observed `20,000,001` wei gas price. Recheck
-all values and obtain fresh confirmation before Mainnet deployment.
+After explicit owner confirmation, the production pair was broadcast on chain `196` using official
+native USDC `0x74b7f16337b8972027f6196a17a631ac6de26d22` (`USDC`, 6 decimals). The two transactions
+consumed `4,381,279` gas and `0.000087625584381279 OKB`. No Mainnet USDC was transferred and no job
+was created. Recheck chain, balances, method, and parameters and obtain fresh confirmation before
+any future Mainnet write.
 
 A hosted web release additionally needs:
 
@@ -144,9 +152,8 @@ A hosted web release additionally needs:
 - optional `GITHUB_TOKEN`
 - deployed public addresses/block in the documented `NEXT_PUBLIC_*` variables
 
-The dedicated ScopeSettle X account, public launch post, hosting/database accounts, and any Mainnet
-approval are still human/external actions. Mainnet must not be attempted before a source-verified,
-end-to-end Testnet job and fresh explicit approval.
+The dedicated ScopeSettle X account, public launch post, and hosting/database accounts are still
+human/external actions. Any further Mainnet write requires its own fresh explicit approval.
 
 ## Tooling note
 
@@ -166,10 +173,10 @@ PostgreSQL 17 service instead. That gate passed on the final CI run.
 2. Link the judge path to the hosted completed job while retaining the deterministic job `2`
    evidence as the contract-wiring proof, then rerun
    `pnpm check`, CodeQL, dependency/secret review, Lighthouse, responsive QA, and documentation audit.
-3. Optionally add the Testnet signer/role secrets to the protected GitHub environments before any
-   future redeployment; never paste a private key into chat or Git.
-4. Only then request fresh Mainnet approval, deploy/verify with a real supported payment token, and
-   perform the public X launch/submission actions.
+3. Optionally add signer/role secrets to the protected GitHub environments before any future
+   redeployment; never paste a private key into chat or Git.
+4. Publish the dedicated X account post mentioning `@XLayerOfficial`, record the owner contact
+   fields and demo URL, then perform the final submission before the deadline.
 
 ## Rules for the next chat
 

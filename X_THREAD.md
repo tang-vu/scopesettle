@@ -42,8 +42,9 @@ posting time.
    evaluator/reviewer roles, and the unaudited low-value beta limitation.
 5. **Testnet proof:** publish only after verified deployment. Include contract, transaction, source
    verification, and completed-job links from the checked-in deployment record.
-6. **Mainnet launch / submission:** publish only after the live low-value flow passes. Use the
-   five-post launch thread above, attach the final demo, and mention `@XLayerOfficial`.
+6. **Mainnet launch / submission:** the contracts are deployed and source-verified. Publish after
+   the hosted workflow and final demo are real; use the five-post launch thread above and mention
+   `@XLayerOfficial`. Do not imply a Mainnet job or user activity.
 
 Suggested existing assets: `docs/assets/product-preview.png` for the problem/product post and
 `docs/assets/job-mobile.png` for the explainability post. Replace them with real hosted-job
@@ -59,6 +60,19 @@ and settlement—not a live AI code review. The evaluator remains an explicitly 
 
 Proof: https://tang-vu.github.io/scopesettle/
 Finalization: https://www.oklink.com/x-layer-testnet/tx/0x7016b1c12d0fcbf0c1a9b1b9eb7313ad8fb017e97c6d210e6adea3bdca2da330
+Code: https://github.com/tang-vu/scopesettle
+
+Built for Build X AI Season. @XLayerOfficial
+
+## Copy-ready Mainnet contract launch post
+
+ScopeSettle's immutable production-shaped contracts are now source-verified on X Layer Mainnet
+(chain 196), using official native USDC. No Mainnet job or user activity is claimed; the beta is
+unaudited and should not hold meaningful funds.
+
+AgenticCommerce: https://www.oklink.com/x-layer/address/0xef0b78c4dd4cd167fddad7edb48cf7f9e4c5fac1/contract
+Evaluator: https://www.oklink.com/x-layer/address/0x76a0f64d59699be3330d6088a157a7941bcad3cc/contract
+Proof: https://tang-vu.github.io/scopesettle/
 Code: https://github.com/tang-vu/scopesettle
 
 Built for Build X AI Season. @XLayerOfficial

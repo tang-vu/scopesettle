@@ -60,11 +60,11 @@
           </div>
         </div>
         <aside class="proof-card" aria-label="Verified deployment summary">
-          <div class="status"><i></i> X Layer Testnet · chain 1952</div>
+          <div class="status"><i></i> X Layer Testnet + Mainnet</div>
           <dl>
             <div>
-              <dt>Contracts</dt>
-              <dd>3 source-verified</dd>
+              <dt>Deployments</dt>
+              <dd>Both networks source-verified</dd>
             </div>
             <div>
               <dt>Lifecycle proof</dt>
@@ -156,6 +156,41 @@
         </ol>
       </section>
 
+      <section class="section shell" aria-labelledby="mainnet-heading">
+        <div class="heading">
+          <div>
+            <p class="eyebrow">MAINNET LAUNCH</p>
+            <h2 id="mainnet-heading">Immutable contracts on chain 196.</h2>
+          </div>
+          <p>
+            The production-shaped pair uses X Layer's official native USDC.
+            Source, bytecode, and immutable bindings were reconciled through
+            both official RPCs. No Mainnet job or user activity is claimed.
+          </p>
+        </div>
+        <div class="evidence-grid">
+          <a
+            href="https://www.oklink.com/x-layer/address/0xef0b78c4dd4cd167fddad7edb48cf7f9e4c5fac1/contract"
+            ><span>ERC-8183 escrow</span><strong>AgenticCommerce</strong
+            ><code>0xef0b…fac1</code></a
+          >
+          <a
+            href="https://www.oklink.com/x-layer/address/0x76a0f64d59699be3330d6088a157a7941bcad3cc/contract"
+            ><span>Verdict contract</span><strong>ScopeSettleEvaluator</strong
+            ><code>0x76a0…d3cc</code></a
+          >
+          <a
+            href="https://www.oklink.com/x-layer/tx/0xbc26c1f047af79bd1630f5fb90707f9669632bbc02a2063fe9e1df14a6b36b85"
+            ><span>Deployment receipt</span><strong>Commerce transaction</strong
+            ><code>0xbc26…6b85</code></a
+          >
+          <a href="evidence/xlayer-mainnet-196-2026-08-13.json"
+            ><span>Canonical ledger</span><strong>Mainnet evidence</strong
+            ><code>chain 196 · native USDC</code></a
+          >
+        </div>
+      </section>
+
       <section class="section shell" id="architecture">
         <div class="heading">
           <div>
@@ -212,7 +247,7 @@
             <li>45 Solidity unit, fuzz, and invariant tests</li>
             <li>23 TypeScript unit and component tests</li>
             <li>24 browser, accessibility, and wallet lifecycle tests</li>
-            <li>Source-verified immutable Testnet deployment</li>
+            <li>Source-verified immutable Testnet and Mainnet deployments</li>
           </ul>
           <a
             class="text-link"

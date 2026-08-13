@@ -5,10 +5,11 @@ whether an offchain pull request met scope. ScopeSettle adds evidence, explanati
 Click **Explore a verified job**.
 
 **0:12–0:32 — auditability.** Open the public
-[submission proof](https://tang-vu.github.io/scopesettle/) and its completed Testnet job `2`
-transaction. Explain that this is the real contract-wiring proof, while the app's example report is
-explicitly illustrative. In the example, point to the weighted formula, locked thresholds,
-criterion evidence, limitations, and report hash without calling it a live model run.
+[submission proof](https://tang-vu.github.io/scopesettle/), its completed Testnet job `2`
+transaction, and the source-verified Mainnet pair. Explain that Testnet proves the contract wiring
+and settlement, while Mainnet proves launch readiness; neither is a live AI evaluation. In the
+example, point to the weighted formula, locked thresholds, criterion evidence, limitations, and
+report hash without calling it a live model run.
 
 **0:32–0:48 — immutable agreement.** Open `/jobs/new`. Show weighted criteria summing to 100,
 provider/budget/expiry, pass/confidence thresholds, challenge window, and the specification/rubric

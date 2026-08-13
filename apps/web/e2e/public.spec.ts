@@ -18,7 +18,7 @@ test("public visitor understands the product and opens a completed example", asy
   );
   await expect(
     page.getByText(
-      "X Layer Testnet · chain 1952 · contracts source-verified · job 2 completed",
+      "X Layer · Testnet lifecycle + Mainnet contracts · source-verified",
     ),
   ).toBeVisible();
   await page.getByRole("link", { name: "Explore example report" }).click();

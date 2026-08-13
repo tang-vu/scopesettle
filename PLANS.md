@@ -74,7 +74,8 @@ Acceptance: no serious accessibility issue and all achievable quality gates pass
 - [x] Finalize README, methodology, deployments, demo, submission, and X thread.
 - [x] Prepare portable web and local/Testnet/Mainnet deployment instructions.
 - [x] Run the final aggregate check and evidence-backed release review.
-- [!] Mainnet deploy/verify and public launch (explicit approval, signer, funds, accounts).
+- [x] Deploy and source-verify the production-shaped pair on X Layer Mainnet after explicit approval.
+- [!] Public hosted app, dedicated X launch, demo video, and final submission accounts.
 
 Acceptance: submission assets match reality; human-only checklist is minimal and exact.
 
@@ -116,9 +117,9 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
 
 ## External blockers log
 
-- No Mainnet signer or approval, hosted database, public web host, GitHub token, OpenAI key,
-  dedicated X account, or public-post approval has been provided. The funded Testnet deployer and
-  role signers produced the source-verified mock deployment recorded in `deployments/`.
+- Mainnet deployment approval and gas funding were provided; the source-verified deployment is
+  recorded in `deployments/`. A hosted database, public full-app host, GitHub token, OpenAI key,
+  dedicated X account, and public-post approval have not been provided.
 
 ## Testnet deployment readiness
 

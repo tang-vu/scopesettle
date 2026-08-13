@@ -5,9 +5,10 @@ Official deadline: **August 21, 2026 at 23:59 UTC**. The
 an X Layer Testnet deployment followed by Mainnet launch, a dedicated active X account, and a
 submission post mentioning `@XLayerOfficial`.
 
-**Current eligibility:** Testnet deployment and a completed deterministic contract lifecycle are
-public. Mainnet launch, the hosted AI-backed workflow, dedicated X account/post, and owner contact
-fields remain required before final submission. Do not describe job `2` as an AI code review.
+**Current eligibility:** Testnet deployment, a completed deterministic contract lifecycle, and the
+source-verified Mainnet launch are public. The hosted AI-backed workflow, dedicated X account/post,
+and owner contact fields remain required before final submission. Do not describe job `2` as an AI
+code review or the Mainnet deployment as user adoption.
 
 The live form currently contains eight fields: Project Name, Project Description, Project URL,
 Github, Email, Telegram, X handle, and X post URL. Google marks Github and X post URL optional in
@@ -55,7 +56,7 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 | Innovation                     | Evidence-bound AI verdicts settle an ERC-8183 escrow after a challenge window          | Implemented in contracts and app             |
 | Product completeness           | Create, fund, submit, evaluate, challenge, resolve, finalize, and refund flows         | Local full flow + public Testnet smoke proof |
 | User value                     | Replaces subjective acceptance and payment coordination with an auditable workflow     | Demonstrable with labeled example and proof  |
-| X Layer integration            | Chain-bound contracts, wallet flow, explorer links, and protected deployment pipeline  | Testnet source-verified; Mainnet pending     |
+| X Layer integration            | Chain-bound contracts, wallet flow, explorer links, and protected deployment pipeline  | Testnet and Mainnet source-verified          |
 | Growth potential               | Reusable settlement primitive for coding agents before expansion to other deliverables | Thesis documented; no fake usage             |
 | X Layer ecosystem contribution | Real work-linked transactions and evidence commitments, with no fee or wash volume     | Testnet lifecycle completed                  |
 
@@ -64,7 +65,7 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 - [x] X Layer Testnet contract source verification and deployment record
 - [x] Completed deterministic Testnet lifecycle and transactions linked
 - [ ] Hosted OpenAI-backed Testnet evaluation linked
-- [ ] Mainnet deployment/source verification after fresh explicit approval
+- [x] Mainnet deployment/source verification after fresh explicit approval
 - [ ] Mainnet web configuration and low-value launch validation
 - [x] Public judge-proof URL with immutable Testnet evidence
 - [ ] Live app URL backed by the production database/evaluator configuration
@@ -73,15 +74,18 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 - [ ] Owner Email, Telegram, X handle, and self-custodial prize wallet confirmed
 - [ ] Final form submitted before the official deadline
 
-## Mainnet preflight checkpoint
+## Mainnet deployment checkpoint
 
 - Target chain: X Layer Mainnet, chain ID `196` (confirmed by both official RPCs).
-- Candidate payment token: native USDC,
+- Payment token: native USDC,
   `0x74b7f16337b8972027f6196a17a631ac6de26d22` (official docs, non-empty runtime, 6 decimals).
 - Deployer: `0x66dd076f5cbb8c8dc4825c8eb7148df55bd565a6`.
-- Current deployer balances: `0 OKB`, `0 USDC`; deployment is blocked and no transaction was sent.
-- Conservative gas funding request: `0.001 OKB`; observed two-contract deployment cost was about
-  `0.00008763 OKB` at the current RPC gas price.
+- Source commit: `88dbf456b644b4326c1467db36da411ea2292bd3`.
+- AgenticCommerce: `0xef0b78c4dd4cd167fddad7edb48cf7f9e4c5fac1`.
+- ScopeSettleEvaluator: `0x76a0f64d59699be3330d6088a157a7941bcad3cc`.
+- Both contracts are source-verified on OKLink and reconciled through both official RPCs.
+- Total deployment cost: `0.000087625584381279 OKB` for `4,381,279` gas.
+- No Mainnet job or USDC transfer has been performed; the contracts remain an unaudited beta.
 
 The Hackathon Grant—not the AI-RWA Liquidity Grant or trading-volume Launch Grant—is the honest
 target for the current product. ScopeSettle must not generate artificial DEX volume or represent

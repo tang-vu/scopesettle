@@ -99,5 +99,6 @@ Sources: [OpenAI API quickstart](https://platform.openai.com/docs/quickstart),
 
 - Whether faucet USDG is a standard ERC-20 usable by the escrow and its exact Testnet address.
 - Final RPC health, fee estimates, deployer balance, and chain ID immediately before broadcasting.
-- Hosted AI-backed app URL, Mainnet deployment, dedicated X account/post, and demo video.
+- Hosted AI-backed app URL, dedicated X account/post, and demo video. The Mainnet contracts are
+  deployed and source-verified, but no Mainnet job or user activity is claimed.
 - The EIP’s draft text may change; compatibility must be re-diffed before public deployment.

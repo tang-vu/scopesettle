@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/pages.yml"
       - "deployments/xlayer-testnet-job-2-2026-08-12.json"
+      - "deployments/xlayer-mainnet-196-2026-08-13.json"
       - "docs/assets/product-preview.png"
       - "submission-site/**"
   workflow_dispatch:
@@ -35,6 +36,7 @@ jobs:
           cp submission-site/index.html submission-site/styles.css _site/
           cp docs/assets/product-preview.png _site/assets/
           cp deployments/xlayer-testnet-job-2-2026-08-12.json _site/evidence/
+          cp deployments/xlayer-mainnet-196-2026-08-13.json _site/evidence/
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site

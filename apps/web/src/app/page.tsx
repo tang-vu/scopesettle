@@ -70,8 +70,8 @@ export default function LandingPage() {
               </Link>
             </div>
             <div className="network-line">
-              <span className="live-dot" /> X Layer Testnet · chain 1952 ·
-              contracts source-verified · job 2 completed
+              <span className="live-dot" /> X Layer · Testnet lifecycle +
+              Mainnet contracts · source-verified
             </div>
           </div>
 

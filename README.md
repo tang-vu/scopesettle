@@ -6,10 +6,10 @@ ScopeSettle is an explainable AI evaluator and settlement layer for agent-to-age
 funds an ERC-8183 coding job on X Layer, a provider commits an exact public GitHub pull request,
 and ScopeSettle produces an evidence-linked verdict that can settle escrow after a challenge window.
 
-**Launch status:** the beta is implemented and tested, its X Layer Testnet contracts are
-source-verified, and deterministic job `2` completed onchain. The public
-[submission proof](https://tang-vu.github.io/scopesettle/) links the canonical receipts. Mainnet,
-hosted AI evaluation, and the demo video remain pending and are never represented by placeholders.
+**Launch status:** the beta is implemented and tested. Its X Layer Testnet lifecycle and X Layer
+Mainnet contracts are source-verified, and deterministic Testnet job `2` completed onchain. The
+public [submission proof](https://tang-vu.github.io/scopesettle/) links the canonical receipts.
+Hosted AI evaluation and the demo video remain pending and are never represented by placeholders.
 
 ![ScopeSettle landing page](docs/assets/product-preview.png)
 
@@ -127,10 +127,11 @@ local audit evidence, not claims about an as-yet-unpublished hosting environment
 ## Networks and deployments
 
 Official configuration is recorded in [verified research](docs/research.md). X Layer Testnet is
-chain `1952`; Mainnet is `196`; both use OKB gas. The source-verified Testnet mock stack and its
-transaction evidence are recorded in the live [deployment ledger](docs/deployments.md). Because no
-official faucet USDG address is published, the beta uses an explicitly valueless, chain-guarded
-`MockUSDG`; the production/Mainnet path cannot use that script.
+chain `1952`; Mainnet is `196`; both use OKB gas. The source-verified Testnet mock stack, completed
+Testnet lifecycle, and source-verified Mainnet pair are recorded in the live
+[deployment ledger](docs/deployments.md). Because no official faucet USDG address is published,
+the beta uses an explicitly valueless, chain-guarded `MockUSDG`; the Mainnet pair uses official
+native USDC and cannot use that mock script.
 
 ## Security model and limitations
 
@@ -153,8 +154,8 @@ and platform fees are intentionally out of scope. Read [SECURITY.md](SECURITY.md
 
 The source-verified contracts now have a completed valueless Testnet lifecycle with a dedicated EOA
 provider. It is explicitly a deterministic contract-wiring proof, not an AI evaluation. The
-remaining release gate is the public hosted OpenAI-backed workflow and judge demo. Mainnet follows
-only after explicit approval.
+Mainnet contracts are deployed and source-verified; no Mainnet job or user activity is claimed.
+The remaining release gate is the public hosted OpenAI-backed workflow and judge demo.
 Submission copy, demo script, and launch thread are in [SUBMISSION.md](SUBMISSION.md),
 [DEMO.md](DEMO.md), and [X_THREAD.md](X_THREAD.md).
 
