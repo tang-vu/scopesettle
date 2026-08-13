@@ -4,6 +4,8 @@ import {
   supportedChains,
 } from "@scopesettle/shared";
 import {
+  BaseError,
+  ContractFunctionRevertedError,
   createPublicClient,
   getAddress,
   http,
@@ -126,15 +128,26 @@ export async function verdictProposalExists(
   jobId: bigint,
 ): Promise<boolean> {
   const deployment = getDeployment(chainId);
-  const deploymentBlock = BigInt(
-    process.env.NEXT_PUBLIC_DEPLOYMENT_BLOCK ?? "0",
-  );
-  const events = await getScopeSettleClient(chainId).getContractEvents({
-    abi: scopeSettleEvaluatorAbi,
-    address: deployment.evaluator,
-    args: { jobId },
-    eventName: "VerdictProposed",
-    fromBlock: deploymentBlock,
-  });
-  return events.length > 0;
+  try {
+    await getScopeSettleClient(chainId).readContract({
+      abi: scopeSettleEvaluatorAbi,
+      address: deployment.evaluator,
+      args: [jobId],
+      functionName: "getProposal",
+    });
+    return true;
+  } catch (error) {
+    if (error instanceof BaseError) {
+      const reverted = error.walk(
+        (cause) => cause instanceof ContractFunctionRevertedError,
+      );
+      if (
+        reverted instanceof ContractFunctionRevertedError &&
+        reverted.data?.errorName === "ProposalMissing"
+      ) {
+        return false;
+      }
+    }
+    throw error;
+  }
 }

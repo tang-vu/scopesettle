@@ -27,6 +27,7 @@ export const agenticCommerceAbi = parseAbi([
 ]);
 
 export const scopeSettleEvaluatorAbi = parseAbi([
+  "error ProposalMissing()",
   "function verdictSigner() view returns (address)",
   "function reviewer() view returns (address)",
   "function proposeVerdict((uint256 jobId,bytes32 deliverableHash,bytes32 reportHash,uint16 score,uint16 confidence,uint8 outcome,uint256 nonce,uint64 deadline) verdict,bytes signature)",
