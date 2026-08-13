@@ -1,0 +1,15 @@
+.git
+.github
+.tools
+.vercel
+**/.next
+**/node_modules
+**/playwright-report
+**/test-results
+contracts/artifacts
+contracts/broadcast
+contracts/cache
+contracts/lib
+contracts/out
+docs/assets
+submission-site
