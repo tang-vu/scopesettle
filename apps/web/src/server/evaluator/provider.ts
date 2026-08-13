@@ -17,7 +17,7 @@ export const providerOutputSchema = z.object({
               startLine: z.number().int().positive().nullable(),
               endLine: z.number().int().positive().nullable(),
               excerpt: z.string().max(800).nullable(),
-              url: z.url().max(1_000).nullable(),
+              url: z.string().max(1_000).nullable(),
             }),
           )
           .max(20),
