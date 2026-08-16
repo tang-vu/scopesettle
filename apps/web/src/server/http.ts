@@ -32,6 +32,9 @@ export function apiError(error: unknown): NextResponse {
   if (error instanceof Error && error.name === "ConflictError") {
     return NextResponse.json({ error: error.message }, { status: 409 });
   }
+  if (error instanceof Error && error.name === "InvalidRequestError") {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
   if (error instanceof RateLimitError) {
     return NextResponse.json(
       { error: error.message },

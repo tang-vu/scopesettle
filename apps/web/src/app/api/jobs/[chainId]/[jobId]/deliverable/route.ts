@@ -11,9 +11,13 @@ import { z } from "zod";
 import { requireWalletSession, UnauthorizedError } from "@/server/auth";
 import { assertSuccessfulTransaction, readJob } from "@/server/chain";
 import { getDatabase } from "@/server/db";
-import { jobDocuments } from "@/server/db/schema";
+import { jobDocuments, webhookEvents } from "@/server/db/schema";
 import { GitHubClient, parseGitHubRepositoryUrl } from "@/server/github";
 import { apiError } from "@/server/http";
+import { webhookEventValues } from "@/server/webhook-outbox";
+import { scheduleWebhookProcessing } from "@/server/webhook-scheduler";
+
+export const maxDuration = 60;
 
 type RouteContext = { params: Promise<{ chainId: string; jobId: string }> };
 const bodySchema = z.object({
@@ -84,17 +88,37 @@ export async function POST(request: NextRequest, context: RouteContext) {
         "The pull request changed before its commitment was indexed.",
       );
     }
-    await database
-      .update(jobDocuments)
-      .set({
-        deliverable: body.deliverable,
-        deliverableHash,
-        submissionTransactionHash: body.transactionHash.toLowerCase(),
-        updatedAt: new Date(),
-      })
-      .where(
-        and(eq(jobDocuments.chainId, chainId), eq(jobDocuments.jobId, jobId)),
-      );
+    await database.transaction(async (transaction) => {
+      await transaction
+        .update(jobDocuments)
+        .set({
+          deliverable: body.deliverable,
+          deliverableHash,
+          submissionTransactionHash: body.transactionHash.toLowerCase(),
+          updatedAt: new Date(),
+        })
+        .where(
+          and(eq(jobDocuments.chainId, chainId), eq(jobDocuments.jobId, jobId)),
+        );
+      await transaction
+        .insert(webhookEvents)
+        .values(
+          webhookEventValues({
+            eventType: "deliverable.submitted",
+            chainId,
+            jobId,
+            deduplicationKey: body.transactionHash.toLowerCase(),
+            payload: {
+              chainId,
+              jobId: jobId.toString(),
+              deliverableHash,
+              transactionHash: body.transactionHash.toLowerCase(),
+            },
+          }),
+        )
+        .onConflictDoNothing();
+    });
+    scheduleWebhookProcessing();
     return NextResponse.json({ deliverableHash });
   } catch (error) {
     return apiError(error);

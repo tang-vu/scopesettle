@@ -13,7 +13,11 @@ import { requireWalletSession, UnauthorizedError } from "@/server/auth";
 import { readJob, verdictProposalExists } from "@/server/chain";
 import { getDatabase } from "@/server/db";
 import { serializeJobRecord } from "@/server/db/json-record";
-import { evaluationReports, jobDocuments } from "@/server/db/schema";
+import {
+  evaluationReports,
+  jobDocuments,
+  webhookEvents,
+} from "@/server/db/schema";
 import {
   acquireEvaluationLease,
   releaseEvaluationLease,
@@ -24,6 +28,10 @@ import { evaluatePullRequest } from "@/server/evaluator/pipeline";
 import { GitHubClient } from "@/server/github";
 import { apiError } from "@/server/http";
 import { signEvaluationVerdict } from "@/server/verdict";
+import { webhookEventValues } from "@/server/webhook-outbox";
+import { scheduleWebhookProcessing } from "@/server/webhook-scheduler";
+
+export const maxDuration = 60;
 
 type RouteContext = { params: Promise<{ chainId: string; jobId: string }> };
 
@@ -188,22 +196,44 @@ export async function POST(request: NextRequest, context: RouteContext) {
         reportHash: report.reportHash,
         signedVerdict,
       };
-      if (existing) {
-        await database
-          .update(evaluationReports)
-          .set(reportRecord)
-          .where(
-            and(
-              eq(evaluationReports.chainId, chainId),
-              eq(evaluationReports.jobId, jobId),
-            ),
-          );
-      } else {
-        await database
-          .insert(evaluationReports)
-          .values(reportRecord)
+      await database.transaction(async (transaction) => {
+        if (existing) {
+          await transaction
+            .update(evaluationReports)
+            .set(reportRecord)
+            .where(
+              and(
+                eq(evaluationReports.chainId, chainId),
+                eq(evaluationReports.jobId, jobId),
+              ),
+            );
+        } else {
+          await transaction
+            .insert(evaluationReports)
+            .values(reportRecord)
+            .onConflictDoNothing();
+        }
+        await transaction
+          .insert(webhookEvents)
+          .values(
+            webhookEventValues({
+              eventType: "evaluation.completed",
+              chainId,
+              jobId,
+              deduplicationKey: report.reportHash,
+              payload: {
+                chainId,
+                jobId: jobId.toString(),
+                reportHash: report.reportHash,
+                deliverableHash: document.deliverableHash,
+                verdict: report.verdict,
+                weightedScore: report.weightedScore,
+                confidence: report.confidence,
+              },
+            }),
+          )
           .onConflictDoNothing();
-      }
+      });
       const [saved] = await database
         .select()
         .from(evaluationReports)
@@ -216,6 +246,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
         .limit(1);
       if (!saved)
         throw new Error("The evaluation report could not be persisted.");
+      scheduleWebhookProcessing();
       return NextResponse.json(serializeJobRecord(saved), { status: 201 });
     } finally {
       await releaseEvaluationLease(lease).catch((error: unknown) => {

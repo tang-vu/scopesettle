@@ -5,6 +5,7 @@ import type {
 } from "@scopesettle/shared";
 import {
   bigint,
+  boolean,
   index,
   integer,
   jsonb,
@@ -17,6 +18,11 @@ import {
 
 export type OrganizationRole = "owner" | "member";
 export type ApiKeyScope = "jobs:read" | "reports:read" | "webhooks:manage";
+export type WebhookEventType =
+  | "job.created"
+  | "deliverable.submitted"
+  | "evaluation.completed"
+  | "endpoint.test";
 
 export const authNonces = pgTable(
   "auth_nonces",
@@ -219,5 +225,100 @@ export const auditEvents = pgTable(
       table.organizationId,
       table.createdAt,
     ),
+  ],
+);
+
+export const webhookEndpoints = pgTable(
+  "webhook_endpoints",
+  {
+    id: text("id").primaryKey(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    url: text("url").notNull(),
+    eventTypes: text("event_types")
+      .array()
+      .$type<WebhookEventType[]>()
+      .notNull(),
+    chainId: integer("chain_id").notNull(),
+    jobId: bigint("job_id", { mode: "bigint" }).notNull(),
+    secretCiphertext: text("secret_ciphertext").notNull(),
+    secretIv: text("secret_iv").notNull(),
+    secretTag: text("secret_tag").notNull(),
+    active: boolean("active").default(true).notNull(),
+    createdBy: text("created_by").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    index("webhook_endpoints_organization_idx").on(table.organizationId),
+    index("webhook_endpoints_job_idx").on(table.chainId, table.jobId),
+  ],
+);
+
+export const webhookEvents = pgTable(
+  "webhook_events",
+  {
+    id: text("id").primaryKey(),
+    eventType: text("event_type").$type<WebhookEventType>().notNull(),
+    chainId: integer("chain_id").notNull(),
+    jobId: bigint("job_id", { mode: "bigint" }).notNull(),
+    deduplicationKey: text("deduplication_key").notNull(),
+    payload: jsonb("payload").$type<Record<string, unknown>>().notNull(),
+    processedAt: timestamp("processed_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex("webhook_events_dedup_unique").on(
+      table.eventType,
+      table.chainId,
+      table.jobId,
+      table.deduplicationKey,
+    ),
+    index("webhook_events_pending_idx").on(table.processedAt, table.createdAt),
+  ],
+);
+
+export const webhookDeliveries = pgTable(
+  "webhook_deliveries",
+  {
+    id: text("id").primaryKey(),
+    endpointId: text("endpoint_id")
+      .notNull()
+      .references(() => webhookEndpoints.id, { onDelete: "cascade" }),
+    eventId: text("event_id")
+      .notNull()
+      .references(() => webhookEvents.id, { onDelete: "cascade" }),
+    status: text("status")
+      .$type<"pending" | "processing" | "retry" | "delivered" | "dead">()
+      .notNull(),
+    attemptCount: integer("attempt_count").default(0).notNull(),
+    nextAttemptAt: timestamp("next_attempt_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    leaseUntil: timestamp("lease_until", { withTimezone: true }),
+    responseStatus: integer("response_status"),
+    lastError: text("last_error"),
+    deliveredAt: timestamp("delivered_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex("webhook_deliveries_endpoint_event_unique").on(
+      table.endpointId,
+      table.eventId,
+    ),
+    index("webhook_deliveries_due_idx").on(table.status, table.nextAttemptAt),
   ],
 );

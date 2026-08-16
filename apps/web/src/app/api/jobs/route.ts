@@ -17,8 +17,16 @@ import {
   readJob,
 } from "@/server/chain";
 import { getDatabase } from "@/server/db";
-import { evaluationReports, jobDocuments } from "@/server/db/schema";
+import {
+  evaluationReports,
+  jobDocuments,
+  webhookEvents,
+} from "@/server/db/schema";
 import { apiError } from "@/server/http";
+import { webhookEventValues } from "@/server/webhook-outbox";
+import { scheduleWebhookProcessing } from "@/server/webhook-scheduler";
+
+export const maxDuration = 60;
 
 const bodySchema = z.object({
   chainId: z.number().int().positive(),
@@ -67,19 +75,42 @@ export async function POST(request: NextRequest) {
       { eventName: "JobCreated", jobId },
     );
     const database = getDatabase();
-    await database
-      .insert(jobDocuments)
-      .values({
-        chainId: body.chainId,
-        jobId,
-        client: session.address.toLowerCase(),
-        provider: body.specification.provider.toLowerCase(),
-        transactionHash: body.transactionHash.toLowerCase(),
-        specificationHash,
-        rubricHash,
-        specification: body.specification,
-      })
-      .onConflictDoNothing();
+    await database.transaction(async (transaction) => {
+      const inserted = await transaction
+        .insert(jobDocuments)
+        .values({
+          chainId: body.chainId,
+          jobId,
+          client: session.address.toLowerCase(),
+          provider: body.specification.provider.toLowerCase(),
+          transactionHash: body.transactionHash.toLowerCase(),
+          specificationHash,
+          rubricHash,
+          specification: body.specification,
+        })
+        .onConflictDoNothing()
+        .returning({ jobId: jobDocuments.jobId });
+      if (inserted.length === 1) {
+        await transaction
+          .insert(webhookEvents)
+          .values(
+            webhookEventValues({
+              eventType: "job.created",
+              chainId: body.chainId,
+              jobId,
+              deduplicationKey: body.transactionHash.toLowerCase(),
+              payload: {
+                chainId: body.chainId,
+                jobId: body.jobId,
+                specificationHash,
+                rubricHash,
+                title: body.specification.title,
+              },
+            }),
+          )
+          .onConflictDoNothing();
+      }
+    });
     const [saved] = await database
       .select({ specificationHash: jobDocuments.specificationHash })
       .from(jobDocuments)
@@ -97,6 +128,7 @@ export async function POST(request: NextRequest) {
       conflict.name = "ConflictError";
       throw conflict;
     }
+    scheduleWebhookProcessing();
     return NextResponse.json(
       { jobId: body.jobId, specificationHash, rubricHash },
       { status: 201 },
