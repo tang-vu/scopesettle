@@ -177,10 +177,10 @@ export default function LandingPage() {
             </article>
             <article className="feature-card">
               <Braces aria-hidden="true" size={24} />
-              <h3>Canonical report</h3>
+              <h3>Machine-verifiable proof</h3>
               <p>
-                Application code recalculates totals, validates the schema, then
-                hashes stable JSON.
+                A public certificate recomputes the schema, score, policy,
+                deliverable, and onchain verdict commitment.
               </p>
             </article>
             <article className="feature-card">

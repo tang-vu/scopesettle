@@ -122,19 +122,26 @@ export default async function JobDetailPage({ params }: PageProperties) {
         job={{
           budget: job.budget.toString(),
           client: job.client,
+          deliverableHash: job.deliverable,
           evaluator: job.evaluator,
           expiredAt: Number(job.expiredAt),
           provider: job.provider,
+          rubricHash: job.policy.rubricHash,
+          specificationHash: job.policy.specificationHash,
           status: job.status,
         }}
         jobId={jobId}
         proposal={
           proposal
             ? {
+                confidence: proposal.confidence,
+                deliverableHash: proposal.deliverableHash,
                 challenged: proposal.challenged,
                 challengeUntil: Number(proposal.challengeUntil),
                 finalized: proposal.finalized,
                 outcome: proposal.outcome,
+                reportHash: proposal.reportHash,
+                score: proposal.score,
               }
             : null
         }

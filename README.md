@@ -36,6 +36,8 @@ generic chatbot.
    report, and signs a replay-protected EIP-712 verdict.
 6. The evaluator contract records the proposal. Eligible unchallenged verdicts settle
    permissionlessly; challenged or ambiguous results require the trusted reviewer.
+7. A public verification certificate independently recomputes the report hash, score, rubric,
+   policy, deliverable, and onchain proposal for machines and human reviewers.
 
 ## Why AI and X Layer are essential
 
@@ -71,9 +73,13 @@ flowchart LR
 - PostgreSQL/Drizzle: expiring single-use nonces, immutable job documents, pinned deliverables, and
   reports, plus atomic per-job evaluation leases and per-wallet hourly AI quotas. The database
   cannot fabricate settlement; contract reads remain authoritative.
+- Verification engine: pure shared-package checks plus a read-only certificate API at
+  `/api/jobs/{chainId}/{jobId}/verification`; a certificate is reproducible evidence, not a new
+  trusted authority.
 
 See [architecture](docs/architecture.md), [methodology](docs/evaluation-methodology.md), and
-[threat model](docs/threat-model.md).
+[threat model](docs/threat-model.md). The certificate format and verification boundaries are in
+[verification protocol](docs/verification.md).
 
 ## Repository
 

@@ -100,6 +100,8 @@ Acceptance: submission assets match reality; human-only checklist is minimal and
       exact pass/fail/manual-review precedence on every completed report.
 - [x] Reconcile deployed bytecode and immutable bindings from RPC, verify sources, and preserve
       normalized deployment records plus raw Foundry receipts as protected workflow artifacts.
+- [x] Add a deterministic verification engine, downloadable machine-readable certificates, and a
+      live-job integrity UI covering schema, hash, score, rubric, policy, deliverable, and proposal.
 
 ## Architecture decisions
 

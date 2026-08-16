@@ -2,7 +2,9 @@ import {
   explorerAddressUrl,
   explorerTransactionUrl,
   jobStatusNames,
+  verifyEvaluationReport,
   type EvaluationReport,
+  type JobSpecification,
 } from "@scopesettle/shared";
 import {
   CircleCheck,
@@ -21,12 +23,16 @@ import { DecisionProof } from "./decision-proof";
 import { JobActions } from "./job-actions";
 import { Providers } from "./providers";
 import { Status } from "./status";
+import { VerificationCertificate } from "./verification-certificate";
 import { WalletButton } from "./wallet-button";
 
 type Properties = {
   readonly chainId: number;
   readonly jobId: string;
   readonly job: {
+    deliverableHash: EvaluationReport["reportHash"];
+    rubricHash: EvaluationReport["reportHash"];
+    specificationHash: EvaluationReport["reportHash"];
     client: `0x${string}`;
     provider: `0x${string}`;
     evaluator: `0x${string}`;
@@ -34,20 +40,7 @@ type Properties = {
     expiredAt: number;
     status: number;
   };
-  readonly specification: {
-    title: string;
-    scope: string;
-    repositoryUrl: string;
-    minimumPassingScore: number;
-    minimumConfidence: number;
-    challengeWindowSeconds: number;
-    criteria: Array<{
-      id: string;
-      title: string;
-      description: string;
-      weight: number;
-    }>;
-  };
+  readonly specification: JobSpecification;
   readonly transactionHash: string;
   readonly submissionTransactionHash: string | null;
   readonly deliverable: {
@@ -60,10 +53,14 @@ type Properties = {
   readonly report: EvaluationReport | null;
   readonly signedVerdict: SignedVerdictRecord | null;
   readonly proposal: {
+    confidence: number;
+    deliverableHash: EvaluationReport["reportHash"];
     challengeUntil: number;
     challenged: boolean;
     finalized: boolean;
     outcome: number;
+    reportHash: EvaluationReport["reportHash"];
+    score: number;
   } | null;
   readonly token: { symbol: string; decimals: number };
   readonly reviewer: `0x${string}`;
@@ -88,6 +85,18 @@ export function LiveJobDetail(properties: Properties) {
       ? "red"
       : "amber";
   const report = properties.report;
+  const verification = report
+    ? verifyEvaluationReport(report, {
+        specification: properties.specification,
+        expectedChainId: properties.chainId,
+        expectedJobId: properties.jobId,
+        expectedContractAddress: properties.job.evaluator,
+        expectedDeliverableHash: properties.job.deliverableHash,
+        expectedRubricHash: properties.job.rubricHash,
+        expectedSpecificationHash: properties.job.specificationHash,
+        proposal: properties.proposal,
+      })
+    : null;
   const creationUrl = explorerTransactionUrl(
     properties.chainId,
     properties.transactionHash,
@@ -173,6 +182,13 @@ export function LiveJobDetail(properties: Properties) {
           </section>
           {report ? (
             <>
+              {verification ? (
+                <VerificationCertificate
+                  chainId={properties.chainId}
+                  jobId={properties.jobId}
+                  verification={verification}
+                />
+              ) : null}
               <DecisionProof
                 minimumConfidence={properties.specification.minimumConfidence}
                 minimumPassingScore={

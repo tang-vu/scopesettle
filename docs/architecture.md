@@ -13,6 +13,9 @@ flowchart LR
   AI --> R[(Canonical report store)]
   R --> S[Trusted evaluator signer]
   S -->|EIP-712 verdict| EV[ScopeSettleEvaluator]
+  R --> V[Deterministic verification engine]
+  X --> V
+  V --> CERT[(Machine-readable certificate)]
   EV -->|propose / finalize| AC
   EV -->|report hash, score, confidence| X[X Layer events]
   AC -->|release or refund ERC-20| C
@@ -47,6 +50,12 @@ a real Testnet job exists.
 
 Database migrations run in filename order under a PostgreSQL advisory transaction lock. Applied
 SHA-256 checksums are persisted, and editing an already-applied migration fails closed.
+
+The verification engine is a pure shared-package function. Given a report and public context, it
+validates the schema, removes the embedded report hash, re-hashes canonical JSON, recalculates the
+weighted score and policy verdict, binds the funded rubric and pinned deliverable, and compares the
+result with the evaluator proposal. The web API gathers current RPC and database evidence but does
+not decide whether a check passes; consumers can reproduce the same checks independently.
 
 ## Canonical commitments
 

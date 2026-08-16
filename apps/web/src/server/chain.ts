@@ -127,15 +127,18 @@ export async function verdictProposalExists(
   chainId: number,
   jobId: bigint,
 ): Promise<boolean> {
+  return (await readVerdictProposal(chainId, jobId)) !== null;
+}
+
+export async function readVerdictProposal(chainId: number, jobId: bigint) {
   const deployment = getDeployment(chainId);
   try {
-    await getScopeSettleClient(chainId).readContract({
+    return await getScopeSettleClient(chainId).readContract({
       abi: scopeSettleEvaluatorAbi,
       address: deployment.evaluator,
       args: [jobId],
       functionName: "getProposal",
     });
-    return true;
   } catch (error) {
     if (error instanceof BaseError) {
       const reverted = error.walk(
@@ -145,7 +148,7 @@ export async function verdictProposalExists(
         reverted instanceof ContractFunctionRevertedError &&
         reverted.data?.errorName === "ProposalMissing"
       ) {
-        return false;
+        return null;
       }
     }
     throw error;
