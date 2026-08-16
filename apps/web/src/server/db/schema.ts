@@ -15,6 +15,9 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 
+export type OrganizationRole = "owner" | "member";
+export type ApiKeyScope = "jobs:read" | "reports:read" | "webhooks:manage";
+
 export const authNonces = pgTable(
   "auth_nonces",
   {
@@ -136,5 +139,85 @@ export const evaluationRateLimits = pgTable(
     primaryKey({
       columns: [table.address, table.chainId, table.windowStartedAt],
     }),
+  ],
+);
+
+export const organizations = pgTable(
+  "organizations",
+  {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [index("organizations_created_at_idx").on(table.createdAt)],
+);
+
+export const organizationMembers = pgTable(
+  "organization_members",
+  {
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    address: text("address").notNull(),
+    role: text("role").$type<OrganizationRole>().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.organizationId, table.address] }),
+    index("organization_members_address_idx").on(table.address),
+  ],
+);
+
+export const apiKeys = pgTable(
+  "api_keys",
+  {
+    id: text("id").primaryKey(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    prefix: text("prefix").notNull(),
+    secretHash: text("secret_hash").notNull(),
+    scopes: text("scopes").array().$type<ApiKeyScope[]>().notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }),
+    lastUsedAt: timestamp("last_used_at", { withTimezone: true }),
+    revokedAt: timestamp("revoked_at", { withTimezone: true }),
+    createdBy: text("created_by").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex("api_keys_prefix_unique").on(table.prefix),
+    index("api_keys_organization_idx").on(table.organizationId),
+  ],
+);
+
+export const auditEvents = pgTable(
+  "audit_events",
+  {
+    id: text("id").primaryKey(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    actorType: text("actor_type").$type<"wallet" | "api_key">().notNull(),
+    actorId: text("actor_id").notNull(),
+    action: text("action").notNull(),
+    targetType: text("target_type").notNull(),
+    targetId: text("target_id"),
+    metadata: jsonb("metadata").$type<Record<string, unknown>>().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    index("audit_events_organization_created_idx").on(
+      table.organizationId,
+      table.createdAt,
+    ),
   ],
 );
