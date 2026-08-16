@@ -9,6 +9,8 @@ on:
       - "deployments/xlayer-testnet-job-3-ai-2026-08-13.json"
       - "deployments/xlayer-mainnet-196-2026-08-13.json"
       - "docs/assets/product-preview.png"
+      - "docs/assets/scopesettle-demo.mp4"
+      - "docs/assets/subtitles.en.vtt"
       - "submission-site/**"
   workflow_dispatch:
 
@@ -36,6 +38,8 @@ jobs:
           mkdir -p _site/assets _site/evidence
           cp submission-site/index.html submission-site/styles.css _site/
           cp docs/assets/product-preview.png _site/assets/
+          cp docs/assets/scopesettle-demo.mp4 _site/assets/
+          cp docs/assets/subtitles.en.vtt _site/assets/
           cp deployments/xlayer-testnet-job-2-2026-08-12.json _site/evidence/
           cp deployments/xlayer-testnet-job-3-ai-2026-08-13.json _site/evidence/
           cp deployments/xlayer-mainnet-196-2026-08-13.json _site/evidence/

@@ -7,7 +7,8 @@ submission post mentioning `@XLayerOfficial`.
 
 **Current eligibility:** Testnet deployment, a completed deterministic lifecycle, hosted AI-backed
 job `3`, the production web app, and the source-verified Mainnet launch are public. The dedicated X
-account/post, demo video, and owner contact fields remain required before final submission. Do not
+account/post and owner contact fields remain required before final submission. The public demo video
+is complete. Do not
 describe job `2` as an AI code review or the Mainnet deployment as user adoption.
 
 The live form currently contains eight fields: Project Name, Project Description, Project URL,
@@ -69,7 +70,7 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 - [ ] Mainnet web configuration and low-value launch validation
 - [x] Public judge-proof URL with immutable Testnet evidence
 - [x] Live app URL backed by the production database/evaluator configuration
-- [ ] 90-second demo video using only real public links
+- [x] 90-second demo video using only real public links
 - [ ] Dedicated X account and post mentioning `@XLayerOfficial`
 - [ ] Owner Email, Telegram, X handle, and self-custodial prize wallet confirmed
 - [ ] Final form submitted before the official deadline

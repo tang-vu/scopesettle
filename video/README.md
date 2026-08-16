@@ -6,7 +6,8 @@ This folder contains the reproducible 90-second submission video package.
 - `subtitles.en.srt`: accessible subtitle sidecar.
 - `overlay.ass`: burned-in scene labels and captions.
 - `assets/`: public product, report, explorer, Mainnet, and repository captures.
-- `output/`: rendered previews and final exports; generated media is intentionally ignored.
+- `output/`: local previews and QA artifacts; generated intermediates are intentionally ignored.
+- `../docs/assets/scopesettle-demo.mp4`: checked-in final submission export.
 
 Generate narration only with a Xiaomi MiMo **Pay-As-You-Go API key**:
 

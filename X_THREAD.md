@@ -19,7 +19,7 @@ trustless oracle, and the beta contracts are unaudited.
 5/ Try the public hosted AI job: https://scopesettle.vercel.app/jobs/1952/3
 App: https://scopesettle.vercel.app
 Code: https://github.com/tang-vu/scopesettle
-Demo: `[DEMO_VIDEO_URL]`
+Demo: https://tang-vu.github.io/scopesettle/assets/scopesettle-demo.mp4
 
 Replace placeholders only with real public artifacts; attach product/report/explorer visuals and do
 not claim audit, usage, or Mainnet status without evidence.

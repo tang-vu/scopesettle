@@ -317,6 +317,14 @@ code {
   border: 1px solid var(--line);
   box-shadow: 18px 18px 0 #121812;
 }
+.demo-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  background: #050706;
+  box-shadow: 18px 18px 0 #121812;
+}
 .visual ul {
   padding-left: 1.1rem;
   color: var(--muted);
