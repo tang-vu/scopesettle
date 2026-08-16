@@ -47,6 +47,8 @@ export async function createJobVerification(chainId: number, jobId: bigint) {
       expectedChainId: chainId,
       expectedJobId: jobId.toString(),
       expectedContractAddress: chain.deployment.commerce,
+      expectedEvaluatorAddress: chain.job.evaluator,
+      proposalContractAddress: chain.deployment.evaluator,
       expectedDeliverableHash: chain.job.deliverable,
       expectedRubricHash: chain.job.policy.rubricHash,
       expectedSpecificationHash: chain.job.policy.specificationHash,

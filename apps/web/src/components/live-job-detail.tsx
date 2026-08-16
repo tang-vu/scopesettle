@@ -31,6 +31,7 @@ type Properties = {
   readonly jobId: string;
   readonly job: {
     commerceContract: `0x${string}`;
+    configuredEvaluator: `0x${string}`;
     deliverableHash: EvaluationReport["reportHash"];
     rubricHash: EvaluationReport["reportHash"];
     specificationHash: EvaluationReport["reportHash"];
@@ -92,6 +93,8 @@ export function LiveJobDetail(properties: Properties) {
         expectedChainId: properties.chainId,
         expectedJobId: properties.jobId,
         expectedContractAddress: properties.job.commerceContract,
+        expectedEvaluatorAddress: properties.job.evaluator,
+        proposalContractAddress: properties.job.configuredEvaluator,
         expectedDeliverableHash: properties.job.deliverableHash,
         expectedRubricHash: properties.job.rubricHash,
         expectedSpecificationHash: properties.job.specificationHash,

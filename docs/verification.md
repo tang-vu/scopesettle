@@ -35,10 +35,12 @@ Aggregate status has exact semantics:
    and confidence thresholds.
 7. **Chain, contract, and job binding** rejects evidence for another chain, commerce contract, or
    job.
-8. **Pinned deliverable binding** recomputes the exact repository, PR, base SHA, and head SHA
+8. **Evaluator contract binding** confirms the proposal was read from the evaluator configured by
+   the onchain job.
+9. **Pinned deliverable binding** recomputes the exact repository, PR, base SHA, and head SHA
    commitment and compares it with the commerce contract.
-9. **Onchain verdict commitment** compares report hash, deliverable hash, basis-point score,
-   confidence, and outcome with the evaluator proposal.
+10. **Onchain verdict commitment** compares report hash, deliverable hash, basis-point score,
+    confidence, and outcome with the evaluator proposal.
 
 Each check returns `pass`, `fail`, or `unavailable` plus an explicit detail. A failed check
 always dominates the aggregate status.

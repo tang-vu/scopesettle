@@ -76,10 +76,13 @@ flowchart LR
 - Verification engine: pure shared-package checks plus a read-only certificate API at
   `/api/jobs/{chainId}/{jobId}/verification`; a certificate is reproducible evidence, not a new
   trusted authority.
+- Independent SDK/CLI: reads X Layer contracts directly and reproduces the ten certificate checks
+  without calling the ScopeSettle server.
 
 See [architecture](docs/architecture.md), [methodology](docs/evaluation-methodology.md), and
 [threat model](docs/threat-model.md). The certificate format and verification boundaries are in
-[verification protocol](docs/verification.md).
+[verification protocol](docs/verification.md); integration and automation examples are in the
+[verifier SDK guide](docs/sdk.md).
 
 ## Repository
 
@@ -87,6 +90,7 @@ See [architecture](docs/architecture.md), [methodology](docs/evaluation-methodol
 apps/web             Next.js UI, APIs, wallet flows, evaluator, browser tests
 contracts            Solidity contracts, deploy scripts, unit/fuzz/invariant tests
 packages/shared      Zod schemas, canonical hashing, chain definitions, ABIs
+packages/sdk         independent RPC verifier, TypeScript API, and CLI
 docs                  research, architecture, security, methodology, deployment
 .github/workflows    PR/default-branch CI and protected manual deployment
 ```

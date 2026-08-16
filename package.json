@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "pnpm --filter @scopesettle/web dev",
-    "build": "pnpm --filter @scopesettle/shared build && pnpm --filter @scopesettle/web build",
+    "build": "pnpm --filter @scopesettle/shared build && pnpm --filter @scopesettle/sdk build && pnpm --filter @scopesettle/web build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "pnpm -r lint",

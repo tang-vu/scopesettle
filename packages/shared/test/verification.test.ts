@@ -84,6 +84,8 @@ describe("report verification certificate", () => {
       expectedChainId: 1952,
       expectedJobId: "7",
       expectedContractAddress: content.contractAddress,
+      expectedEvaluatorAddress: "0x4444444444444444444444444444444444444444",
+      proposalContractAddress: "0x4444444444444444444444444444444444444444",
       expectedDeliverableHash: deliverableHash,
       expectedRubricHash: hashCanonicalJson(specification.criteria),
       expectedSpecificationHash: hashCanonicalJson(specification),
@@ -97,7 +99,7 @@ describe("report verification certificate", () => {
     });
 
     expect(verification.status).toBe("verified");
-    expect(verification.checks).toHaveLength(9);
+    expect(verification.checks).toHaveLength(10);
     expect(verification.checks.every((item) => item.status === "pass")).toBe(
       true,
     );

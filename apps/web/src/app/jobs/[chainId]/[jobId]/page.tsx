@@ -123,6 +123,7 @@ export default async function JobDetailPage({ params }: PageProperties) {
           budget: job.budget.toString(),
           client: job.client,
           commerceContract: deployment.commerce,
+          configuredEvaluator: deployment.evaluator,
           deliverableHash: job.deliverable,
           evaluator: job.evaluator,
           expiredAt: Number(job.expiredAt),

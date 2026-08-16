@@ -36,6 +36,8 @@ type VerificationContext = {
   expectedChainId?: number;
   expectedJobId?: string;
   expectedContractAddress?: string;
+  expectedEvaluatorAddress?: string;
+  proposalContractAddress?: string;
   expectedDeliverableHash?: string;
   expectedSpecificationHash?: string;
   expectedRubricHash?: string;
@@ -224,6 +226,32 @@ export function verifyEvaluationReport(
           "job_binding",
           "Chain, contract, and job binding",
           "No expected onchain identity was supplied.",
+        ),
+  );
+
+  const hasEvaluatorContext =
+    context.expectedEvaluatorAddress !== undefined &&
+    context.proposalContractAddress !== undefined;
+  const evaluatorMatches =
+    context.expectedEvaluatorAddress !== undefined &&
+    context.proposalContractAddress !== undefined &&
+    sameAddress(
+      context.expectedEvaluatorAddress,
+      context.proposalContractAddress,
+    );
+  checks.push(
+    hasEvaluatorContext
+      ? check(
+          "evaluator_binding",
+          "Evaluator contract binding",
+          evaluatorMatches,
+          "The verdict proposal was read from the evaluator configured by the onchain job.",
+          "The verdict proposal contract does not match the evaluator configured by the onchain job.",
+        )
+      : unavailable(
+          "evaluator_binding",
+          "Evaluator contract binding",
+          "The job evaluator and proposal contract were not both supplied.",
         ),
   );
 
