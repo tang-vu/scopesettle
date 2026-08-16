@@ -78,11 +78,14 @@ flowchart LR
   trusted authority.
 - Independent SDK/CLI: reads X Layer contracts directly and reproduces the ten certificate checks
   without calling the ScopeSettle server.
+- Developer platform: wallet-owned organizations, hash-only scoped API keys, an append-only audit
+  trail, and job-filtered HMAC webhooks backed by a durable PostgreSQL outbox.
 
 See [architecture](docs/architecture.md), [methodology](docs/evaluation-methodology.md), and
 [threat model](docs/threat-model.md). The certificate format and verification boundaries are in
 [verification protocol](docs/verification.md); integration and automation examples are in the
-[verifier SDK guide](docs/sdk.md).
+[verifier SDK guide](docs/sdk.md), and operational APIs are in the
+[developer platform guide](docs/developer-platform.md).
 
 ## Repository
 

@@ -11,6 +11,9 @@ export function SiteHeader() {
           <Link href="/app" prefetch={false}>
             Jobs
           </Link>
+          <Link href="/developers" prefetch={false}>
+            Developers
+          </Link>
           <Link href="/#methodology">Methodology</Link>
           <Link className="desktop-only" href="/jobs/new" prefetch={false}>
             Create job

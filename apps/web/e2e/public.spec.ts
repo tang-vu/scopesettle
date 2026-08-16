@@ -92,4 +92,15 @@ test("mobile pages do not overflow horizontally", async ({ page }) => {
     scroll: document.documentElement.scrollWidth,
   }));
   expect(jobDimensions.scroll).toBeLessThanOrEqual(jobDimensions.client + 1);
+  await page.goto("/developers");
+  await expect(
+    page.getByRole("heading", { name: "Developer console" }),
+  ).toBeVisible();
+  const developerDimensions = await page.evaluate(() => ({
+    client: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+  }));
+  expect(developerDimensions.scroll).toBeLessThanOrEqual(
+    developerDimensions.client + 1,
+  );
 });

@@ -14,6 +14,9 @@ import {
 } from "@/server/db/schema";
 import { assertOrganizationOwner } from "@/server/developer-platform";
 import { apiError } from "@/server/http";
+import { scheduleWebhookProcessing } from "@/server/webhook-scheduler";
+
+export const maxDuration = 60;
 
 type RouteContext = { params: Promise<{ deliveryId: string }> };
 
@@ -69,6 +72,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
         metadata: {},
       });
     });
+    scheduleWebhookProcessing();
     return NextResponse.json({ deliveryId, status: "retry" }, { status: 202 });
   } catch (error) {
     return apiError(error);
