@@ -1,0 +1,42 @@
+[
+  {
+    "id": "01",
+    "startMs": 700,
+    "text": "AI agents can write code and move money. But a payment rail cannot tell whether an offchain pull request truly met its scope."
+  },
+  {
+    "id": "02",
+    "startMs": 11000,
+    "text": "ScopeSettle locks the rubric, weights, provider, budget, expiry, and confidence threshold before funding an ERC-8183 escrow on X Layer."
+  },
+  {
+    "id": "03",
+    "startMs": 22000,
+    "text": "For this public Testnet job, the deliverable is pinned to one GitHub pull request and one immutable head commit. No moving branch can change the evidence."
+  },
+  {
+    "id": "04",
+    "startMs": 34000,
+    "text": "Deterministic checks verify repository identity, required files, diff bounds, and CI. The hosted evaluator then scores only cited evidence against the immutable rubric."
+  },
+  {
+    "id": "05",
+    "startMs": 47000,
+    "text": "The manifest criterion scored one hundred, but the required lockfile criterion scored zero because pinned CI was failing. Weighted score: fifty."
+  },
+  {
+    "id": "06",
+    "startMs": 60000,
+    "text": "That uncertainty did not trigger an automatic payout. It routed to the named trusted reviewer, who rejected the verdict and refunded the full valueless Testnet escrow."
+  },
+  {
+    "id": "07",
+    "startMs": 72000,
+    "text": "The commerce and evaluator contracts are also source-verified on X Layer Mainnet with native USDC. No Mainnet job or user adoption is claimed."
+  },
+  {
+    "id": "08",
+    "startMs": 82000,
+    "text": "Every report, hash, receipt, limitation, and test is public. ScopeSettle: verified work, automatic settlement."
+  }
+]

@@ -1,0 +1,30 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Arial,39,&H00F5F4EE,&H000000FF,&HCC080B09,&HCC080B09,0,0,0,0,100,100,0,0,3,1,0,2,170,170,60,1
+Style: Kicker,Arial,25,&H0000FF9F,&H000000FF,&H00080B09,&H66080B09,1,0,0,0,100,100,2,0,3,1,0,7,90,90,75,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.20,0:00:10.80,Kicker,,0,0,0,,THE PROBLEM · AGENT COMMERCE
+Dialogue: 1,0:00:00.70,0:00:10.60,Caption,,0,0,0,,AI agents can write code and move money.\NBut payment rails cannot judge offchain work.
+Dialogue: 1,0:00:11.00,0:00:21.60,Kicker,,0,0,0,,01 · LOCK THE AGREEMENT
+Dialogue: 1,0:00:11.00,0:00:21.60,Caption,,0,0,0,,Rubric, weights, provider, budget, expiry, and thresholds\Nare immutable before ERC-8183 escrow funding.
+Dialogue: 1,0:00:22.00,0:00:33.60,Kicker,,0,0,0,,02 · PIN ONE DELIVERABLE
+Dialogue: 1,0:00:22.00,0:00:33.60,Caption,,0,0,0,,One public pull request. One immutable head commit.\NNo moving branch can change the evidence.
+Dialogue: 1,0:00:34.00,0:00:46.60,Kicker,,0,0,0,,03 · BOUNDED EVALUATION
+Dialogue: 1,0:00:34.00,0:00:46.60,Caption,,0,0,0,,Deterministic gates verify identity, files, bounds, and CI.\NAI scores only evidence that survives validation.
+Dialogue: 1,0:00:47.00,0:00:59.60,Kicker,,0,0,0,,04 · EXPLAIN THE DECISION
+Dialogue: 1,0:00:47.00,0:00:59.60,Caption,,0,0,0,,Manifest consistency: 100. Lockfile evidence: 0.\NWeighted score: 50 · confidence: 50.
+Dialogue: 1,0:01:00.00,0:01:11.60,Kicker,,0,0,0,,05 · FAIL CLOSED
+Dialogue: 1,0:01:00.00,0:01:11.60,Caption,,0,0,0,,A trusted reviewer rejected the ambiguous verdict.\NThe full valueless Testnet escrow was refunded.
+Dialogue: 1,0:01:12.00,0:01:21.60,Kicker,,0,0,0,,06 · LAUNCHED ON X LAYER
+Dialogue: 1,0:01:12.00,0:01:21.60,Caption,,0,0,0,,Testnet workflow proven. Mainnet contracts source-verified.\NNo Mainnet job or user adoption is claimed.
+Dialogue: 1,0:01:22.00,0:01:29.70,Kicker,,0,0,0,,SCOPESETTLE · BUILD X AI SEASON
+Dialogue: 1,0:01:22.00,0:01:29.70,Caption,,0,0,0,,Every report, hash, receipt, limitation, and test is public.\NVerified work. Automatic settlement.

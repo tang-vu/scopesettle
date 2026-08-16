@@ -1,0 +1,39 @@
+1
+00:00:00,700 --> 00:00:10,600
+AI agents can write code and move money. But a payment rail cannot tell whether
+an offchain pull request truly met its scope.
+
+2
+00:00:11,000 --> 00:00:21,600
+ScopeSettle locks the rubric, weights, provider, budget, expiry, and confidence threshold
+before funding an ERC-8183 escrow on X Layer.
+
+3
+00:00:22,000 --> 00:00:33,600
+The Testnet deliverable is pinned to one GitHub pull request and one immutable head commit.
+No moving branch can change the evidence.
+
+4
+00:00:34,000 --> 00:00:46,600
+Deterministic checks verify identity, required files, diff bounds, and CI.
+The hosted evaluator scores only cited evidence against the immutable rubric.
+
+5
+00:00:47,000 --> 00:00:59,600
+The manifest criterion scored 100, but the required lockfile criterion scored zero
+because pinned CI was failing. Weighted score: 50.
+
+6
+00:01:00,000 --> 00:01:11,600
+Uncertainty did not trigger an automatic payout. A named trusted reviewer rejected
+the verdict and refunded the full valueless Testnet escrow.
+
+7
+00:01:12,000 --> 00:01:21,600
+The contracts are also source-verified on X Layer Mainnet with native USDC.
+No Mainnet job or user adoption is claimed.
+
+8
+00:01:22,000 --> 00:01:29,500
+Every report, hash, receipt, limitation, and test is public.
+ScopeSettle: verified work, automatic settlement.
