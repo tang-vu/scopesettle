@@ -39,13 +39,14 @@ export async function createJobVerification(chainId: number, jobId: bigint) {
     subject: {
       chainId,
       jobId: jobId.toString(),
+      commerceContract: chain.deployment.commerce,
       evaluatorContract: chain.job.evaluator,
     },
     verification: verifyEvaluationReport(saved.report, {
       specification: document.specification,
       expectedChainId: chainId,
       expectedJobId: jobId.toString(),
-      expectedContractAddress: chain.job.evaluator,
+      expectedContractAddress: chain.deployment.commerce,
       expectedDeliverableHash: chain.job.deliverable,
       expectedRubricHash: chain.job.policy.rubricHash,
       expectedSpecificationHash: chain.job.policy.specificationHash,

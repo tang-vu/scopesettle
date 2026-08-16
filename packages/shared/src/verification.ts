@@ -229,7 +229,11 @@ export function verifyEvaluationReport(
 
   const deliverableHash = hashCanonicalJson({
     schemaVersion: "1.0.0",
-    ...report.repository,
+    owner: report.repository.owner,
+    repository: report.repository.name,
+    pullNumber: report.repository.pullNumber,
+    baseSha: report.repository.baseSha,
+    headSha: report.repository.headSha,
   });
   checks.push(
     context.expectedDeliverableHash

@@ -122,6 +122,7 @@ export default async function JobDetailPage({ params }: PageProperties) {
         job={{
           budget: job.budget.toString(),
           client: job.client,
+          commerceContract: deployment.commerce,
           deliverableHash: job.deliverable,
           evaluator: job.evaluator,
           expiredAt: Number(job.expiredAt),

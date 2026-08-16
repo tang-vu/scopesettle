@@ -70,7 +70,11 @@ const report: EvaluationReport = {
 };
 const deliverableHash = hashCanonicalJson({
   schemaVersion: "1.0.0",
-  ...content.repository,
+  owner: content.repository.owner,
+  repository: content.repository.name,
+  pullNumber: content.repository.pullNumber,
+  baseSha: content.repository.baseSha,
+  headSha: content.repository.headSha,
 });
 
 describe("report verification certificate", () => {

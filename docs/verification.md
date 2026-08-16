@@ -33,7 +33,8 @@ Aggregate status has exact semantics:
    specification.
 6. **Locked settlement policy** reruns fail/manual-review/pass precedence using the committed score
    and confidence thresholds.
-7. **Chain, contract, and job binding** rejects evidence for another domain or job.
+7. **Chain, contract, and job binding** rejects evidence for another chain, commerce contract, or
+   job.
 8. **Pinned deliverable binding** recomputes the exact repository, PR, base SHA, and head SHA
    commitment and compares it with the commerce contract.
 9. **Onchain verdict commitment** compares report hash, deliverable hash, basis-point score,
