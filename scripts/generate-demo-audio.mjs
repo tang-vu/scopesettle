@@ -1,6 +1,8 @@
 import { Buffer } from "node:buffer";
+import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
+import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 const requireFromWeb = createRequire(
@@ -12,6 +14,10 @@ const repositoryRoot = fileURLToPath(new URL("../", import.meta.url));
 const audioDirectory = fileURLToPath(
   new URL("../video/audio/", import.meta.url),
 );
+const localEnvironment = fileURLToPath(
+  new URL("../.env.video.local", import.meta.url),
+);
+if (existsSync(localEnvironment)) process.loadEnvFile(localEnvironment);
 const segments = JSON.parse(
   await readFile(
     new URL("../video/voice-segments.json", import.meta.url),

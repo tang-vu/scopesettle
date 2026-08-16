@@ -11,7 +11,8 @@ This folder contains the reproducible 90-second submission video package.
 Generate narration only with a Xiaomi MiMo **Pay-As-You-Go API key**:
 
 ```powershell
-$env:MIMO_API_KEY = "your-pay-as-you-go-key"
+Copy-Item .env.video.example .env.video.local
+# Put the Pay-As-You-Go key in .env.video.local, which Git ignores.
 pnpm video:voice
 pnpm video:render
 ```
