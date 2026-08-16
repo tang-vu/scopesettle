@@ -217,7 +217,7 @@ export function verifyEvaluationReport(
           "job_binding",
           "Chain, contract, and job binding",
           identityExpectations.every(Boolean),
-          "The report names the expected chain, evaluator contract, and job.",
+          "The report names the expected chain, commerce contract, and job.",
           "The report identity does not match the requested onchain job.",
         )
       : unavailable(
