@@ -7,7 +7,7 @@ short-lived SIWE session as job operations. No email identity or custodial walle
 ## API keys
 
 An owner can issue, rotate, and revoke a key. The plaintext token is returned exactly once. The
-database stores only its public prefix and a server-peppered HMAC-SHA256 digest; a lost token must be
+database stores only its public prefix and a server-peppered scrypt digest; a lost token must be
 rotated, not recovered.
 
 Available scopes are:

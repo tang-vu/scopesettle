@@ -1,4 +1,4 @@
-import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
+import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 
 const KEY_PATTERN = /^ss_live_([a-f0-9]{16})_([A-Za-z0-9_-]{43})$/u;
 
@@ -11,7 +11,7 @@ function apiKeyPepper(): string {
 }
 
 export function digestApiKey(value: string): string {
-  return createHmac("sha256", apiKeyPepper()).update(value).digest("hex");
+  return scryptSync(value, apiKeyPepper(), 32).toString("hex");
 }
 
 export function createApiKeySecret(): {
