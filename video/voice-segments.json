@@ -2,41 +2,55 @@
   {
     "id": "01",
     "startMs": 700,
-    "text": "AI agents can write code and move money. But a payment rail cannot tell whether an offchain pull request truly met its scope."
+    "durationMs": 8200,
+    "text": "AI agents can write code and move money. But payment rails still cannot determine whether offchain work met an agreed scope."
   },
   {
     "id": "02",
-    "startMs": 11000,
-    "text": "ScopeSettle locks the rubric, weights, provider, budget, expiry, and confidence threshold before funding an ERC-8183 escrow on X Layer."
+    "startMs": 9500,
+    "durationMs": 8900,
+    "text": "ScopeSettle locks the rubric, provider, budget, expiry, and confidence threshold before funding an ERC-8183 escrow on X Layer."
   },
   {
     "id": "03",
-    "startMs": 22000,
-    "text": "For this public Testnet job, the deliverable is pinned to one GitHub pull request and one immutable head commit. No moving branch can change the evidence."
+    "startMs": 19000,
+    "durationMs": 9400,
+    "text": "Each deliverable binds one public pull request, its base commit, and one immutable head commit. A moving branch cannot replace the evidence."
   },
   {
     "id": "04",
-    "startMs": 34000,
-    "text": "Deterministic checks verify repository identity, required files, diff bounds, and CI. The hosted evaluator then scores only cited evidence against the immutable rubric."
+    "startMs": 29000,
+    "durationMs": 11400,
+    "text": "Deterministic gates verify repository identity, required files, diff bounds, and CI. The hosted evaluator scores only evidence that survives validation."
   },
   {
     "id": "05",
-    "startMs": 47000,
-    "text": "The manifest criterion scored one hundred, but the required lockfile criterion scored zero because pinned CI was failing. Weighted score: fifty."
+    "startMs": 41000,
+    "durationMs": 10400,
+    "text": "Every criterion exposes its score, reason, citations, and limitations. Deterministic code recomputes the weighted result outside the model."
   },
   {
     "id": "06",
-    "startMs": 60000,
-    "text": "That uncertainty did not trigger an automatic payout. It routed to the named trusted reviewer, who rejected the verdict and refunded the full valueless Testnet escrow."
+    "startMs": 52000,
+    "durationMs": 8400,
+    "text": "Low confidence made ScopeSettle fail closed. The trusted reviewer rejected the verdict and refunded the full valueless Testnet escrow."
   },
   {
     "id": "07",
-    "startMs": 72000,
-    "text": "The commerce and evaluator contracts are also source-verified on X Layer Mainnet with native USDC. No Mainnet job or user adoption is claimed."
+    "startMs": 61000,
+    "durationMs": 9400,
+    "text": "The public certificate recomputes every binding, from report and rubric to evaluator and verdict. Job three verifies ten out of ten."
   },
   {
     "id": "08",
-    "startMs": 82000,
-    "text": "Every report, hash, receipt, limitation, and test is public. ScopeSettle: verified work, automatic settlement."
+    "startMs": 71000,
+    "durationMs": 8400,
+    "text": "The open SDK and CLI reproduce every check from X Layer RPC. Integrators never need to trust the ScopeSettle web server."
+  },
+  {
+    "id": "09",
+    "startMs": 80000,
+    "durationMs": 9400,
+    "text": "The wallet-owned console adds scoped keys, signed webhooks, durable retries, and audits. ScopeSettle: verified work, automatic settlement."
   }
 ]

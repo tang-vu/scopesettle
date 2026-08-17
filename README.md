@@ -10,7 +10,8 @@ and ScopeSettle produces an evidence-linked verdict that can settle escrow after
 Mainnet contracts are source-verified, deterministic Testnet job `2` completed onchain, and hosted
 AI-backed job [`3`](https://scopesettle.vercel.app/jobs/1952/3) produced a public evidence report
 before trusted-reviewer refund. The public [submission proof](https://tang-vu.github.io/scopesettle/)
-links the canonical receipts. The demo video remains pending and is never represented by a placeholder.
+links the canonical receipts. The published 90-second demo reproducibly shows public product evidence,
+the independent certificate, the verifier CLI, and a clearly labelled local developer-console fixture.
 
 ![ScopeSettle landing page](docs/assets/product-preview.png)
 

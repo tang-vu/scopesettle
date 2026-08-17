@@ -19,6 +19,7 @@
     "test:e2e": "pnpm --filter @scopesettle/web test:e2e",
     "video:render": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/render-demo.ps1",
     "video:voice": "pnpm --filter @scopesettle/web exec node ../../scripts/generate-demo-audio.mjs",
+    "video:voice:local": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/generate-demo-audio-local.ps1",
     "contracts:build": "pnpm --dir contracts build",
     "contracts:test": "pnpm --dir contracts test",
     "contracts:coverage": "pnpm --dir contracts coverage",

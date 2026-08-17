@@ -12,19 +12,21 @@ Style: Kicker,Arial,25,&H0000FF9F,&H000000FF,&H00080B09,&H66080B09,1,0,0,0,100,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 1,0:00:00.20,0:00:10.80,Kicker,,0,0,0,,THE PROBLEM · AGENT COMMERCE
-Dialogue: 1,0:00:00.70,0:00:10.60,Caption,,0,0,0,,AI agents can write code and move money.\NBut payment rails cannot judge offchain work.
-Dialogue: 1,0:00:11.00,0:00:21.60,Kicker,,0,0,0,,01 · LOCK THE AGREEMENT
-Dialogue: 1,0:00:11.00,0:00:21.60,Caption,,0,0,0,,Rubric, weights, provider, budget, expiry, and thresholds\Nare immutable before ERC-8183 escrow funding.
-Dialogue: 1,0:00:22.00,0:00:33.60,Kicker,,0,0,0,,02 · PIN ONE DELIVERABLE
-Dialogue: 1,0:00:22.00,0:00:33.60,Caption,,0,0,0,,One public pull request. One immutable head commit.\NNo moving branch can change the evidence.
-Dialogue: 1,0:00:34.00,0:00:46.60,Kicker,,0,0,0,,03 · BOUNDED EVALUATION
-Dialogue: 1,0:00:34.00,0:00:46.60,Caption,,0,0,0,,Deterministic gates verify identity, files, bounds, and CI.\NAI scores only evidence that survives validation.
-Dialogue: 1,0:00:47.00,0:00:59.60,Kicker,,0,0,0,,04 · EXPLAIN THE DECISION
-Dialogue: 1,0:00:47.00,0:00:59.60,Caption,,0,0,0,,Manifest consistency: 100. Lockfile evidence: 0.\NWeighted score: 50 · confidence: 50.
-Dialogue: 1,0:01:00.00,0:01:11.60,Kicker,,0,0,0,,05 · FAIL CLOSED
-Dialogue: 1,0:01:00.00,0:01:11.60,Caption,,0,0,0,,A trusted reviewer rejected the ambiguous verdict.\NThe full valueless Testnet escrow was refunded.
-Dialogue: 1,0:01:12.00,0:01:21.60,Kicker,,0,0,0,,06 · LAUNCHED ON X LAYER
-Dialogue: 1,0:01:12.00,0:01:21.60,Caption,,0,0,0,,Testnet workflow proven. Mainnet contracts source-verified.\NNo Mainnet job or user adoption is claimed.
-Dialogue: 1,0:01:22.00,0:01:29.70,Kicker,,0,0,0,,SCOPESETTLE · BUILD X AI SEASON
-Dialogue: 1,0:01:22.00,0:01:29.70,Caption,,0,0,0,,Every report, hash, receipt, limitation, and test is public.\NVerified work. Automatic settlement.
+Dialogue: 1,0:00:00.20,0:00:09.20,Kicker,,0,0,0,,THE PROBLEM / AGENT COMMERCE
+Dialogue: 1,0:00:00.70,0:00:09.10,Caption,,0,0,0,,Agents can write code and move money.\NPayment rails still cannot judge offchain work.
+Dialogue: 1,0:00:09.50,0:00:18.70,Kicker,,0,0,0,,01 / LOCK THE AGREEMENT
+Dialogue: 1,0:00:09.50,0:00:18.70,Caption,,0,0,0,,Scope and settlement policy become immutable\Nbefore ERC-8183 escrow funding on X Layer.
+Dialogue: 1,0:00:19.00,0:00:28.70,Kicker,,0,0,0,,02 / PIN ONE DELIVERABLE
+Dialogue: 1,0:00:19.00,0:00:28.70,Caption,,0,0,0,,One pull request. Immutable base and head commits.\NA moving branch cannot replace the evidence.
+Dialogue: 1,0:00:29.00,0:00:40.70,Kicker,,0,0,0,,03 / BOUNDED EVALUATION
+Dialogue: 1,0:00:29.00,0:00:40.70,Caption,,0,0,0,,Deterministic gates verify identity, files, bounds, and CI.\NAI scores only evidence that survives validation.
+Dialogue: 1,0:00:41.00,0:00:51.70,Kicker,,0,0,0,,04 / EXPLAIN THE DECISION
+Dialogue: 1,0:00:41.00,0:00:51.70,Caption,,0,0,0,,Scores, reasons, citations, and limitations stay visible.\NCode recomputes the weighted result outside the model.
+Dialogue: 1,0:00:52.00,0:01:00.70,Kicker,,0,0,0,,05 / FAIL CLOSED
+Dialogue: 1,0:00:52.00,0:01:00.70,Caption,,0,0,0,,A trusted reviewer rejected the ambiguous verdict.\NThe full valueless Testnet escrow was refunded.
+Dialogue: 1,0:01:01.00,0:01:10.70,Kicker,,0,0,0,,06 / PUBLIC INTEGRITY CERTIFICATE
+Dialogue: 1,0:01:01.00,0:01:10.70,Caption,,0,0,0,,Report, rubric, policy, deliverable, evaluator, and verdict.\NJob 3 independently verifies 10 of 10 bindings.
+Dialogue: 1,0:01:11.00,0:01:19.70,Kicker,,0,0,0,,07 / OPEN SDK + CLI
+Dialogue: 1,0:01:11.00,0:01:19.70,Caption,,0,0,0,,Reproduce every check directly from X Layer RPC.\NNo trust in the ScopeSettle web server required.
+Dialogue: 1,0:01:20.00,0:01:29.70,Kicker,,0,0,0,,08 / INTEGRATION INFRASTRUCTURE
+Dialogue: 1,0:01:20.00,0:01:29.70,Caption,,0,0,0,,Scoped keys. Signed webhooks. Durable retries. Audit trail.\NScopeSettle / verified work, automatic settlement.
