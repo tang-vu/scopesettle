@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import sys
 import urllib.request
@@ -26,9 +25,7 @@ from kokoro_onnx import Kokoro
 ROOT = Path(__file__).resolve().parent.parent
 SEGMENTS_PATH = ROOT / "video" / "voice-segments.json"
 OUTPUT_ROOT = ROOT / "video" / "audio-v3"
-MODEL_ROOT = (
-    Path(os.environ.get("LOCALAPPDATA", Path.home())) / "ScopeSettle" / "video-models"
-)
+MODEL_ROOT = ROOT / ".video-models"
 KOKORO_MODEL = MODEL_ROOT / "kokoro-v1.0.onnx"
 KOKORO_VOICES = MODEL_ROOT / "voices-v1.0.bin"
 MODEL_BASE_URL = (

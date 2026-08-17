@@ -7,8 +7,8 @@ short-lived SIWE session as job operations. No email identity or custodial walle
 ## API keys
 
 An owner can issue, rotate, and revoke a key. The plaintext token is returned exactly once. The
-database stores only its public prefix and SHA-256 digest; a lost token must be rotated, not
-recovered.
+database stores only its public prefix and a server-peppered scrypt digest; a lost token must be
+rotated, not recovered.
 
 Available scopes are:
 
@@ -36,8 +36,9 @@ A subscription belongs to one organization and one exact `(chainId, jobId)` pair
 - `evaluation.completed`
 
 The signing secret is displayed once and encrypted at rest with AES-256-GCM under a key derived
-from `SESSION_SECRET`. Changing `SESSION_SECRET` therefore requires rotating all webhook signing
-secrets. Endpoint creation and URL updates resolve DNS and reject non-HTTPS, credential-bearing,
+from `SESSION_SECRET`. API key digests are also bound to this secret. Changing `SESSION_SECRET`
+therefore invalidates API keys and requires rotating all webhook signing secrets. Endpoint creation
+and URL updates resolve DNS and reject non-HTTPS, credential-bearing,
 loopback, private, link-local, multicast, and IPv4-mapped private targets. Delivery resolves again
 and pins the validated address for the TLS request; redirects are not followed.
 

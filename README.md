@@ -79,8 +79,8 @@ flowchart LR
   trusted authority.
 - Independent SDK/CLI: reads X Layer contracts directly and reproduces the ten certificate checks
   without calling the ScopeSettle server.
-- Developer platform: wallet-owned organizations, hash-only scoped API keys, an append-only audit
-  trail, and job-filtered HMAC webhooks backed by a durable PostgreSQL outbox.
+- Developer platform: wallet-owned organizations, server-peppered scoped API keys, an append-only
+  audit trail, and job-filtered HMAC webhooks backed by a durable PostgreSQL outbox.
 
 See [architecture](docs/architecture.md), [methodology](docs/evaluation-methodology.md), and
 [threat model](docs/threat-model.md). The certificate format and verification boundaries are in
@@ -140,7 +140,7 @@ Latest local production audit (Lighthouse 13.4.1, 2026-08-10): desktop scored 99
 100 accessibility, 100 best practices, and 100 SEO; mobile throttling scored 82/100/100/100.
 Both runs reported zero cumulative layout shift. Wallet libraries are loaded only on transaction
 routes, keeping the public landing route independent of the wagmi/viem client bundle. Scores are
-local audit evidence, not claims about an as-yet-unpublished hosting environment.
+dated local audit evidence, not a claim about current hosted performance.
 
 ## Networks and deployments
 
@@ -173,9 +173,9 @@ and platform fees are intentionally out of scope. Read [SECURITY.md](SECURITY.md
 The source-verified contracts now have a completed valueless Testnet lifecycle with a dedicated EOA
 provider. It is explicitly a deterministic contract-wiring proof, not an AI evaluation. The
 Mainnet contracts are deployed and source-verified; no Mainnet job or user activity is claimed.
-The hosted OpenAI-backed workflow is live at `https://scopesettle.vercel.app`; the remaining release
-gates are the judge demo, dedicated X account/post, owner contacts, and final form submission.
+The hosted OpenAI-backed workflow, judge demo, dedicated X account, and public launch post are live.
+The owner supplied the private contact fields and submitted the official Google Form on August 17, 2026.
 Submission copy, demo script, and launch thread are in [SUBMISSION.md](SUBMISSION.md),
-[DEMO.md](DEMO.md), and [X_THREAD.md](X_THREAD.md).
+[DEMO.md](DEMO.md), and [docs/x-launch-posts.md](docs/x-launch-posts.md).
 
 Licensed under [MIT](LICENSE).
