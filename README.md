@@ -173,8 +173,8 @@ and platform fees are intentionally out of scope. Read [SECURITY.md](SECURITY.md
 The source-verified contracts now have a completed valueless Testnet lifecycle with a dedicated EOA
 provider. It is explicitly a deterministic contract-wiring proof, not an AI evaluation. The
 Mainnet contracts are deployed and source-verified; no Mainnet job or user activity is claimed.
-The hosted OpenAI-backed workflow, judge demo, dedicated X account, and public launch post are live;
-the remaining submission gates are owner contact fields and the final Google Form submission.
+The hosted OpenAI-backed workflow, judge demo, dedicated X account, and public launch post are live.
+The owner supplied the private contact fields and submitted the official Google Form on August 17, 2026.
 Submission copy, demo script, and launch thread are in [SUBMISSION.md](SUBMISSION.md),
 [DEMO.md](DEMO.md), and [docs/x-launch-posts.md](docs/x-launch-posts.md).
 

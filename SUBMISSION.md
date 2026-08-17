@@ -7,9 +7,10 @@ submission post mentioning `@XLayerOfficial`.
 
 **Current eligibility:** Testnet deployment, a completed deterministic lifecycle, hosted AI-backed
 job `3`, the production web app, the source-verified Mainnet launch, the dedicated project X account,
-and its public submission post are complete. Owner email and Telegram fields remain required before
-final submission. The public demo video is complete. Do not
-describe job `2` as an AI code review or the Mainnet deployment as user adoption.
+its public submission post, and the official Google Form submission are complete. The owner supplied
+contact details directly in the form on August 17, 2026; they are intentionally not duplicated in
+this public repository. The public demo video is complete. Do not describe job `2` as an AI code
+review or the Mainnet deployment as user adoption.
 
 The live form currently contains eight fields: Project Name, Project Description, Project URL,
 Github, Email, Telegram, X handle, and X post URL. Google marks Github and X post URL optional in
@@ -24,8 +25,8 @@ the form UI, but the official event rules still require the project-account post
   release or refund.
 - **Project URL:** `https://scopesettle.vercel.app`
 - **GitHub:** `https://github.com/tang-vu/scopesettle`
-- **Email:** `[required: owner contact]`
-- **Telegram:** `[required: owner handle]`
+- **Email:** supplied privately in the submitted form
+- **Telegram:** supplied privately in the submitted form
 - **X handle:** `@scopesettle`
 - **X post URL:** `https://x.com/scopesettle/status/2089206766060134677`
 
@@ -76,8 +77,8 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 - [x] Live app URL backed by the production database/evaluator configuration
 - [x] 90-second demo video using only real public links
 - [x] Dedicated `@scopesettle` account and post mentioning `@XLayerOfficial`
-- [ ] Owner Email and Telegram confirmed; project X handle is complete
-- [ ] Final form submitted before the official deadline
+- [x] Owner Email and Telegram supplied privately; project X handle is complete
+- [x] Final Google Form submitted by the owner on August 17, 2026
 
 ## Mainnet deployment checkpoint
 

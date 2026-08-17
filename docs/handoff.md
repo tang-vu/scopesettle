@@ -152,9 +152,9 @@ the deployed public Testnet addresses/block, and `AI_GATEWAY_MODEL`. The Neon `f
 `sin1` passed two idempotent migration runs. A direct OpenAI configuration remains supported through
 `OPENAI_API_KEY` + `OPENAI_MODEL`, but is not required for the Vercel Gateway path.
 
-The dedicated ScopeSettle X account and public launch post are complete. Owner contact fields and the
-final Google Form submission remain human/external actions. Any further Mainnet write requires its
-own fresh explicit approval.
+The dedicated ScopeSettle X account and public launch post are complete. The owner supplied contact
+fields privately and submitted the final Google Form on August 17, 2026. Any further Mainnet write
+requires its own fresh explicit approval.
 
 ## Tooling note
 
@@ -172,7 +172,8 @@ PostgreSQL 17 service instead. That gate passed on the final CI run.
    `https://x.com/tangvu_dev/status/2089207028451619191` is the founder amplification post.
 2. Optionally add signer/role secrets to the protected GitHub environments before any future
    redeployment; never paste a private key into chat or Git.
-3. Record the owner contact fields and demo URL, then perform the final submission before the deadline.
+3. Preserve the private form confirmation outside the public repository and monitor the submitted
+   contact channels for organizer follow-up.
 
 ## Rules for the next chat
 
