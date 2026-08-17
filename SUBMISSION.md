@@ -71,12 +71,12 @@ validation, deterministic score math, confidence thresholds, and fail-closed man
 - [x] Completed deterministic Testnet lifecycle and transactions linked
 - [x] Hosted OpenAI-backed Testnet evaluation linked
 - [x] Mainnet deployment/source verification after fresh explicit approval
-- [ ] Mainnet web configuration and low-value launch validation
+- [x] Mainnet contract launch, source verification, and canonical deployment record
 - [x] Public judge-proof URL with immutable Testnet evidence
 - [x] Live app URL backed by the production database/evaluator configuration
 - [x] 90-second demo video using only real public links
-- [ ] Dedicated X account and post mentioning `@XLayerOfficial`
-- [ ] Owner Email, Telegram, X handle, and self-custodial prize wallet confirmed
+- [x] Dedicated `@scopesettle` account and post mentioning `@XLayerOfficial`
+- [ ] Owner Email and Telegram confirmed; project X handle is complete
 - [ ] Final form submitted before the official deadline
 
 ## Mainnet deployment checkpoint
