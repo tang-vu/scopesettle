@@ -18,6 +18,7 @@ test-results/
 !.env.example
 video/audio/
 video/output/
+.video-models/
 *.log
 *.tsbuildinfo
 contracts/lcov.info

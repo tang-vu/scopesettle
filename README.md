@@ -79,8 +79,8 @@ flowchart LR
   trusted authority.
 - Independent SDK/CLI: reads X Layer contracts directly and reproduces the ten certificate checks
   without calling the ScopeSettle server.
-- Developer platform: wallet-owned organizations, hash-only scoped API keys, an append-only audit
-  trail, and job-filtered HMAC webhooks backed by a durable PostgreSQL outbox.
+- Developer platform: wallet-owned organizations, server-peppered scoped API keys, an append-only
+  audit trail, and job-filtered HMAC webhooks backed by a durable PostgreSQL outbox.
 
 See [architecture](docs/architecture.md), [methodology](docs/evaluation-methodology.md), and
 [threat model](docs/threat-model.md). The certificate format and verification boundaries are in
@@ -140,7 +140,7 @@ Latest local production audit (Lighthouse 13.4.1, 2026-08-10): desktop scored 99
 100 accessibility, 100 best practices, and 100 SEO; mobile throttling scored 82/100/100/100.
 Both runs reported zero cumulative layout shift. Wallet libraries are loaded only on transaction
 routes, keeping the public landing route independent of the wagmi/viem client bundle. Scores are
-local audit evidence, not claims about an as-yet-unpublished hosting environment.
+dated local audit evidence, not a claim about current hosted performance.
 
 ## Networks and deployments
 
