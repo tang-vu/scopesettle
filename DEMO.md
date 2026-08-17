@@ -5,8 +5,9 @@
 The final 90-second, 1920x1080 demo uses public ScopeSettle product screens and hosted job `3`.
 The developer-console scene is a visibly labelled local UI fixture with no production credentials;
 the verifier CLI scene presents the independently reproduced result for that public job. English
-narration was synthesized locally with an installed Windows voice, measured segment-by-segment, and
-paired with burned-in English captions. No exposed or Token Plan API key was used.
+narration was synthesized locally with Kokoro ONNX, checked segment-by-segment and after the final
+mix with faster-whisper ASR, and paired with burned-in English captions. No exposed or Token Plan API
+key was used.
 
 ## Storyboard
 

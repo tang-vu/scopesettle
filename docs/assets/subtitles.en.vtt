@@ -1,33 +1,37 @@
 WEBVTT
 
-00:00:00.700 --> 00:00:10.600
-AI agents can write code and move money. But a payment rail cannot tell whether
-an offchain pull request truly met its scope.
+00:00:00.700 --> 00:00:09.100
+AI agents write code and move money. Yet payment rails cannot determine
+whether offchain work met the agreed scope.
 
-00:00:11.000 --> 00:00:21.600
-ScopeSettle locks the rubric, weights, provider, budget, expiry, and confidence threshold
-before funding an ERC-8183 escrow on X Layer.
+00:00:09.500 --> 00:00:18.700
+ScopeSettle locks scope and settlement policy before funding
+an ERC-8183 escrow on X Layer.
 
-00:00:22.000 --> 00:00:33.600
-The Testnet deliverable is pinned to one GitHub pull request and one immutable head commit.
-No moving branch can change the evidence.
+00:00:19.000 --> 00:00:28.700
+Each deliverable binds one public pull request, its base commit, and one immutable head commit.
+A moving branch cannot replace the evidence.
 
-00:00:34.000 --> 00:00:46.600
-Deterministic checks verify identity, required files, diff bounds, and CI.
-The hosted evaluator scores only cited evidence against the immutable rubric.
+00:00:29.000 --> 00:00:40.700
+Deterministic gates verify repository identity, required files, change bounds, and CI.
+The hosted evaluator scores only evidence that survives validation.
 
-00:00:47.000 --> 00:00:59.600
-The manifest criterion scored 100, but the required lockfile criterion scored zero
-because pinned CI was failing. Weighted score: 50.
+00:00:41.000 --> 00:00:51.700
+Every criterion exposes its score, reason, citations, and limitations.
+Deterministic code recomputes the weighted result outside the model.
 
-00:01:00.000 --> 00:01:11.600
-Uncertainty did not trigger an automatic payout. A named trusted reviewer rejected
-the verdict and refunded the full valueless Testnet escrow.
+00:00:52.000 --> 00:01:00.700
+On low confidence, ScopeSettle failed closed. The named reviewer rejected the verdict
+and refunded the valueless Testnet escrow.
 
-00:01:12.000 --> 00:01:21.600
-The contracts are also source-verified on X Layer Mainnet with native USDC.
-No Mainnet job or user adoption is claimed.
+00:01:01.000 --> 00:01:10.700
+The public certificate recomputes every binding, from report and rubric to evaluator
+and verdict. Job three verifies ten out of ten.
 
-00:01:22.000 --> 00:01:29.500
-Every report, hash, receipt, limitation, and test is public.
+00:01:11.000 --> 00:01:19.700
+Open SDK and CLI checks run against X Layer RPC.
+Integrators never need to trust the ScopeSettle server.
+
+00:01:20.000 --> 00:01:29.700
+The developer console adds scoped keys, signed webhooks, durable retries, and audits.
 ScopeSettle: verified work, automatic settlement.

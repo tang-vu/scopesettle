@@ -1,0 +1,101 @@
+[
+  {
+    "id": "01",
+    "expected": "AI agents write code and move money. Yet payment rails cannot determine whether offchain work met the agreed scope.",
+    "spoken": "artificial intelligence agents write code and move money. Yet payment rails cannot determine whether offchain work met the agreed scope.",
+    "durationMs": 8171,
+    "slotMs": 8200,
+    "speed": 1.15,
+    "transcript": "Artificial intelligence agents write code and move money. Yet payment rails cannot determine whether off-chain work met the agreed scope.",
+    "wer": 0.1,
+    "passed": true
+  },
+  {
+    "id": "02",
+    "expected": "ScopeSettle locks scope and settlement policy before funding an ERC-8183 escrow on X Layer.",
+    "spoken": "Scope Settle locks scope and settlement policy before funding an E R C eighty-one eighty-three escrow on X Layer.",
+    "durationMs": 7787,
+    "slotMs": 8900,
+    "speed": 1.0,
+    "transcript": "ScopeSettle locks scope and settlement policy before funding an ERC-8183 escrow on X Layer.",
+    "wer": 0.0,
+    "passed": true
+  },
+  {
+    "id": "03",
+    "expected": "Each deliverable binds one public pull request, its base commit, and one immutable head commit. A moving branch cannot replace the evidence.",
+    "spoken": "Each deliverable binds one public pull request, its base commit, and one immutable head commit. A moving branch cannot replace the evidence.",
+    "durationMs": 9301,
+    "slotMs": 9400,
+    "speed": 1.09,
+    "transcript": "Each deliverable binds one public pull request, its base commit, and one immutable head commit. A moving branch cannot replace the evidence.",
+    "wer": 0.0,
+    "passed": true
+  },
+  {
+    "id": "04",
+    "expected": "Deterministic gates verify repository identity, required files, change bounds, and CI. The hosted evaluator scores only evidence that survives validation.",
+    "spoken": "Deterministic gates verify repository identity, required files, change bounds, and C I. The hosted evaluator scores only evidence that survives validation.",
+    "durationMs": 11179,
+    "slotMs": 11400,
+    "speed": 1.15,
+    "transcript": "Deterministic gates verify repository identity, required files, change bounds, and CI. The hosted evaluator scores only evidence that survives validation.",
+    "wer": 0.0,
+    "passed": true
+  },
+  {
+    "id": "05",
+    "expected": "Every criterion exposes its score, reason, citations, and limitations. Deterministic code recomputes the weighted result outside the model.",
+    "spoken": "Every criterion exposes its score, reason, citations, and limitations. Deterministic code recomputes the weighted result outside the model.",
+    "durationMs": 10389,
+    "slotMs": 10400,
+    "speed": 1.06,
+    "transcript": "Every criterion exposes its score, reason, citations, and limitations. Deterministic code recomputes the weighted result outside the model.",
+    "wer": 0.0,
+    "passed": true
+  },
+  {
+    "id": "06",
+    "expected": "On low confidence, ScopeSettle failed closed. The named reviewer rejected the verdict and refunded the valueless Testnet escrow.",
+    "spoken": "On low confidence, Scope Settle failed closed. The named reviewer rejected the verdict and refunded the valueless Testnet escrow.",
+    "durationMs": 8256,
+    "slotMs": 8400,
+    "speed": 1.15,
+    "transcript": "On low confidence, ScopeSettle failed closed. The named reviewer rejected the verdict and refunded the valueless testnet escrow.",
+    "wer": 0.0,
+    "passed": true
+  },
+  {
+    "id": "07",
+    "expected": "The public certificate recomputes every binding, from report and rubric to evaluator and verdict. Job three verifies ten out of ten.",
+    "spoken": "The public certificate recomputes every binding, from report and rubric to evaluator and verdict. Job three verifies ten out of ten.",
+    "durationMs": 9323,
+    "slotMs": 9400,
+    "speed": 1.03,
+    "transcript": "The public certificate recomputes every binding, from report and rubric, to evaluator and verdict. Job 3 verifies 10 out of 10.",
+    "wer": 0.0,
+    "passed": true
+  },
+  {
+    "id": "08",
+    "expected": "Open SDK and CLI checks run against X Layer RPC. Integrators never need to trust the ScopeSettle server.",
+    "spoken": "Open S D K and C L I checks run against X Layer R P C. Integrators never need to trust the Scope Settle server.",
+    "durationMs": 8363,
+    "slotMs": 8400,
+    "speed": 1.18,
+    "transcript": "Open SDK and CLI checks run against X Layer RPC. Integrators never need to trust the ScopeSettle server.",
+    "wer": 0.0,
+    "passed": true
+  },
+  {
+    "id": "09",
+    "expected": "The developer console adds scoped keys, signed webhooks, durable retries, and audits. ScopeSettle: verified work, automatic settlement.",
+    "spoken": "The developer console adds scoped keys, signed webhooks, durable retries, and audits. Scope Settle: verified work, automatic settlement.",
+    "durationMs": 9387,
+    "slotMs": 9400,
+    "speed": 1.06,
+    "transcript": "The developer console adds scoped keys, signed webhooks, durable retries, and audits. ScopeSettle. Verified work automatic settlement.",
+    "wer": 0.0,
+    "passed": true
+  }
+]

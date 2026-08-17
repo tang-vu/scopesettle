@@ -1,12 +1,12 @@
 1
 00:00:00,700 --> 00:00:09,100
-AI agents can write code and move money. But payment rails still cannot determine
-whether offchain work met an agreed scope.
+AI agents write code and move money. Yet payment rails cannot determine
+whether offchain work met the agreed scope.
 
 2
 00:00:09,500 --> 00:00:18,700
-ScopeSettle locks the rubric, provider, budget, expiry, and confidence threshold
-before funding an ERC-8183 escrow on X Layer.
+ScopeSettle locks scope and settlement policy before funding
+an ERC-8183 escrow on X Layer.
 
 3
 00:00:19,000 --> 00:00:28,700
@@ -15,7 +15,7 @@ A moving branch cannot replace the evidence.
 
 4
 00:00:29,000 --> 00:00:40,700
-Deterministic gates verify repository identity, required files, diff bounds, and CI.
+Deterministic gates verify repository identity, required files, change bounds, and CI.
 The hosted evaluator scores only evidence that survives validation.
 
 5
@@ -25,8 +25,8 @@ Deterministic code recomputes the weighted result outside the model.
 
 6
 00:00:52,000 --> 00:01:00,700
-Low confidence made ScopeSettle fail closed. The trusted reviewer rejected the verdict
-and refunded the full valueless Testnet escrow.
+On low confidence, ScopeSettle failed closed. The named reviewer rejected the verdict
+and refunded the valueless Testnet escrow.
 
 7
 00:01:01,000 --> 00:01:10,700
@@ -35,10 +35,10 @@ and verdict. Job three verifies ten out of ten.
 
 8
 00:01:11,000 --> 00:01:19,700
-The open SDK and CLI reproduce every check from X Layer RPC.
-Integrators never need to trust the ScopeSettle web server.
+Open SDK and CLI checks run against X Layer RPC.
+Integrators never need to trust the ScopeSettle server.
 
 9
 00:01:20,000 --> 00:01:29,700
-The wallet-owned console adds scoped keys, signed webhooks, durable retries, and audits.
+The developer console adds scoped keys, signed webhooks, durable retries, and audits.
 ScopeSettle: verified work, automatic settlement.

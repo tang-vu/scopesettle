@@ -16,9 +16,18 @@ pnpm video:voice:local
 pnpm video:render
 ```
 
-This uses an installed Windows speech voice and fails if any generated segment exceeds its declared
-scene duration. V2 audio is written to `audio-v2/`; the original MiMo narration remains in `audio/`
-for provenance but is not used by the V2 renderer.
+This uses Kokoro ONNX through an isolated `uv` environment and fails if any generated segment exceeds
+its scene duration or its faster-whisper word error rate exceeds 18%. Models are cached outside the
+repository. Passing audio and its ASR report are written to `audio-v3/`.
+
+After rendering, verify that the music and final loudness mix did not reduce speech clarity:
+
+```powershell
+pnpm video:qa:audio
+```
+
+The original MiMo and Windows narration remain in `audio/` and `audio-v2/` for provenance but are not
+used by the current renderer.
 
 The optional MiMo path requires a Xiaomi MiMo **Pay-As-You-Go API key**:
 

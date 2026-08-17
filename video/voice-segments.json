@@ -3,13 +3,13 @@
     "id": "01",
     "startMs": 700,
     "durationMs": 8200,
-    "text": "AI agents can write code and move money. But payment rails still cannot determine whether offchain work met an agreed scope."
+    "text": "AI agents write code and move money. Yet payment rails cannot determine whether offchain work met the agreed scope."
   },
   {
     "id": "02",
     "startMs": 9500,
     "durationMs": 8900,
-    "text": "ScopeSettle locks the rubric, provider, budget, expiry, and confidence threshold before funding an ERC-8183 escrow on X Layer."
+    "text": "ScopeSettle locks scope and settlement policy before funding an ERC-8183 escrow on X Layer."
   },
   {
     "id": "03",
@@ -21,7 +21,7 @@
     "id": "04",
     "startMs": 29000,
     "durationMs": 11400,
-    "text": "Deterministic gates verify repository identity, required files, diff bounds, and CI. The hosted evaluator scores only evidence that survives validation."
+    "text": "Deterministic gates verify repository identity, required files, change bounds, and CI. The hosted evaluator scores only evidence that survives validation."
   },
   {
     "id": "05",
@@ -33,7 +33,7 @@
     "id": "06",
     "startMs": 52000,
     "durationMs": 8400,
-    "text": "Low confidence made ScopeSettle fail closed. The trusted reviewer rejected the verdict and refunded the full valueless Testnet escrow."
+    "text": "On low confidence, ScopeSettle failed closed. The named reviewer rejected the verdict and refunded the valueless Testnet escrow."
   },
   {
     "id": "07",
@@ -45,12 +45,12 @@
     "id": "08",
     "startMs": 71000,
     "durationMs": 8400,
-    "text": "The open SDK and CLI reproduce every check from X Layer RPC. Integrators never need to trust the ScopeSettle web server."
+    "text": "Open SDK and CLI checks run against X Layer RPC. Integrators never need to trust the ScopeSettle server."
   },
   {
     "id": "09",
     "startMs": 80000,
     "durationMs": 9400,
-    "text": "The wallet-owned console adds scoped keys, signed webhooks, durable retries, and audits. ScopeSettle: verified work, automatic settlement."
+    "text": "The developer console adds scoped keys, signed webhooks, durable retries, and audits. ScopeSettle: verified work, automatic settlement."
   }
 ]

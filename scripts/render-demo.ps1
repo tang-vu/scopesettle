@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $assetRoot = Join-Path $repositoryRoot "video\assets"
-$audioRoot = Join-Path $repositoryRoot "video\audio-v2"
+$audioRoot = Join-Path $repositoryRoot "video\audio-v3"
 $outputRoot = Join-Path $repositoryRoot "video\output"
 New-Item -ItemType Directory -Force -Path $outputRoot | Out-Null
 
