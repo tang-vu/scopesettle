@@ -102,10 +102,10 @@ Last verified: 2026-08-13. Read this file together with [`PLANS.md`](../PLANS.md
 
 ## External blockers and secrets still missing
 
-Hosted AI-backed Testnet job `3` is complete and public; no Mainnet job or public X post exists. The
-Testnet deployment, deterministic job `2`, hosted job `3`, and Mainnet contracts are real and
-source-verified where applicable. Never describe the smoke verdict as an AI code evaluation or the
-Mainnet deployment as usage.
+Hosted AI-backed Testnet job `3` is complete and public; no Mainnet job exists. The Testnet
+deployment, deterministic job `2`, hosted job `3`, Mainnet contracts, dedicated `@scopesettle`
+account, and project launch post are public. Never describe the smoke verdict as an AI code
+evaluation or the Mainnet deployment as usage.
 
 Testnet job `2` completed through create, fund, EOA submit, signed verdict, challenge window, and
 finalization. It released exactly `1 mUSDG` to the dedicated Testnet EOA provider. The immutable
@@ -152,8 +152,9 @@ the deployed public Testnet addresses/block, and `AI_GATEWAY_MODEL`. The Neon `f
 `sin1` passed two idempotent migration runs. A direct OpenAI configuration remains supported through
 `OPENAI_API_KEY` + `OPENAI_MODEL`, but is not required for the Vercel Gateway path.
 
-The dedicated ScopeSettle X account, public launch post, and hosting/database accounts are still
-human/external actions. Any further Mainnet write requires its own fresh explicit approval.
+The dedicated ScopeSettle X account and public launch post are complete. Owner contact fields and the
+final Google Form submission remain human/external actions. Any further Mainnet write requires its
+own fresh explicit approval.
 
 ## Tooling note
 
@@ -167,12 +168,11 @@ PostgreSQL 17 service instead. That gate passed on the final CI run.
 
 ## Exact next sequence
 
-1. Record a concise demo of the live job `3`, report, explorer receipts, and source-verified Mainnet
-   pair without implying a Mainnet job or user adoption.
-2. Publish the dedicated X account post mentioning `@XLayerOfficial` and add its URL to the form.
-3. Optionally add signer/role secrets to the protected GitHub environments before any future
+1. Use `https://x.com/scopesettle/status/2089206766060134677` as the official project X post URL;
+   `https://x.com/tangvu_dev/status/2089207028451619191` is the founder amplification post.
+2. Optionally add signer/role secrets to the protected GitHub environments before any future
    redeployment; never paste a private key into chat or Git.
-4. Record the owner contact fields and demo URL, then perform the final submission before the deadline.
+3. Record the owner contact fields and demo URL, then perform the final submission before the deadline.
 
 ## Rules for the next chat
 
