@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@scopesettle/shared": "workspace:*",
-    "viem": "2.55.15",
+    "viem": "2.55.19",
     "zod": "4.4.3"
   },
   "devDependencies": {
@@ -31,6 +31,6 @@
     "eslint": "^9.39.1",
     "typescript": "6.0.3",
     "typescript-eslint": "^8.67.0",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   }
 }
