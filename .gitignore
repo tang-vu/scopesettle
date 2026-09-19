@@ -26,3 +26,9 @@ contracts/lcov.info
 Thumbs.db
 
 .vercel
+
+# AI assistant artifacts
+.devin/
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+NUL
