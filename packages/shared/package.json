@@ -13,16 +13,16 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "viem": "2.55.15",
-    "zod": "4.4.3"
+    "viem": "2.57.7",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.19.2",
     "esbuild": "0.28.2",
     "eslint": "^9.39.1",
     "typescript": "6.0.3",
-    "typescript-eslint": "^8.67.0",
-    "vitest": "4.1.10"
+    "typescript-eslint": "^8.71.2",
+    "vitest": "5.0.5"
   }
 }
