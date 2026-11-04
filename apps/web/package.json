@@ -31,7 +31,7 @@
     "siwe": "3.0.0",
     "viem": "2.55.15",
     "wagmi": "3.7.6",
-    "zod": "4.4.3"
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
